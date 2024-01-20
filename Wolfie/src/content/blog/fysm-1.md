@@ -1,0 +1,115 @@
+---
+title: 'Finding Your Study Method'
+description: 'Explore different study methods.'
+pubDate: 'Jan 19 2024'
+heroImage: '/blog-placeholder-3.jpg'
+---
+
+We’ll be looking at ways to improve your grades by finding a study method that works for you. Try out as many of these methods as possible to find out which method works best to help you become The Alpha of the pack.
+#### The Feynman Technique
+1. __Study the topic.__
+2. __Review what you studied__: Take note of the important points and write your notes using your words (unless it is a theorem or principle). Everything you learn can be connected/associated with other things you already
+know. Making these connections allow your brain to recall and understand new things easily.
+3. __Explain the content__: Explain what you studied as if you were explaining to a 12-year-old.
+At this step you will be able to assess how well you understand the topic.
+4. __Repeat__: If you cannot do step 1-3 flawlessly, you do not understand the topic well enough to be writing a test
+you can guarantee you will ace (or teach anyone). Redo the steps until you can.
+
+
+<small style="text-align: right; font-size: 0.8em;"> _The Feynman technique is one of the most effective techniques that produce desired results as tests your understanding. “If you can't explain it simply, you don't understand it well enough.”-Albert Einstein_ </small><hr/>
+
+
+#### The Pomodoro method
+The Pomodoro method is a time management method designed to help you improve your productivity and focus by breaking workload using intervals, usually 25 minutes long, separated by short 5-minute breaks.
+
+1. __Choose a subject to study__
+2. __Set a timer__:
+The timer is usually set for 25 minutes, however if this is too short you can try to set it for 50
+minutes or less.
+3. __Focused work__:
+Once you have chosen a task and set a timer, for this duration you rid yourself and surroundings
+of all distractions and focus solely on the task you chose.
+4. __Take a short and timed break__:
+Usually, a full Pomodoro cycle is competed after 1 hour. This hour can be split into either one phase of working for 50 minutes, then resting for 10 minutes or, two phases of 25 minutes of working and 5 minutes of resting in-between.
+5. __Repeat__:
+After you have completed, your first pomodoro, you then repeat the cycle until you feel you have covered enough work for the day.
+6. __Reflect__:
+
+<hr/>
+At the end of your study session, it is important to reflect on the effectiveness of the method, by assessing the quantity and most importantly the quality of the work you have just completed. Here are tools and methods you can use to do just that. 
+<br/><br/>
+
+#### Flash Cards
+Using flash cards is a highly efficient and versatile study technique used to enhance learning and
+memory retention. It involves creating a set of small, portable cards, with concise information on one
+side and a corresponding question or cue on the other.
+Here is how you can use flash cards:
+
+1. __Creating the flash card__:
+Each flash card usually consists of two sides – on one side you write a question and on the other you write the answer to that question. (They can be made using index cards, digital apps, or even regular pieces of paper.)
+2. __Repetition__:
+To optimize memory retention, it is important that you repeat this process until you’re
+comfortable with your retention of information.
+3. __Interactive learning__:
+Flash cards do not have to just be words, you can include pictures and diagrams as well.
+<br/><br/>
+
+#### Survey, Question, Read, Recite, and Review (SQ3R)
+
+1. __Survey (or scanning)__:
+Before diving into a reading assignment or a new topic, start by surveying the material. This
+means quickly scanning the headings, subheadings, captions, and any summary or review
+sections.
+The goal of this step is to get a broad overview of what you're about to read, which can
+provide context and structure for the details you'll encounter later.
+2. __Question__:
+After your initial survey, formulate questions about the material. These questions should be
+based on the headings, subheadings, and any other important information you noticed
+during the survey.
+Questions help you actively engage with the material and set a purpose for your reading.
+3. __Read__:
+Proceed to read the material actively and attentively. As you read, focus on answering the
+questions you formulated in the previous step.
+Take notes while reading, highlighting key points, concepts, and terms. Summarize important
+information in your own words.
+4. __Recite (or remember)__:
+After you've finished reading a section or a chapter, close the book or look away from the
+material and try to recall the main points and answers to your questions from memory.
+Recitation reinforces your understanding and retention of the material. If you can't recall
+something, go back, and review that section.
+5. __Review__:
+Once you've completed the entire reading assignment, take some time to review your notes
+and the key points you've recited.
+Consider how the material fits into the larger context of the subject you're studying.
+Reviewing shortly after reading and then periodically helps solidify your knowledge over
+time.<br/><br/>
+
+#### Mind Mapping
+Using mind mapping for studying is an effective way to organize and retain information, whether
+you're preparing for exams, learning a new subject, or summarizing complex material.
+Here's a step-by-step guide on how to use mind mapping for studying:
+1. __Set a study goal__:
+Clarify what you want to achieve through your study session. Are you summarizing a
+textbook chapter, preparing for a presentation, or reviewing notes for an exam?
+Understanding your goal will help you create a focused mind map.
+2. __Choose central topic__:
+Start with a central topic or subject that represents the core of what you're studying. Write it
+at the centre of your mind map.
+3. __Add subtopics__:
+For each main branch, add subtopics or subcategories that provide more detailed
+information. These subtopics should branch off from the corresponding main branch.
+Keep subtopics concise and use keywords or brief phrases to capture essential details.
+4. __Prioritize and Organise__:
+For each main branch, add subtopics or subcategories that provide more detailed
+information. These subtopics should branch off from the corresponding main branch.
+Keep subtopics concise and use keywords or brief phrases to capture essential details.
+5. __Summarise__:
+Include brief annotations or summaries with key points, facts, formulas, or explanations for
+each branch or subtopic. This will help you understand the content at a glance.
+6. __Revise__:
+After creating the mind map, review it thoroughly to ensure that it covers all the essential
+information.
+Use the mind map as a study guide to test your knowledge. Try to recall the information
+associated with each branch and subtopic.
+Revise and refine the mind map as needed, adding new information or making adjustments
+based on your understanding.
