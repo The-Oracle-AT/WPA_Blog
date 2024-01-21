@@ -1,5 +1,12 @@
 # LearnBetter!
 
+# Table Of Contents
+- [Description](#description)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+
 ## Description
 
 This project is a website that helps users become better through awareness and intentional action to improve their lives. It's designed for people of all ages. This project aims to eductae people on how to utilize their throughts and actions to work on and achieve goals that they set out for themselves.
@@ -9,6 +16,7 @@ This project is a website that helps users become better through awareness and i
 - News Feed: Blog updates when a new lesson is available.
 - Interactive learning: Integrated learning to help user remember the lessons.
 - progress tracker: tracks a user's progress.
+
 
 ## Installation
 
