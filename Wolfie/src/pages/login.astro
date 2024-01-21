@@ -1,18 +1,25 @@
 ---
 
 import LoginForm from '../components/LoginForm.tsx'
+import SiteName from '../components/SiteName.astro'
 ---
 
 <main>
+    <h1><SiteName/></h1>
     <LoginForm/>
 </main>
 
 <style lang="scss">
     main {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 100vh;
+    }
+    h1 {
+        font-size: 4rem;
+        margin-bottom: 2rem;
     }
     
 </style>
