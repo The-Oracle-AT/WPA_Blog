@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/reactstyle.scss';
 
 const LoginForm: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ const LoginForm: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='auth-form'>
             <h1>Sign In</h1>
             <p>Don't have an account yet? <span>Sign-up</span></p>
             <div>
@@ -34,7 +35,7 @@ const LoginForm: React.FC = () => {
                 <p>Or</p>
                 <div className="social">
                     <div className="google">
-                        <svg width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <title>Google-color</title><desc>Created with Sketch.</desc><defs></defs>
                             <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Color-" transform="translate(-401.000000, -860.000000)">
