@@ -17,13 +17,13 @@ Follow these steps to get a development environment running:
 1. Clone the repository:
 ```bash
 git clone https://github.com/The-Oracle-AT/WPA_Blog
-
 ```
+
 2. Move to directory:
 ```bash
 cd Wolfie
-
 ```
+
 3. Start development server:
 ```bash
 npm run dev

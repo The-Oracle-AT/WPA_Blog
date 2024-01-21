@@ -1,36 +1,40 @@
-import React, { useState } from 'react';
+import DOMPurify from 'dompurify';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import '../styles/reactstyle.scss';
 
+type FormData = {
+    email: string;
+    password: string;
+};
+
 const LoginForm: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
 
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const onSubmit = (data: FormData) => {
+        const sanitizedEmail = DOMPurify.sanitize(data.email);
+        const sanitizedPassword = DOMPurify.sanitize(data.password);
         // Perform sign-up/sign-in logic here
+        console.log(data);
+        console.log(sanitizedEmail, sanitizedPassword)
     };
 
     return (
-        <form onSubmit={handleSubmit} className='auth-form'>
-            <h1>Sign In</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className='auth-form'>
+            <h1>Sign Up</h1>
             <p>Don't have an account yet? <span>Sign-up</span></p>
             <div>
                 <label htmlFor="email">Email:</label>
-                <input type="email" id="email" value={email} onChange={handleEmailChange} />
+                <input {...register('email', { required: 'Please enter your email', pattern: { value: /^\S+@\S+$/i, message: 'Please enter a valid email' } })} />
+                {errors.email && <p>{errors.email.message}</p>}
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+                <input {...register('password', { required: 'Please enter your password' })} />
+                {errors.password && <p>{errors.password.message}</p>}
             </div>
-            <button type="submit">Sign In/Up</button>
+            <button type="submit">Sign In</button>
             <div className="social-login">
                 <p>Or</p>
                 <div className="social">
