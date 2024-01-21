@@ -6,6 +6,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Licence](#proprietary-license)
 
 ## Description
 
