@@ -10,7 +10,7 @@
 
 ## Description
 
-This project is a website that helps users become better through awareness and intentional action to improve their lives. It's designed for people of all ages. This project aims to eductae people on how to utilize their throughts and actions to work on and achieve goals that they set out for themselves.
+This project is a website that helps users become better through awareness and intentional action to improve their lives. It's designed for people of all ages. We aim to eductae people on how to utilize their throughts and actions to work on and achieve goals that they set out for themselves.
 
 ## Features
 
