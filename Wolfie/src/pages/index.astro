@@ -1,50 +1,100 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import Header from '../components/Header.astro';
+import HeaderLink from '../components/HeaderLink.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body>
+        <Header title={SITE_TITLE} />
+        <main>
+			<header>
+				<h1><span>Learn</span><span>Better!</span></h1>
+				<p>We believe in a practical and intentional approach to personal development. Empowering you with realistic tools and knowledge to navigate the journey of self-discovery and growth.</p>
+			</header>
+		
+			<section>
+				<h2>Our Focus</h2>
+				<ul>
+					<li><h3>Concentration & Will Power</h3>
+						<p>Discover the art of harnessing your focus and directing it toward tasks that truly matter to you. Our resources offer actionable strategies, helping you cut through distractions and enhance your concentration for increased productivity in your everyday life.</p>
+					</li>
+					<li>
+						<h3>Self-Improvement</h3>
+						<p>Continuous growth is a journey, not a destination. We offer practical resources and guidance to support your ongoing self-improvement. No fluff or abstract theories—just straightforward advice to help you continually evolve and enhance various aspects of your life.</p>
+					</li>
+					<li>
+						<h3>Control over your emotions & Discipline</h3>
+						<p>Emotions are a powerful force, and learning to control them is a crucial step in your journey to personal growth. It takes discipline and practice with our actionable strategies to help you manage your emotions and use them to your advantage.</p>
+					</li>
+					<li>
+						<h3>Self-Awareness</h3>
+						<p>Self-awareness is a crucial aspect of personal growth, and it's something that can be learned. Our resources offer practical guidance to help you build your self-awareness and develop a positive mindset.</p>
+					</li>
+					<li>
+						<h3>And more ...</h3>
+
+					</li>
+				</ul>
+			</section>
+		
+			<section>
+				<h2>Our Mission</h2>
+				<p>Our mission is to provide you with the tools and mindset needed to tap into your potential. We firmly believe that with the right resources and a approach, anyone can work towards achieving the goals they set for themselves. There is no shortcut or sugercoting it—success demands intentional effort and a commitment to yourself.</p>
+			</section>
+		
+			<section>
+				<h2>Join Us</h2>
+				<p>Welcome to a community where growth is approached with a realistic mindset. Each of us has a journey of our own but we don't have to take it blindly or alone. Your success is achieved through intentional effort, commitment to your development and a realistic mindset.</p>
+			</section>
+		
+			<section>
+				<h2>Testimonials</h2>
+				<blockquote>
+					<p>(No Testimonials yet, project is still in its early launch)</p>
+				</blockquote>
+				
+			</section>
+		
+			<section>
+				<h2>Get better Today!</h2>
+				<p>Ready to direct your efforts towards meaningful change? Explore our <HeaderLink href="/blog">blog</HeaderLink>, and stay tuned for our upcoming interactive platform. The Wolf Pack community is here to support you, offering practical guidance for your journey to personal growth. Welcome to Wolf Pack Academia—where potential meets practicality.</p>
+			</section>
+        </main>
+        <Footer />
+    </body>
 </html>
+
+<style>
+	h1 span:nth-child(1) {
+		color: #000;
+	}
+	h1 span:nth-child(2) {
+		color: #07b4ee;
+	}
+	section li {
+		margin: 2rem 0;
+		border: 1px solid #000;
+		border-radius: 2rem;
+		list-style: none;
+		padding: 2rem;
+		backdrop-filter: blur(1rem);
+		filter:drop-shadow(0 0 1rem rgba(0, 0, 0, 0.5));
+		
+	}
+	section li:nth-child(odd) {
+		transform: translate(-2rem, 0rem);
+	}
+	section li:nth-child(even) {
+		transform: translate(1rem, 0rem);
+	}
+	section h3 {
+		font-size: 2rem;
+	}
+</style>
