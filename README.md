@@ -32,8 +32,11 @@ git clone https://github.com/The-Oracle-AT/WPA_Blog
 ```bash
 cd Wolfie
 ```
-
-3. Start development server:
+3. Install astro 
+```bash
+npm install astro@latest
+```
+4. Start development server:
 ```bash
 npm run dev
 ```
