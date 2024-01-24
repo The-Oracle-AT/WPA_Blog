@@ -3,7 +3,30 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import HeaderLink from '../components/HeaderLink.astro';
+import SiteName from '../components/SiteName.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+//section to update the newest articles
+const updates = {
+	articles: [
+		{
+			title: "Concentration",
+			link: "/blog/concentration-1/"
+		},
+		{
+			title: "Finding your study method",
+			link: "/blog/finding-your-study-method-1/"
+		},
+		{
+			title: "Finding your study method: Beyond The Book",
+			link: "/blog/finding-your-study-method-2/"
+		},
+		{
+			title: "Tackling long form questions in exam/test.",
+			link: "/blog/tackling-long-form-questions/"
+		}
+	]
+}
 ---
 
 <!doctype html>
@@ -15,43 +38,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
         <Header title={SITE_TITLE} />
         <main>
 			<header>
-				<h1><span>Learn</span><span>Better!</span></h1>
-				<p>We believe in a practical and intentional approach to personal development. Empowering you with realistic tools and knowledge to navigate the journey of self-discovery and growth.</p>
+				<h1><SiteName /></h1>
+				<p>The only way to get better is to start acting better!</p>
 			</header>
 		
 			<section>
-				<h2>Our Focus</h2>
+				<h2>What's New</h2>
 				<ul>
-					<li><h3>Concentration & Will Power</h3>
-						<p>Discover the art of harnessing your focus and directing it toward tasks that truly matter to you. Our resources offer actionable strategies, helping you cut through distractions and enhance your concentration for increased productivity in your everyday life.</p>
-					</li>
-					<li>
-						<h3>Self-Improvement</h3>
-						<p>Continuous growth is a journey, not a destination. We offer practical resources and guidance to support your ongoing self-improvement. No fluff or abstract theories—just straightforward advice to help you continually evolve and enhance various aspects of your life.</p>
-					</li>
-					<li>
-						<h3>Control over your emotions & Discipline</h3>
-						<p>Emotions are a powerful force, and learning to control them is a crucial step in your journey to personal growth. It takes discipline and practice with our actionable strategies to help you manage your emotions and use them to your advantage.</p>
-					</li>
-					<li>
-						<h3>Self-Awareness</h3>
-						<p>Self-awareness is a crucial aspect of personal growth, and it's something that can be learned. Our resources offer practical guidance to help you build your self-awareness and develop a positive mindset.</p>
-					</li>
-					<li>
-						<h3>And more ...</h3>
+					<h3>Newest Articles</h3>
+					<ul>
+						{updates.articles.map((article) =>(
+							<li><a href={article.link}>{article.title}</a></li>
+						)) }
+					</ul>
 
-					</li>
+					<h3>New Features</h3>
+					<ul>
+						<li>We've added the <b>"Newest Articles"</b> sector above to make navigating to new articles easier from the landing page. Click on a links to read the content.</li>
+						<li>The <b>"Newest Features"</b> section contains updates on the recently added features to enhance your experience on the website.</li>
+						<li>The <b>"Long-Term Goals"</b> section outlines our planned updates over a period of 3 to 12 months. Click on the links learn more about upcoming enhancements to your favourite website!</li>
+					</ul>
 				</ul>
 			</section>
 		
 			<section>
-				<h2>Our Mission</h2>
-				<p>Our mission is to provide you with the tools and mindset needed to tap into your potential. We firmly believe that with the right resources and a approach, anyone can work towards achieving the goals they set for themselves. There is no shortcut or sugercoting it—success demands intentional effort and a commitment to yourself.</p>
-			</section>
-		
-			<section>
-				<h2>Join Us</h2>
-				<p>Welcome to a community where growth is approached with a realistic mindset. Each of us has a journey of our own but we don't have to take it blindly or alone. Your success is achieved through intentional effort, commitment to your development and a realistic mindset.</p>
+				<h2>Long Term Goals</h2>
+				<ul>
+					<li>Making the site an interactive Platform(3-8 months plan)</li>
+					<li>Adding Communities to allow interaction between users(6 - 12 months plan) </li>
+				</ul>
 			</section>
 		
 			<section>
@@ -64,37 +79,45 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		
 			<section>
 				<h2>Get better Today!</h2>
-				<p>Ready to direct your efforts towards meaningful change? Explore our <HeaderLink href="/blog">blog</HeaderLink>, and stay tuned for our upcoming interactive platform. The Wolf Pack community is here to support you, offering practical guidance for your journey to personal growth. Welcome to Wolf Pack Academia—where potential meets practicality.</p>
+				<p>Ready to direct your efforts towards meaningful change? Explore our <span><HeaderLink href="/blog">blog</HeaderLink></span>, and stay tuned for our upcoming content. We here to support you, offering practical guidance for your journey to personal growth. Be part a of LearnBetter!—where potential meets practicality.</p>
+			</section>
+			
+			<section >
+				<h2>Get in Touch</h2>
+				<p>Have a question or comment? We’d love to hear from you. Send us a message and we’ll respond as soon as possible.</p>
+				<p>Please <b>review</b> our content at <a href="mailto:lapanemaela140403@gmail.com">learnbetter!review@gmail.com</a></p>
+				<p>For general inquiries, please email <a href="mailto:lapanemaela140403@gmail.com">learnbetter!inquiries@gmail.com</a></p>
 			</section>
         </main>
         <Footer />
     </body>
 </html>
 
-<style>
-	h1 span:nth-child(1) {
-		color: #000;
-	}
-	h1 span:nth-child(2) {
-		color: #07b4ee;
-	}
-	section li {
-		margin: 2rem 0;
-		border: 1px solid #000;
-		border-radius: 2rem;
-		list-style: none;
-		padding: 2rem;
-		backdrop-filter: blur(1rem);
-		filter:drop-shadow(0 0 1rem rgba(0, 0, 0, 0.5));
+<style lang="scss">
+	span {
+		background-color: rgba(78, 175, 255, 0.3);
+		border-radius: 0.5em;
+		padding: 0rem 0.5rem;
+		a {
+			text-decoration: none;
+			color: #333;
+			
+		}
+		&:hover {
+			background-color: rgba(78, 175, 255, 0.8);
+		}
+
+	}	
+	section:nth-last-child(1) a {
 		
+		color: black;
+		background-color: rgba(78, 175, 255, 0.3);
+		border-radius: 0.5em;
+		padding: 0.3rem 0.5rem;
+
+		&:hover {
+			background-color: rgba(78, 175, 255, 0.8);
+		}
 	}
-	section li:nth-child(odd) {
-		transform: translate(-2rem, 0rem);
-	}
-	section li:nth-child(even) {
-		transform: translate(1rem, 0rem);
-	}
-	section h3 {
-		font-size: 2rem;
-	}
+
 </style>

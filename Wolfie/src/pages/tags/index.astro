@@ -1,0 +1,67 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+const allPosts = await Astro.glob('../../content/blog/*.md');
+const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+
+
+---
+<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  <section class="container">
+    <p>Filter</p>
+    <ul>
+      
+      {tags.map((tag) => (
+        <li>
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <style lang="scss">
+    .container {
+      display: flex;
+      flex-direction: row;
+      padding-left: 1rem;
+
+      /* Custom scrollbar for Chrome, Safari and Opera */
+      &::-webkit-scrollbar {
+          width: 1rem; /* width of the entire scrollbar */
+      }
+
+      &::-webkit-scrollbar-track {
+          background: #f1f1f1; /* color of the tracking area */
+      }
+
+      &::-webkit-scrollbar-thumb {
+          background: #888; /* color of the scroll thumb */
+          border-radius: 1rem; /* roundness of the scroll thumb */
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+          background: #555; /* color of the scroll thumb on hover */
+      }
+
+
+    }
+    ul {
+      display: flex;
+      flex-direction: row;
+    
+      list-style:none;
+      overflow-x: scroll;
+    }
+    li {
+      margin: 0 0.5rem 0.5rem 0;
+      padding: 0rem 0.5rem;
+      border-radius: 0.5rem;
+      min-width: max-content;
+      background-color: rgba(78, 175, 255, 0.3);
+      display: inline-block;
+    }
+    a {
+      text-decoration: none;
+      color: var(--color-text);
+    }
+  </style>

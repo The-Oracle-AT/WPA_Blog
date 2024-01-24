@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../styles/reactstyle.scss';
+import '../../styles/reactstyle.scss';
 
 type FormData = {
     email: string;

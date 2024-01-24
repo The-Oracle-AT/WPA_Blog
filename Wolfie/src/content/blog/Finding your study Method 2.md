@@ -3,11 +3,12 @@ title: 'Finding Your Study Method: Beyond The Book'
 description: 'More ways to enhance your study sessions'
 pubDate: 'Jan 20 2024'
 heroImage: '/blog-placeholder-4.jpg'
+tags: ['study method', 'study', 'learning']
 ---
 
 The road to become an A student isn’t just about studying, you must also keep your mind and body in the best shape it  can possibly be in.
 #### Your Brain Wants to Have fun.
-Study ways that are fun for you. This keeps you positively motivated and you will not feel that studying is as much of a drag as it used to be (Some fun ways of studying include, playing your favorite music while you practice
+Study in ways that are fun for you. This keeps you positively motivated and you will not feel that studying is as much of a drag as it used to be (Some fun ways of studying include, playing your favorite music while you practice
 solving equations, moving around the room while reading a book, acting out the characters roles
 in a story you are reading, etc.).
 #### Take sleep seriously.

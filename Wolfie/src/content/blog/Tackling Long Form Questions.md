@@ -3,6 +3,7 @@ title: 'Tackling Long Form Questions'
 description: 'learn how to navigate answering test questions that require lengthy answers.'
 pubDate: 'Jan 21 2024'
 heroImage: '/blog-placeholder-2.jpg'
+tags: ['test', 'exam', 'student', 'study', 'learning']
 ---
 
 This section of every question paper carries the most marks. The material discussed in this newsletter
