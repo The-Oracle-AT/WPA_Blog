@@ -49,5 +49,5 @@ use.
 <hr/>
 
 <small>“If you know what you are doing then, it shouldn’t take you too long to do it” – W.P.A.</small> <br/>
-<small>"The direction in which education starts a man will determine his future in
+<small>"The direction in which education starts a man, will determine his future in
 life." — Plato </small>

@@ -23,25 +23,10 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
       display: flex;
       flex-direction: row;
       padding-left: 1rem;
+      padding-right: 1rem;
 
       /* Custom scrollbar for Chrome, Safari and Opera */
-      &::-webkit-scrollbar {
-          width: 1rem; /* width of the entire scrollbar */
-      }
-
-      &::-webkit-scrollbar-track {
-          background: #f1f1f1; /* color of the tracking area */
-      }
-
-      &::-webkit-scrollbar-thumb {
-          background: #888; /* color of the scroll thumb */
-          border-radius: 1rem; /* roundness of the scroll thumb */
-      }
-
-      /* Handle on hover */
-      &::-webkit-scrollbar-thumb:hover {
-          background: #555; /* color of the scroll thumb on hover */
-      }
+     
 
 
     }
@@ -51,7 +36,43 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
     
       list-style:none;
       overflow-x: scroll;
+      scroll-behavior: smooth;
+      &::-webkit-scrollbar {
+        width: 0.5rem;
     }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* For Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #f1f1f1;
+}
+
+/* For IE and Edge */
+@supports (-ms-overflow-style: none) {
+    ul {
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+    }
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    ul {
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+    }
+}
     li {
       margin: 0 0.5rem 0.5rem 0;
       padding: 0rem 0.5rem;
@@ -59,9 +80,16 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
       min-width: max-content;
       background-color: rgba(78, 175, 255, 0.3);
       display: inline-block;
+
+      &:hover {
+        background-color: rgba(78, 175, 255, 0.5);
+      }
     }
     a {
       text-decoration: none;
       color: var(--color-text);
+    }
+    p {
+      margin-right: 1rem;
     }
   </style>

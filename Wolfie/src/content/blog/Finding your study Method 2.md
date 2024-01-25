@@ -6,7 +6,7 @@ heroImage: '/blog-placeholder-4.jpg'
 tags: ['study method', 'study', 'learning']
 ---
 
-The road to become an A student isn’t just about studying, you must also keep your mind and body in the best shape it  can possibly be in.
+The road to becoming an A student isn’t just about studying, you must also keep your mind and body in the best shape they can possibly be in.
 #### Your Brain Wants to Have fun.
 Study in ways that are fun for you. This keeps you positively motivated and you will not feel that studying is as much of a drag as it used to be (Some fun ways of studying include, playing your favorite music while you practice
 solving equations, moving around the room while reading a book, acting out the characters roles
@@ -42,7 +42,7 @@ reduces your critical thinking capability and diminishes your concentration and 
 4. __Don’t Force It.__ If you are unable to study and aren’t under any pressure to, don’t! You are better off having fun
 and studying when nothing is holding you back.
 Remove All Distractions
-5. __Limit screen time__ – especially when you are about to sleep or stud.: Now more than ever we are bombarded with social media feeds and as fun as these short Tik-Tok videos are to watch, every time you visit Tik-Tok you are practicing how to limit you attention span to smaller time periods.
+5. __Limit screen time__ – especially when you are about to sleep or study. Now more than ever we are bombarded with social media feeds and as fun as these short Tik-Tok videos are to watch, every time you visit Tik-Tok you are practicing how to limit you attention span to smaller time periods.
 6. __Manage stress and anxiety__ – do not be swayed by negative emotions or thoughts. You must
 have power over your mind and some control over the extent to which your emotions distract
 you. (You may not be able to do this now, but anyone can gain control over their mental

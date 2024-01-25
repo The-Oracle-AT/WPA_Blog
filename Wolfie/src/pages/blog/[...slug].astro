@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
@@ -13,8 +13,57 @@ type Props = CollectionEntry<'blog'>;
 
 const post = Astro.props;
 const { Content } = await post.render();
+const tags = post.data.tags;
 ---
 
 <BlogPost {...post.data}>
 	<Content />
+	<section class="container">
+		<h2>Related Posts</h2>
+	<ul>
+		{tags.map((tag) => (
+			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
+		))}
+	</ul>
+</section>
 </BlogPost>
+
+<style lang="scss">
+	
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding-top: 2rem;
+	  margin-top: 2rem;
+      /* Custom scrollbar for Chrome, Safari and Opera */
+     
+
+
+    }
+    ul {
+      display: flex;
+      flex-flow: row wrap;
+	  justify-content: flex-start;
+      list-style:none;
+      scroll-behavior: smooth;
+	}
+    li {
+      margin: 0 0.5rem 0.5rem 0;
+      padding: 0rem 0.5rem;
+      border-radius: 0.5rem;
+      min-width: max-content;
+      background-color: rgba(78, 175, 255, 0.3);
+      display: inline-block;
+
+      &:hover {
+        background-color: rgba(78, 175, 255, 0.5);
+      }
+    }
+    a {
+      text-decoration: none;
+      color: var(--color-text);
+    }
+    p {
+      margin-right: 1rem;
+    }
+</style>
