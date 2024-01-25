@@ -2,16 +2,12 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
-}
+const posts = await getCollection('blog');
 type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
+const { slug } = Astro.params;
+const post = posts.find((page) => page.slug === slug);
+if (!post) return Astro.redirect("/404");
 const { Content } = await post.render();
 const tags = post.data.tags;
 ---
@@ -21,7 +17,7 @@ const tags = post.data.tags;
 	<section class="container">
 		<h2>Related Posts</h2>
 	<ul>
-		{tags && tags.map((tag) => (
+		{tags && tags.map((tag:string) => (
 			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
 		))}
 	</ul>
