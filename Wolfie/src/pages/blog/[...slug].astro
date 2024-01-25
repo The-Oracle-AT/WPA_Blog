@@ -21,7 +21,7 @@ const tags = post.data.tags;
 	<section class="container">
 		<h2>Related Posts</h2>
 	<ul>
-		{tags.map((tag) => (
+		{tags && tags.map((tag) => (
 			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
 		))}
 	</ul>
