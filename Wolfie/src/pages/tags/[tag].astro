@@ -6,6 +6,7 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
+
 export async function getStaticPaths(): Promise<any> {
     const allPosts = await getCollection('blog');
 
@@ -20,6 +21,7 @@ export async function getStaticPaths(): Promise<any> {
     });
 }
 type Props = CollectionEntry<'blog'>;
+export const prerender = true;
 
 const { tag } = Astro.params;
 const { posts } = Astro.props as { posts: any[] };
