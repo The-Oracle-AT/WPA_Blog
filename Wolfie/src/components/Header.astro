@@ -18,10 +18,9 @@ import SiteName from './SiteName.astro';
 		<ul class="nav-bar">
 			<li class="hamburger-icon" id="hamburger-icon"><Hamburger/></li>
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
+			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
-			<li><HeaderLink href='/blog'>Blog</HeaderLink></li>
 			<li><HeaderLink href='/login'>Sign-up</HeaderLink></li>
-			
 		</ul>
 		<div class="social-links">
 
@@ -110,7 +109,6 @@ import SiteName from './SiteName.astro';
 			&:first-child {
 				display: none;
 			}
-
 		}
 		
 	}
@@ -135,6 +133,7 @@ import SiteName from './SiteName.astro';
 					align-self: flex-end;
 					margin-right: 0rem;
 					
+					
 				}
 				&:not(:first-child) {
 					display: none;
@@ -142,7 +141,10 @@ import SiteName from './SiteName.astro';
 					background: white;
 					align-self: flex-start;
 					text-align: center;
-					
+
+					&:hover {
+						background: aqua;	
+					}
 				}
 			}
 		}

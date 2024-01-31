@@ -1,0 +1,97 @@
+---
+const updates = { 
+	info : [
+		{
+			title: "Newest Articles",
+			desc: "Find all the latest article uploads in one place. Hover your cursor to view the card and click on it to read the article",
+			date: "23 Jan 2024",
+		},
+		{
+			title: "New Features",
+			desc: "We are continuosly working on LearnBetter to give you  a better experience. Find out what we've been up to in this section!",
+			date: "24 Jan 2024",
+		},
+		{
+			title: "Long-Term Goals",
+			desc: "Read about our planned updates over a period of 3 to 12 months. Visit this section every now and then learn more about upcoming enhancements to your favourite website!",
+			date: "25 Jan 2024",
+		},
+		{
+			title: "Tags/filters",
+			desc: "Find all the latest article uploads in one place. Hover your cursor to view the card and click on it to read the article",
+			date: "26 Jan 2024",
+		},
+	],	
+}
+---
+<div class="new-features">
+<h3>New Features</h3>
+	<div class="items">
+		{
+			updates.info.map((item: any, index: number) => {
+				return (
+					<div class="item">
+						<h4>{item.title}</h4>
+						<p class="desc">{item.desc}</p>
+						<p class="date">{item.date}</p>
+					</div>
+				)
+			})
+		}
+
+		
+	</div>
+</div>
+
+<style lang="scss">
+	.new-features {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		.items {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		.item {
+
+			max-width: 15rem;
+			max-height:min-content;
+			border-bottom: 1px solid rgba($color: royalblue, $alpha: 0.8);
+			border-top:  1px solid rgba($color: royalblue, $alpha: 0.8);
+
+			display: flex;
+			flex-direction: column;
+			border-radius: 1rem;
+			padding: 1rem;
+			margin: 1rem;
+
+			box-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
+			backdrop-filter: blur(15px);
+		}
+		$colors: red, blue, green, yellow, purple, pink, orange, brown;
+
+		@each $color in $colors {
+			.item:nth-child(#{length($colors)}n + #{index($colors, $color)}) {
+				border-top: 2px solid rgba($color: $color, $alpha: 0.8);
+				border-bottom: 2px solid rgba($color: $color, $alpha: 0.8);
+			}
+		}
+		.date {
+			font-size: 0.8rem;
+			color: grey;
+			align-self: flex-end;
+			
+		}
+		.desc {
+			font-size: 0.9rem;
+			
+			margin: 0.5rem 0;
+		}
+	}
+
+	
+
+</style>

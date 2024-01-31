@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
                     <div className="google">
                         <svg width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <title>Google-color</title><desc>Created with Sketch.</desc><defs></defs>
-                            <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Icons" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
                                 <g id="Color-" transform="translate(-401.000000, -860.000000)">
                                     <g id="Google" transform="translate(401.000000, 860.000000)">
                                         <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"></path>
@@ -59,8 +59,8 @@ const LoginForm: React.FC = () => {
                             <path d="M21.2137 20.2816L21.8356 16.3301H17.9452V13.767C17.9452 12.6857 18.4877 11.6311 20.2302 11.6311H22V8.26699C22 8.26699 20.3945 8 18.8603 8C15.6548 8 13.5617 9.89294 13.5617 13.3184V16.3301H10V20.2816H13.5617V29.8345C14.2767 29.944 15.0082 30 15.7534 30C16.4986 30 17.2302 29.944 17.9452 29.8345V20.2816H21.2137Z" fill="white"/>
                             <defs>
                             <linearGradient id="paint0_linear_87_7208" x1="16" y1="2" x2="16" y2="29.917" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#18ACFE"/>
-                                <stop offset="1" stop-color="#0163E0"/>
+                                <stop stopColor="#18ACFE"/>
+                                <stop offset="1" stopColor="#0163E0"/>
                             </linearGradient>
                             </defs>
                         </svg>

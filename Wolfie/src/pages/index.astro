@@ -4,26 +4,37 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import HeaderLink from '../components/HeaderLink.astro';
 import SiteName from '../components/SiteName.astro';
+import NewFeatures from '../components/index/NewFeatures.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+
+
+
 
 //section to update the newest articles
 const updates = {
 	articles: [
 		{
 			title: "Concentration",
-			link: "/blog/concentration-1/"
+			link: "/blog/concentration-1/",
+			desc: "Discover ways to concentrate better",
 		},
 		{
 			title: "Finding your study method",
-			link: "/blog/finding-your-study-method-1/"
+			link: "/blog/finding-your-study-method-1/",
+			desc: "Learn about, and find, study methods for you"
+
 		},
 		{
 			title: "Finding your study method: Beyond The Book",
-			link: "/blog/finding-your-study-method-2/"
+			link: "/blog/finding-your-study-method-2/",
+			desc: "Learn about ways to enhance studying beyond the study table",
+
 		},
 		{
 			title: "Tackling long form questions in exam/test.",
-			link: "/blog/tackling-long-form-questions/"
+			link: "/blog/tackling-long-form-questions/",
+			desc: "Learn how to tackle long form questions in exams"
 		}
 	]
 }
@@ -46,19 +57,15 @@ const updates = {
 				<h2>What's New</h2>
 				<ul>
 					<h3>Newest Articles</h3>
-					<ul>
+					<article class="articles-update-cards">
+						
 						{updates.articles.map((article) =>(
-							<li><a href={article.link}>{article.title}</a></li>
+							<a href={article.link}><div class="card"><span class="article-title">{article.title}</span>
+								<p class="desc">{article.desc}</p>
+							</div></a>
 						)) }
-					</ul>
-
-					<h3>New Features</h3>
-					<ul>
-						<li>We've added the <b>"Newest Articles"</b> sector above to make navigating to new articles easier from the landing page. Click on a links to read the content.</li>
-						<li>The <b>"Newest Features"</b> section contains updates on the recently added features to enhance your experience on the website.</li>
-						<li>The <b>"Long-Term Goals"</b> section outlines our planned updates over a period of 3 to 12 months. Click on the links learn more about upcoming enhancements to your favourite website!</li>
-						<li>We've added <b>Tags/filters</b> and <b>related posts.</b> By clicking on a term in one of these sections it wil filter the posts to give you the ones that are related to that keyword. </li>
-					</ul>
+					</article>
+					<NewFeatures />                    
 				</ul>
 			</section>
 		
@@ -95,7 +102,7 @@ const updates = {
 </html>
 
 <style lang="scss">
-	span {
+	span:not(.article-title) {
 		background-color: rgba(78, 175, 255, 0.3);
 		border-radius: 0.5em;
 		padding: 0rem 0.5rem;
@@ -119,6 +126,95 @@ const updates = {
 		&:hover {
 			background-color: rgba(78, 175, 255, 0.8);
 		}
+	}
+	a {
+			text-decoration: none;
+	}
+	.articles-update-cards {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: nowrap;
+		overflow-x: hidden;
+		padding: 3rem;
+		padding-bottom: 5rem;
+		transition: .3s;
+		transform: translateX(-3rem);
+		
+		a {
+			background-color: azure;
+			color: black;
+			min-width: 250px;
+			width: 13rem;
+			height: 10rem;
+			
+			border-radius: 1.5rem;
+			margin-top: 2rem;
+
+			&:hover {
+				transform: translateY(-1rem);
+
+				&~a {
+					transform: translateX(10rem);
+				}
+			}
+			&:not(:first-child) {
+				margin-left: -10rem;
+			}
+		}
+
+		.card {
+			width: 100%;
+			height: 100%;
+			border-radius: 1.5rem;
+			padding: 1rem;
+			display: flex;
+			background-color: inherit;
+			position: relative;
+			flex-direction: column;
+			
+			box-shadow: -1rem 0px 2rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+			//HOVER EFFECTS
+
+		}
+		$colors: red, blue, green, yellow, purple, pink, orange, brown;
+
+		@each $color in $colors {
+			a:nth-child(#{length($colors)}n + #{index($colors, $color)}) > .card {
+				border-left: 5px solid $color;
+			}
+		}
+		.desc {
+			font-size: 0.8rem;
+		}
+		&::-webkit-scrollbar-track {
+			background-color: #7070ea;
+		}
+		&::-webkit-scrollbar {
+			height: 0.5rem;
+			background-color: #7070ea;
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: #7070ea;
+			border-radius: 1rem;
+			box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+		}
+		&::-webkit-scrollbar-thumb:hover {
+			background-color: #5f5fef;
+		}
+	
+
+	}
+	@media  screen and 	(max-width: 680px ) {
+		.articles-update-cards{
+			width: 100svw;
+
+			.card {
+				transform: translateX(-2rem);
+			}
+		}
+		
 	}
 
 </style>
