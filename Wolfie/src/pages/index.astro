@@ -102,6 +102,7 @@ const updates = {
 </html>
 
 <style lang="scss">
+	$colors: red, blue, green, yellow, purple, pink, orange, brown;
 	span:not(.article-title) {
 		background-color: rgba(78, 175, 255, 0.3);
 		border-radius: 0.5em;
@@ -138,7 +139,7 @@ const updates = {
 		overflow-x: hidden;
 		padding: 3rem;
 		padding-bottom: 5rem;
-		transition: .3s;
+		transition: .3s ease;
 		transform: translateX(-3rem);
 		
 		a {
@@ -147,6 +148,7 @@ const updates = {
 			min-width: 250px;
 			width: 13rem;
 			height: 10rem;
+			transition: 0.3s ease;
 			
 			border-radius: 1.5rem;
 			margin-top: 2rem;
@@ -178,11 +180,14 @@ const updates = {
 			//HOVER EFFECTS
 
 		}
-		$colors: red, blue, green, yellow, purple, pink, orange, brown;
+		
 
 		@each $color in $colors {
 			a:nth-child(#{length($colors)}n + #{index($colors, $color)}) > .card {
 				border-left: 5px solid $color;
+				&:hover {
+					border-top: 5px solid $color;
+				}
 			}
 		}
 		.desc {
@@ -206,12 +211,50 @@ const updates = {
 	
 
 	}
-	@media  screen and 	(max-width: 680px ) {
+	@media  screen and 	(max-width: 680px) {
 		.articles-update-cards{
 			width: 100svw;
+			flex-direction: column;
+			overflow-y: hidden;
+			height: 20svh;
+
+			a {
+				background-color: azure;
+				color: black;
+				min-width: 250px;
+				width: 13rem;
+				height: 10rem;
+				
+				border-radius: 1.5rem;
+				margin-top: 2rem;
+				transition: 0.3s ease;
+				margin-bottom: -10rem;
+				margin-left: 0rem;
+				&:first-child {
+					margin-left: -10rem;
+				}	
+			}
+			@for $i from 1 through length($colors) {
+				a:nth-child(#{length($colors)}n + #{$i}) {
+					
+					
+					transition: transform 0.3s ease;
+					&:hover > .card {
+					border-top: 5px solid nth($colors, $i);
+					transform: translateY(-#{$i * 1.5}rem);
+
+					&~a {
+						transform: translateX(10rem) translateY(-#{$i * 1.5}rem);
+					}
+					
+				}
+			}
+
+		}
 
 			.card {
-				transform: translateX(-2rem);
+				transform: translateX(0rem);
+
 			}
 		}
 		
