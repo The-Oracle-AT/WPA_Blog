@@ -9,7 +9,7 @@ import Tags from '../tags/index.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+).reverse();
 ---
 
 <!doctype html>

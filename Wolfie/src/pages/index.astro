@@ -1,43 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import HeaderLink from '../components/HeaderLink.astro';
 import SiteName from '../components/SiteName.astro';
 import NewFeatures from '../components/index/NewFeatures.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
+const latest_posts = (await getCollection('blog')).sort(
+	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+).reverse().slice(0, 4);
 
 
-
-
-//section to update the newest articles
-const updates = {
-	articles: [
-		{
-			title: "Concentration",
-			link: "/blog/concentration-1/",
-			desc: "Discover ways to concentrate better",
-		},
-		{
-			title: "Finding your study method",
-			link: "/blog/finding-your-study-method-1/",
-			desc: "Learn about, and find, study methods for you"
-
-		},
-		{
-			title: "Finding your study method: Beyond The Book",
-			link: "/blog/finding-your-study-method-2/",
-			desc: "Learn about ways to enhance studying beyond the study table",
-
-		},
-		{
-			title: "Tackling long form questions in exam/test.",
-			link: "/blog/tackling-long-form-questions/",
-			desc: "Learn how to tackle long form questions in exams"
-		}
-	]
-}
 ---
 
 <!doctype html>
@@ -59,13 +35,14 @@ const updates = {
 					<h3>Newest Articles</h3>
 					<article class="articles-update-cards">
 						
-						{updates.articles.map((article) =>(
-							<a href={article.link}><div class="card"><span class="article-title">{article.title}</span>
-								<p class="desc">{article.desc}</p>
+						{latest_posts.map((post) =>(
+							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title">{post.data.title}</span>
+								<p class="desc">{post.data.description}</p>
+								<p class="date"><FormattedDate date={post.data.pubDate} /></p>
 							</div></a>
 						)) }
 					</article>
-					<NewFeatures />                    
+					<div class="n-features"><NewFeatures /> </div>                   
 				</ul>
 			</section>
 		
@@ -102,6 +79,8 @@ const updates = {
 </html>
 
 <style lang="scss">
+	main {
+	}
 	$colors: red, blue, green, yellow, purple, pink, orange, brown;
 	span:not(.article-title) {
 		background-color: rgba(78, 175, 255, 0.3);
@@ -138,9 +117,12 @@ const updates = {
 		flex-wrap: nowrap;
 		overflow-x: hidden;
 		padding: 3rem;
+
 		padding-bottom: 5rem;
 		transition: .3s ease;
 		transform: translateX(-3rem);
+	
+
 		
 		a {
 			background-color: azure;
@@ -177,7 +159,13 @@ const updates = {
 			
 			box-shadow: -1rem 0px 2rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
-			//HOVER EFFECTS
+			.date {
+				font-size: 0.8rem;
+				position: absolute;
+				bottom: 0.5rem;
+				right: 0.5rem;
+				color: grey;
+			}
 
 		}
 		
@@ -256,6 +244,10 @@ const updates = {
 				transform: translateX(0rem);
 
 			}
+		}
+		.n-features {
+			margin-top: 2rem;;
+			transform: translateX(-1rem);
 		}
 		
 	}
