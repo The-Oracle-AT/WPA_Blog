@@ -1,0 +1,33 @@
+---
+import { getAuth } from "firebase-admin/auth";
+import { app } from "../firebase/server";
+import Layout from "../layouts/Layout.astro";
+
+const auth = getAuth(app);
+
+/* Check current session */
+if (!Astro.cookies.has("session")) {
+  return Astro.redirect("/signin");
+}
+const session = Astro.cookies.get("session");
+if (!session) {
+
+  console.log("No session found");
+  return Astro.redirect("/signin");
+}
+const decodedCookie = await auth.verifySessionCookie(session.value);
+const user = await auth.getUser(decodedCookie.uid);
+
+if (!user) {
+  console.log("No user found");
+  return Astro.redirect("/signin");
+}
+---
+
+<Layout title="dashboard">
+  <h1>Welcome {user.displayName}</h1>
+  <p>We are happy to see you here</p>
+  <form action="/api/auth/signout">
+    <button type="submit">Sign out</button>
+  </form>
+</Layout>

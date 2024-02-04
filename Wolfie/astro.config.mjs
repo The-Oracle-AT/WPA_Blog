@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
-import react from "@astrojs/react";
 import netlify from "@astrojs/netlify";
+import react from "@astrojs/react";
+import sitemap from '@astrojs/sitemap';
+import { defineConfig } from 'astro/config';
 
 import svelte from "@astrojs/svelte";
 
@@ -10,6 +10,6 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap(), react(), svelte()],
-  output: "server",
+  output: "hybrid",
   adapter: netlify()
 });
