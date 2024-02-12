@@ -7,17 +7,21 @@ import SiteName from './SiteName.astro';
 
 <header>
 	<nav class="topnav" id="topnav">
-		<a class='sign-in' href="/login">Sign-in</a>
+		<a class='sign-in' href="/profile">Profile</a>
 		<h2><a href="/">
 			<SiteName />
 		</a></h2>
+
+		
+
 		
 		<ul class="nav-bar">
 			<li class="hamburger-icon" id="hamburger-icon"><Hamburger/></li>
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
-			<li><HeaderLink href='/signin'>Sign-up</HeaderLink></li>
+			<li><form action="/api/auth/signout"><button type="submit">Sign out</button></form></li>
+            
 		</ul>
 		<div class="social-links">
 
@@ -44,7 +48,7 @@ import SiteName from './SiteName.astro';
 
 </header>
 <script>
-	import '../scripts/menu.js';
+
 import '../scripts/menu.js';
 </script>
 <style lang="scss">

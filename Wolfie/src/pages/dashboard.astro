@@ -1,8 +1,8 @@
 ---
 import { getAuth } from "firebase-admin/auth";
 import { app } from "../firebase/server";
-import Layout from "../layouts/Layout.astro";
-
+import DashboardLayout from "../layouts/DashboardLayout.astro";
+import { userStore } from "../stores/userStore";
 const auth = getAuth(app);
 
 /* Check current session */
@@ -22,12 +22,21 @@ if (!user) {
   console.log("No user found");
   return Astro.redirect("/signin");
 }
+userStore.set(
+  {
+    email: user.email,
+    name: user.displayName,
+    UID: user.uid,
+  }
+  
+);
+
+
 ---
 
-<Layout title="dashboard">
-  <h1>Welcome {user.displayName}</h1>
+<DashboardLayout title="dashboard">
+  <h1>Welcome {user.email}</h1>
   <p>We are happy to see you here</p>
-  <form action="/api/auth/signout">
-    <button type="submit">Sign out</button>
-  </form>
-</Layout>
+</DashboardLayout>
+
+</script>

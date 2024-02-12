@@ -1,23 +1,26 @@
 ---
-import Hamburger from './Hamburger.astro';
-import HeaderLink from './HeaderLink.astro';
-import SiteName from './SiteName.astro';
+import Hamburger from '../Hamburger.astro';
+import HeaderLink from '../HeaderLink.astro';
+import SiteName from '../SiteName.astro';
 
 ---
 
 <header>
 	<nav class="topnav" id="topnav">
-		<a class='sign-in' href="/login">Sign-in</a>
+		<a class='profile-icon' href="/profile">Profile</a>
 		<h2><a href="/">
 			<SiteName />
 		</a></h2>
+
+		
+
 		
 		<ul class="nav-bar">
 			<li class="hamburger-icon" id="hamburger-icon"><Hamburger/></li>
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
-			<li><HeaderLink href='/signin'>Sign-up</HeaderLink></li>
+			<li><HeaderLink href=""><form action="/api/auth/signout"><button type="submit">Sign out</button></form></HeaderLink></li>
 		</ul>
 		<div class="social-links">
 
@@ -44,8 +47,7 @@ import SiteName from './SiteName.astro';
 
 </header>
 <script>
-	import '../scripts/menu.js';
-import '../scripts/menu.js';
+import '../../scripts/menu.js';
 </script>
 <style lang="scss">
 	header {
@@ -73,7 +75,7 @@ import '../scripts/menu.js';
 	}
 
 		}
-	.sign-in {
+	.profile-icon {
 			display: none;
 		}
 	nav a {
@@ -115,7 +117,7 @@ import '../scripts/menu.js';
 			display: none;
 		}
 		
-		.sign-in {
+		.profile-icon {
 			display: block;
 		}
 		.nav-bar {
@@ -178,6 +180,30 @@ import '../scripts/menu.js';
 				position: relative;
 				left: -2rem;
 				
+			}
+		}
+	}
+	form {
+		width: 100%;
+		height: 110%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		button {
+			width: 100%;
+			height: 4rem;
+			background: none;
+			border: none;
+			font-size: 1rem;
+			font-weight: 500;
+			font-family: inherit;
+		
+
+			color: var(--black);
+			cursor: pointer;
+			&:hover {
+				color: red;
 			}
 		}
 	}
