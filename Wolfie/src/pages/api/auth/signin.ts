@@ -19,22 +19,42 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   /* Verify id token */
   try {
     await auth.verifyIdToken(idToken);
-  } catch (error) {
-    return new Response(
-      "Invalid token",
-      { status: 401 }
-    );
+  } catch (error: any) {
+    switch (error.code) {
+      case "auth/argument-error":
+      case "auth/invalid-id-token":
+      case "auth/id-token-expired":
+      case "auth/user-disable":
+      case "auth/user-not-found":
+        return new Response(
+          "Token expired or invalid",
+          { status: 401 }
+        );
+      default:
+        return new Response(
+          "Internal error, please try again.",
+          { status: 500 }
+        );
+
+    }
   }
 
   /* Create and set session cookie */
   const fiveDays = 60 * 60 * 24 * 5 * 1000;
-  const sessionCookie = await auth.createSessionCookie(idToken, {
-    expiresIn: fiveDays,
-  });
+  try {
+    const sessionCookie = await auth.createSessionCookie(idToken, {
+      expiresIn: fiveDays,
+    });
 
-  cookies.set("session", sessionCookie, {
-    path: "/",
-  });
-  console.log("Session cookie set")
-  return redirect("/dashboard");
+    cookies.set("session", sessionCookie, {
+      path: "/",
+    });
+    console.log("Session cookie set")
+    return redirect("/dashboard");
+  } catch (error: any) {
+    return new Response(
+      "FAILED TO CREATE SESSION COOKIE",
+      { status: 500 }
+    );
+  }
 };

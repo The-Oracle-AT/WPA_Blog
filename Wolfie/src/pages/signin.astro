@@ -1,9 +1,10 @@
 ---
 import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
-import Layout from '../layouts/Layout.astro'
+import Layout from '../layouts/Layout.astro';
 
 /* Check if the user is authenticated */
+
 const auth = getAuth(app);
 if (Astro.cookies.has("session")) {
     const session = Astro.cookies.get("session");
@@ -21,13 +22,16 @@ if (Astro.cookies.has("session")) {
 
 <Layout title="Sign in">
     <h1>Sign in</h1>
+
     <!-- <p>New here? <a href="/register">Create an account</a></p> -->
     <form action="/api/auth/signin" method="post">
         <label for="email" for="email">Email</label>
         <input type="email" name="email" id="email" />
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
+        <input type="password" name="password" id="password"/>
         <button type="submit">Login</button>
+        <p id="error-message" style="display: none;"></p>
+
     </form>
     <!-- <div class="social-login">
         <p>Or</p>
@@ -71,8 +75,10 @@ import { app } from "../firebase/client";
     const auth = getAuth(app);
     // This will prevent the browser from storing session data
     auth.setPersistence(inMemoryPersistence);
+    let error:any;
 
     const form = document.querySelector("form") as HTMLFormElement;
+    const errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         const formData = new FormData(form);
@@ -80,22 +86,65 @@ import { app } from "../firebase/client";
         const password = formData.get("password")?.toString();
 
         if (!email || !password) {
+            error = "Missing email or password";
+            errorMessage.textContent = error;
+            errorMessage.style.display = 'block';
         return;
         }
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const idToken = await userCredential.user.getIdToken();
-        const response = await fetch("/api/auth/signin", {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${idToken}`,
-        },
-        });
-
-        if (response.redirected) {
-        window.location.assign(response.url);
+        
+       
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const idToken = await userCredential.user.getIdToken();
+            
+            const response = await fetch("/api/auth/signin", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${idToken}`,
+            },
+            });
+    
+            if (response.redirected) {
+                window.location.assign(response.url);
+                }
+            
+        } catch (error: any) {
+            console.log(error.code);
+            let message;
+            switch (error.code) {
+                case "auth/invalid-credential":
+                    message = "Invalid email or password";
+                    break;
+                case "auth/user-disabled":
+                    message = "User account is disabled";
+                    break;
+                case "auth/user-not-found":
+                    message = "User not found";
+                    break;
+                case "auth/invalid-password":
+                    message = "Incorrect password";
+                    break;
+                case "auth/invalid-email":
+                    message = "Invalid email";
+                    break;
+                case "auth/too-many-requests":
+                    message = "Too many requests. Try again later";
+                    break;
+                case "auth/network-request-failed":
+                    message = "Network error. Try again later";
+                    break;
+                default:
+                    message = "An error occurred";
+                    break;
+            }
+            console.log(error);
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
         }
 
+        
     });
+    
     //Sign-in with google
 //     const googleSignin = document.querySelector("#google") as HTMLButtonElement;
 //     googleSignin.addEventListener("click", async () => {

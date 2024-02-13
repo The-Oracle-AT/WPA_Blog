@@ -17,7 +17,10 @@ import SiteName from './SiteName.astro';
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
-			<li><HeaderLink href='/signin'>Sign-up</HeaderLink></li>
+			<li id="sign-in"><HeaderLink href='/signin'>Sign-up</HeaderLink></li>
+			<li id="sign-out"><HeaderLink href="">
+				<form action="/api/auth/signout"><button type="submit">Sign out</button></form></HeaderLink></li>
+	
 		</ul>
 		<div class="social-links">
 
@@ -44,8 +47,23 @@ import SiteName from './SiteName.astro';
 
 </header>
 <script>
-	import '../scripts/menu.js';
 import '../scripts/menu.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "../firebase/client";
+import '../scripts/menu.js';
+
+onAuthStateChanged(auth, (user) => {
+	const signOut = document.getElementById('sign-out') as HTMLLIElement;
+	const signIn = document.getElementById('sign-in') as HTMLLIElement;
+  if (user) {
+	signIn.style.display = 'none';
+	signOut.style.display = 'block';
+  } else {
+	signIn.style.display = 'block';
+	signOut.style.display = 'none';
+  }
+});
+
 </script>
 <style lang="scss">
 	header {
