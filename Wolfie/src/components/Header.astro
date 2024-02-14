@@ -7,7 +7,6 @@ import SiteName from './SiteName.astro';
 
 <header>
 	<nav class="topnav" id="topnav">
-		<a class='sign-in' href="/login">Sign-in</a>
 		<h2><a href="/">
 			<SiteName />
 		</a></h2>
@@ -16,10 +15,10 @@ import SiteName from './SiteName.astro';
 			<li class="hamburger-icon" id="hamburger-icon"><Hamburger/></li>
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
+			
+			<li id="sign-in"><HeaderLink href='/dashboard/main'>Dashboard</HeaderLink></li>
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
-			<li id="sign-in"><HeaderLink href='/signin'>Sign-up</HeaderLink></li>
-			<li id="sign-out"><HeaderLink href="">
-				<form action="/api/auth/signout"><button type="submit">Sign out</button></form></HeaderLink></li>
+
 	
 		</ul>
 		<div class="social-links">
@@ -52,18 +51,22 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from "../firebase/client";
 import '../scripts/menu.js';
 
+let isAuthInitialized = false;
+
 onAuthStateChanged(auth, (user) => {
-	const signOut = document.getElementById('sign-out') as HTMLLIElement;
-	const signIn = document.getElementById('sign-in') as HTMLLIElement;
+  if (!isAuthInitialized) {
+    // This is the first time the listener is triggered. The authentication state is now initialized.
+    isAuthInitialized = true;
+  }
+
   if (user) {
-	signIn.style.display = 'none';
-	signOut.style.display = 'block';
+    // The user is signed in.
+    console.log(user);
   } else {
-	signIn.style.display = 'block';
-	signOut.style.display = 'none';
+    // The user is signed out.
+    console.log('No user');
   }
 });
-
 </script>
 <style lang="scss">
 	header {
@@ -71,6 +74,7 @@ onAuthStateChanged(auth, (user) => {
 		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		z-index: 100;
 		nav {
 			display: flex;
 			align-items: center;

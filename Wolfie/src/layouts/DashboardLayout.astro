@@ -1,25 +1,24 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import DashHeader from "../components/dashboard/DashHeader.astro";
+import SideBar from "../components/dashboard/SideBar.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import Layout from "./Layout.astro";
+
 ---
-<!doctype html>
-<html lang="en">
+<Layout>
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body>
-        <DashHeader title={SITE_TITLE} />
-        <main>
-            <slot />
+    <main>
+        <div class="sidebar"><SideBar /></div>
+        <slot />
+    </main>
+  <Footer />
+</Layout>
 
-        </main>
-        <Footer />
-    </body>
-</html>
-
-<script>
-
-import '../pages/api/auth/auth_state';
-</script>
+<style>
+    .sidebar {
+        
+    }
+</style>

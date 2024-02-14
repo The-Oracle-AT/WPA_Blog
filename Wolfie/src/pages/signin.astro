@@ -96,7 +96,7 @@ import { app } from "../firebase/client";
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const idToken = await userCredential.user.getIdToken();
-            
+            sessionStorage.setItem("idToken", idToken);//store the token in the session storage for persistence when redirecting
             const response = await fetch("/api/auth/signin", {
             method: "GET",
             headers: {

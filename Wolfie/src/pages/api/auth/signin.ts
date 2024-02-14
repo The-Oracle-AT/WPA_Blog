@@ -50,7 +50,7 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
       path: "/",
     });
     console.log("Session cookie set")
-    return redirect("/dashboard");
+    return redirect("/dashboard/main");
   } catch (error: any) {
     return new Response(
       "FAILED TO CREATE SESSION COOKIE",

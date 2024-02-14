@@ -1,0 +1,131 @@
+---
+import HeaderLink from "../HeaderLink.astro"
+import Arrow from "./Arrow.astro"
+
+
+---
+
+<script>
+import "../../scripts/side_menu.js"
+import "../../scripts/side_menu.js";
+</script>
+<header class="sidenav" id="sidenav">
+  <nav class="sidebar">
+      <ul>
+          <div id="arrow-icon"><Arrow/></div>
+          <li><HeaderLink href="/dashboard/main">Dashboard</HeaderLink></li>
+          <li><HeaderLink href="/dashboard/lesson">Lessons</HeaderLink></li>
+          <li><HeaderLink href="/dashboard/account">Account</HeaderLink></li>
+          <li><HeaderLink href="/dashboard/settings">Settings</HeaderLink></li>
+          <li><HeaderLink href="">
+            <form action="/api/auth/signout">
+              <button type="submit">signout</button>
+            </form>
+            </HeaderLink></li>
+      </ul>
+  </nav>
+</header>
+<style lang="scss">
+  header {
+
+		margin-left: -1rem;
+		padding: 0 1em;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    position: fixed;
+    top: 4.9rem;
+    left: 0;
+    bottom: 0;
+    width: 0rem;
+    
+   
+    transition: all 0.3s ease;
+    
+		nav {
+      display: flex;
+      flex-direction: column;
+			
+      ul {
+        position: absolute;
+        width: 100%;
+      }
+
+			ul li {
+				margin-right: 0rem;
+        &:not(:first-child){
+          position: relative;
+          left: -5rem;
+        }
+        &:first-child {
+          display: flex;
+          justify-content: flex-end;
+          position: relative;
+          left: 0rem;
+        }
+
+			}
+			h2 {
+				margin: 0;
+				font-size: 1em;
+
+				a.active {
+					text-decoration: none;
+				}
+			}
+			
+	}
+
+		}
+	nav a {
+		padding: 1em 0.5em;
+		color: var(--black);
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+	.social-links,
+	.social-links a {
+		display: flex;
+	}
+	ul {
+
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		
+
+		li {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+		}
+		
+	}
+  .sidenav.responsive {
+    transition: all 0.3s ease;
+    width: 200px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+
+    ul li {
+				margin-right: 0rem;
+        &:not(:first-child){
+          position: relative;
+          display: block;
+          margin-left: 1rem;
+          left: 0rem;
+        }
+        &:first-child {
+          position: relative;
+          left: 2rem;
+        }
+      }
+
+  }
+
+</style>
