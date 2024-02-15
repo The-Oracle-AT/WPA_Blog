@@ -3,6 +3,7 @@ import { getAuth } from "firebase-admin/auth";
 import { app } from "../../firebase/server";
 import Layout from "../../layouts/DashboardLayout.astro";
 import { userStore } from "../../stores/userStore";
+import Dashboard from "../../components/dashboard/Dashboard.svelte";
 const auth = getAuth(app);
 
 /* Check current session */
@@ -37,9 +38,8 @@ userStore.set(
 <Layout title="dashboard">
   <h1>Welcome {user.email}</h1>
   <p>We are happy to see you here</p>
-  <form action="/api/auth/signout">
-    <button type="submit">signout</button>
-  </form>
+  <Dashboard />
+  
 </Layout>
 
 <script>
