@@ -1,10 +1,17 @@
 ---
+
+import UProfile from "../../components/dashboard/UProfile.svelte"
 import DashboardLayout from "../../layouts/DashboardLayout.astro"
+
 ---
 <DashboardLayout>
 <div class="dash-cont">
     <h1>
         Account
+        
+       
     </h1>
+    <UProfile client:visible/>
+
 </div>
 </DashboardLayout>
