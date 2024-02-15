@@ -1,6 +1,7 @@
 ---
 import HeaderLink from "../HeaderLink.astro"
 import Arrow from "./Arrow.astro"
+import SiteName from "../SiteName.astro"
 
 
 ---
@@ -11,33 +12,33 @@ import "../../scripts/side_menu.js";
 </script>
 <header class="sidenav" id="sidenav">
   <nav class="sidebar">
+   
       <ul>
-          <div id="arrow-icon"><Arrow/></div>
-          <li><HeaderLink href="/dashboard/main">Dashboard</HeaderLink></li>
-          <li><HeaderLink href="/dashboard/lesson">Lessons</HeaderLink></li>
-          <li><HeaderLink href="/dashboard/account">Account</HeaderLink></li>
-          <li><HeaderLink href="/dashboard/settings">Settings</HeaderLink></li>
-          <li><HeaderLink href="">
-            <form action="/api/auth/signout">
-              <button type="submit">signout</button>
-            </form>
-            </HeaderLink></li>
+        <li> <h2><a href="/"><SiteName /></a></h2></li>
+        <li id="arrow-icon"><Arrow/></li>
+        <li><HeaderLink href="/dashboard/main">Dashboard</HeaderLink></li>
+        <li><HeaderLink href="/dashboard/lesson">Lessons</HeaderLink></li>
+        <li><HeaderLink href="/dashboard/account">Account</HeaderLink></li>
+        <li><HeaderLink href="/dashboard/settings">Settings</HeaderLink></li>
+        <li><HeaderLink href="">
+          <form action="/api/auth/signout">
+            <button type="submit">signout</button>
+          </form>
+          </HeaderLink></li>
       </ul>
   </nav>
 </header>
 <style lang="scss">
   header {
-
-		margin-left: -1rem;
 		padding: 0 1em;
+
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
     position: fixed;
-    top: 4.9rem;
+    top: 0;
     left: 0;
     bottom: 0;
-    width: 0rem;
-    
-   
+    width: 12rem;
+    background-color: #f4f4f4;
     transition: all 0.3s ease;
     
 		nav {
@@ -51,16 +52,6 @@ import "../../scripts/side_menu.js";
 
 			ul li {
 				margin-right: 0rem;
-        &:not(:first-child){
-          position: relative;
-          left: -5rem;
-        }
-        &:first-child {
-          display: flex;
-          justify-content: flex-end;
-          position: relative;
-          left: 0rem;
-        }
 
 			}
 			h2 {
@@ -85,10 +76,6 @@ import "../../scripts/side_menu.js";
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
 	ul {
 
 		list-style: none;
@@ -102,30 +89,55 @@ import "../../scripts/side_menu.js";
 			display: flex;
 			align-items: center;
 			justify-content: center;
+      
 
 		}
 		
 	}
-  .sidenav.responsive {
+  #arrow-icon {
+    display: none;
     transition: all 0.3s ease;
-    width: 200px;
-    overflow: hidden;
-    background-color: #f4f4f4;
+  }
+  @media (max-width: 1190px) {
+    #arrow-icon {
+      display: block;
+    }
+    header.sidenav {
+      width: 0;
+      overflow-x: visible;
+      position: fixed;
+      box-shadow: none;
+      background-color: transparent;
 
-    ul li {
-				margin-right: 0rem;
-        &:not(:first-child){
+      ul li {
+        &:not(:nth-child(2)){
           position: relative;
-          display: block;
-          margin-left: 1rem;
-          left: 0rem;
-        }
-        &:first-child {
-          position: relative;
-          left: 2rem;
+          left: -300%;
         }
       }
+    }
 
+    .sidenav.responsive {
+      transition: all 0.3s ease;
+      width: 200px;
+      overflow: hidden;
+      background-color: #f4f4f4;
+
+      ul li {
+          margin-right: 0rem;
+          &:not(:nth-child(2)){
+            position: relative;
+            display: block;
+            margin-left: 1rem;
+            left: 0rem;
+          }
+          &:nth-child(2) {
+            position: relative;
+            
+          }
+        }
+
+    }
   }
 
 </style>
