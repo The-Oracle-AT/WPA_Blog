@@ -1,10 +1,28 @@
 ---
-import DashboardLayout from "../../layouts/DashboardLayout.astro"
+import getUserData from "../../firebase/auth/getUserData";
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+
+const user = await getUserData(sessionCookie);
+
+if (!user) {
+  return Astro.redirect("/signin");
+}
+
 ---
-<DashboardLayout>
+
+<DashboardLayout title="Settings page" description="Change the appearence of your account to a theme of your liking!">
     <div class="dash-cont">
         <h1>
             Settings
         </h1>
+
+        <ul>
+            <li>Change theme</li>
+            <li>Notification settings</li>
+            <li>Help & Support</li>
+            <li>Feedback & Suggestions</li>
+            
+        </ul>
     </div>
 </DashboardLayout>

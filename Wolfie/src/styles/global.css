@@ -41,8 +41,15 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
-
-
+}
+body.light-theme {
+	background-color: #ffffff;
+	color: #333333;
+  }
+  
+body.dark-theme {
+	background-color: #333333;
+	color: #ffffff;
 }
 
 
@@ -52,12 +59,7 @@ main {
 	margin: auto;
 	padding: 3em 1em;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5rem 0;
 	color: rgb(var(--black));
 	line-height: 1.2;

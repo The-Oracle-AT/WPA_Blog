@@ -1,6 +1,10 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
+import LessonTracker from '../../components/LessonTracker.svelte';
+import getUserData from '../../firebase/auth/getUserData';
+import isLoggedIn from '../../firebase/auth/isLoggedIn';
 import BlogPost from '../../layouts/BlogPost.astro';
+
 
 const posts = await getCollection('blog');
 type Props = CollectionEntry<'blog'>;
@@ -10,6 +14,22 @@ const post = posts.find((page) => page.slug === slug);
 if (!post) return Astro.redirect("/404");
 const { Content } = await post.render();
 const tags = post.data.tags;
+
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+
+const userData = await getUserData(sessionCookie);
+
+const loggedIn = await isLoggedIn(sessionCookie);
+if (loggedIn) {
+  
+  console.log(userData);
+}
+
+
+
+
+
+
 ---
 
 <BlogPost {...post.data}>
@@ -21,6 +41,24 @@ const tags = post.data.tags;
 			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
 		))}
 	</ul>
+  <LessonTracker 
+  userId={userData.uid}
+  user = {userData}
+  lesson={{
+    title: post.data.title,
+    category: post.data.category,
+    points: 10,
+    id: post.data.title}}
+  category={{
+    name: post.data.category,
+    id: post.data.category,
+    totalCompletedLessons: 10,
+  }}
+  client:only
+
+  />
+
+
 </section>
 </BlogPost>
 

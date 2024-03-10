@@ -1,17 +1,31 @@
 ---
 
-import UProfile from "../../components/dashboard/UProfile.svelte"
-import DashboardLayout from "../../layouts/DashboardLayout.astro"
+import UProfile from "../../components/dashboard/UProfile.svelte";
+import getUserData from "../../firebase/auth/getUserData";
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+
+
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+
+const user = await getUserData(sessionCookie);
+
+if (!user) {
+  return Astro.redirect("/signin");
+}
+
 
 ---
-<DashboardLayout>
+<DashboardLayout title="Account - LearnBetter!" descrption="Edit or change your details on LearnBetter!">
 <div class="dash-cont">
     <h1>
         Account
         
        
     </h1>
-    <UProfile client:visible/>
+    <UProfile {user} client:visible/>
 
 </div>
 </DashboardLayout>
+
+<script>
+</script>

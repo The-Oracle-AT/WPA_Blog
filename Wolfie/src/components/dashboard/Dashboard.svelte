@@ -7,7 +7,9 @@
     <div class="dashboard-content">
         <div class="progress">
             <Card title="Progress">
-                <p>Progress content goes here</p>
+                <p>Completed lessons indicator</p>
+                <p>In progess lessons</p>
+                
             </Card>
         </div>
         <div class="achievements">

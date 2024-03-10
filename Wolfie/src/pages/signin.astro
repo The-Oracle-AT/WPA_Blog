@@ -3,6 +3,8 @@ import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from '../layouts/Layout.astro';
 
+import BaseHead from "../components/BaseHead.astro";
+
 /* Check if the user is authenticated */
 
 const auth = getAuth(app);
@@ -14,22 +16,22 @@ if (Astro.cookies.has("session")) {
     const sessionCookie = session.value;
     const decodedCookie = await auth.verifySessionCookie(sessionCookie, true);
     if (decodedCookie) {
-        return Astro.redirect("/dashboard");
+        return Astro.redirect("/dashboard/main");
     }
 }
 
 ---
-
-<Layout title="Sign in">
+<Layout title="Sign in - LearnBetter" description="Sign in to access guided learning and personalized features.">
     <h1>Sign in</h1>
 
     <!-- <p>New here? <a href="/register">Create an account</a></p> -->
-    <form action="/api/auth/signin" method="post">
+    <form action="/api/auth/signin" method="post" >
         <label for="email" for="email">Email</label>
         <input type="email" name="email" id="email" />
         <label for="password">Password</label>
         <input type="password" name="password" id="password"/>
         <button type="submit">Login</button>
+        <div class="loading" id= "loading" style="display: none">Loading...</div>
         <p id="error-message" style="display: none;"></p>
 
     </form>
@@ -70,6 +72,7 @@ if (Astro.cookies.has("session")) {
 <script>
     
 import { getAuth, inMemoryPersistence, signInWithEmailAndPassword } from "firebase/auth";
+import getFriendlyErrorMessage from "../firebase/auth/getFriendlyErrorMessage";
 import { app } from "../firebase/client";
 
     const auth = getAuth(app);
@@ -78,9 +81,15 @@ import { app } from "../firebase/client";
     let error:any;
 
     const form = document.querySelector("form") as HTMLFormElement;
+    const loading = document.getElementById('loading') as HTMLDivElement;
+    const button = document.querySelector("button") as HTMLButtonElement;
     const errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
     form.addEventListener("submit", async (e) => {
+       
         e.preventDefault();
+        loading.style.display = 'block';
+        button.style.display = 'none';
+
         const formData = new FormData(form);
         const email = formData.get("email")?.toString();
         const password = formData.get("password")?.toString();
@@ -89,6 +98,9 @@ import { app } from "../firebase/client";
             error = "Missing email or password";
             errorMessage.textContent = error;
             errorMessage.style.display = 'block';
+            loading.style.display = 'none';
+            button.style.display = 'block';
+            
         return;
         }
         
@@ -109,39 +121,14 @@ import { app } from "../firebase/client";
                 }
             
         } catch (error: any) {
-            console.log(error.code);
-            let message;
-            switch (error.code) {
-                case "auth/invalid-credential":
-                    message = "Invalid email or password";
-                    break;
-                case "auth/user-disabled":
-                    message = "User account is disabled";
-                    break;
-                case "auth/user-not-found":
-                    message = "User not found";
-                    break;
-                case "auth/invalid-password":
-                    message = "Incorrect password";
-                    break;
-                case "auth/invalid-email":
-                    message = "Invalid email";
-                    break;
-                case "auth/too-many-requests":
-                    message = "Too many requests. Try again later";
-                    break;
-                case "auth/network-request-failed":
-                    message = "Network error. Try again later";
-                    break;
-                default:
-                    message = "An error occurred";
-                    break;
-            }
+            const message = getFriendlyErrorMessage(error.code);
             console.log(error);
             errorMessage.textContent = message;
             errorMessage.style.display = 'block';
+        } finally {
+            loading.style.display = 'none';
+            button.style.display = 'block';
         }
-
         
     });
     

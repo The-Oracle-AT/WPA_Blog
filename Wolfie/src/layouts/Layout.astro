@@ -1,16 +1,19 @@
 ---
+
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+const { title, description} = Astro.props;
+
 ---
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={title} description={description} />
     </head>
-    <body>
-        <Header title={SITE_TITLE} />
+    <body id="html_body" class="html_body">
+        <Header title={title} />
         <main>
             <slot />
 
@@ -21,5 +24,5 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 <script>
 
-import '../pages/api/auth/auth_state';
+
 </script>

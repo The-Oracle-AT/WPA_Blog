@@ -19,52 +19,31 @@ if (!session) {
 const decodedCookie = await auth.verifySessionCookie(session.value);
 const user = await auth.getUser(decodedCookie.uid);
 
-if (!user) {
-  console.log("No user found");
-  return Astro.redirect("/signin");
-}
-userStore.set(
+if (user) {
+  userStore.set(
   {
     email: user.email,
     name: user.displayName,
-    UID: user.uid,
-  }
+    
+  });
   
-);
+} else {
+  console.log("No user found");
+  return Astro.redirect("/signin");
+}
+
+  
+
 
 
 ---
 
-<Layout title="dashboard">
-  <h1>Welcome {user.email}</h1>
-  <p>We are happy to see you here</p>
+<Layout title="Dashboard" description="See your current progress and analytics">
+  <p>Welcome {user.displayName}</p>
   <Dashboard />
   
 </Layout>
 
 <script>
-  import '../../scripts/menu.js';
-import '../../scripts/menu.js';
 
-
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from "../../firebase/client";
-
-
-let isAuthInitialized = false;
-
-onAuthStateChanged(auth, (user) => {
-  if (!isAuthInitialized) {
-    // This is the first time the listener is triggered. The authentication state is now initialized.
-    isAuthInitialized = true;
-  }
-
-  if (user) {
-    // The user is signed in.
-    console.log(user);
-  } else {
-    // The user is signed out.
-    console.log('No user');
-  }
-});
 </script>

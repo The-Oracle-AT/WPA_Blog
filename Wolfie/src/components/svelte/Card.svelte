@@ -9,7 +9,7 @@
 </script>
 
 <div class="card" style="--borderSettings: {border}; --backgroundSettings: {backgroundColor} ">
-    <h2>{title}</h2>
+    <p>{title}</p>
     <slot></slot>
 </div>
 
@@ -20,5 +20,9 @@
         padding: 1rem;
         margin: 1rem;
         border-radius: 1rem;
+    }
+    p {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 </style>

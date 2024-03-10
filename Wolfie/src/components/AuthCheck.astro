@@ -1,0 +1,8 @@
+---
+import getUserData from "../firebase/auth/getUserData";
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+const userData = await getUserData(sessionCookie);
+if (!userData) {
+  return Astro.redirect("/signin");
+}
+---
