@@ -31,16 +31,11 @@ if (user) {
   console.log("No user found");
   return Astro.redirect("/signin");
 }
-
-  
-
-
-
 ---
 
 <Layout title="Dashboard" description="See your current progress and analytics">
-  <p>Welcome {user.displayName}</p>
-  <Dashboard />
+  <p>Welcome {user.displayName}, {user.uid}</p>
+  <Dashboard uid={user.uid} client:only/>
   
 </Layout>
 

@@ -1,0 +1,201 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+import getUserData from "../../../firebase/auth/getUserData";
+import DashboardLayout from "../../../layouts/DashboardLayout.astro";
+
+const posts = (await getCollection('premium_blog')).sort((a:any, b:any) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).reverse();
+// create an array with posts that contain category "concentration"
+const concentrationPosts = posts.filter((post:any) => post.data.category === "concentration");
+const studyPosts = posts.filter((post:any) => post.data.category === "study");
+const roleModelPosts = posts.filter((post:any) => post.data.category === "role-models");
+
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+
+const user = await getUserData(sessionCookie);
+
+if (!user) {
+  return Astro.redirect("/signin");
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style lang="scss">
+			main {
+				width: 960px;
+			}
+			ul {
+				display: flex;
+				
+				flex-direction: row;
+				gap: 2rem;
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+				overflow-x: scroll;
+				overflow-y: hidden;
+			}
+			ul li {
+				min-width: calc(50% - 1rem);
+				// position: relative;
+				// .date {
+				// 	// place date in top right corner of image
+				// 	position: absolute;
+				// 	top: 0;
+				// 	right: 0;
+				// 	margin: 0;
+				// 	padding: 0.1rem;
+				// 	background-color: rgba(55, 52, 52, 0.8);
+				// 	border-top-right-radius: 0.5rem;
+
+
+				// }
+			}
+			ul li * {
+				text-decoration: none;
+				transition: 0.2s ease;
+			}
+			/* ul li:first-child {
+				width: 100%;
+				margin-bottom: 1rem;
+				text-align: center;
+			}
+			ul li:first-child img {
+				width: 100%;
+			}
+			ul li:first-child .title {
+				font-size: 2.369rem;
+			} */
+			ul li img {
+				margin-bottom: 0.5rem;
+				border-radius: 12px;
+			}
+			ul li a {
+				display: block;
+			}
+			.title {
+				margin: 0;
+				color: rgb(var(--black));
+				line-height: 1;
+			}
+			.date {
+				margin: 0;
+				color: rgb(var(--gray));
+			}
+			ul li a:hover h4,
+			ul li a:hover .date {
+				color: rgb(var(--accent));
+			}
+			ul a:hover img {
+				box-shadow: var(--box-shadow);
+			}
+			@media (max-width: 720px) {
+				ul {
+					gap: 0.5em;
+					font-size: 1rem;
+					li {
+						width: 100%;
+						text-align: center;
+
+						.title {
+							font-size: 1rem;
+						}
+
+						img {
+							width: 100%;
+						}
+					}
+				}
+			}
+		</style>
+	</head>
+	<DashboardLayout title="Courses - LearnBetter!" description ="Discover new course and revisit old ones, there's always something to learn.">
+			<section>
+				<h2>All Posts</h2>
+				<ul>
+					{
+						posts.map((post:any) => (
+							
+							<li>
+								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<h5 class="title">{post.data.title}</h5>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+			<section>
+				<h2>Concentration</h2>
+				{concentrationPosts.length > 0 ?
+				<ul>
+					{
+						concentrationPosts.map((post:any) => (
+							<li>
+								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<h5 class="title">{post.data.title}</h5>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+										
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				: <p>No posts found</p>}
+			</section>
+			<section>
+				<h2>Study</h2>
+				{studyPosts.length > 0 ?
+				<ul>
+					{
+						studyPosts.map((post:any) => (
+							<li>
+								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<h5 class="title">{post.data.title}</h5>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+										
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				: <p>No Study posts found</p>}
+			</section>
+			<section>
+				<h2>Role Models</h2>
+				{roleModelPosts.length > 0 ?
+				<ul>
+					{
+						roleModelPosts.map((post:any) => (
+							<li>
+								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<h4 class="title">{post.data.title}</h4>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+										
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+				: <p>No Role Model posts found</p>}
+			</section>
+	</DashboardLayout>
+</html>

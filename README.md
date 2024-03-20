@@ -1,6 +1,7 @@
-# LearnBetter!
+# LearnBetter
 
 # Table Of Contents
+
 - [Description](#description)
 - [Features](#features)
 - [Installation](#installation)
@@ -18,40 +19,47 @@ This project is a website that helps users become better through awareness and i
 - Interactive learning: Integrated learning to help user remember the lessons.
 - progress tracker: tracks a user's progress.
 
-
 ## Installation
 
 Follow these steps to get a development environment running:
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/The-Oracle-AT/WPA_Blog
 ```
 
 2. Move to directory:
+
 ```bash
 cd Wolfie
 ```
-3. Install astro 
+
+3. Install astro
+
 ```bash
 npm install astro@latest
 ```
+
 4. Start development server:
+
 ```bash
 npm run dev
 ```
 
 ## Usage
+
 Coming soon!
 
 ## Contributing
-+ Fork the project.
-+ Create a new branch (git checkout -b feature-branch).
-+ Make your changes.
-+ Run the tests to ensure they pass.
-+ Commit your changes (git commit -am 'Add some feature').
-+ Push to the branch (git push origin feature-branch).
-+ Create a new Pull Request.
+
+- Fork the project.
+- Create a new branch (git checkout -b feature-branch).
+- Make your changes.
+- Run the tests to ensure they pass.
+- Commit your changes (git commit -am 'Add some feature').
+- Push to the branch (git push origin feature-branch).
+- Create a new Pull Request.
 
 # Proprietary License
 

@@ -5,6 +5,7 @@ export interface User {
     points: number;
     rank: string;
     badges: string[];
+
   }
   
 export interface Lesson {

@@ -52,7 +52,6 @@ export async function updateUserProgress(userId: string, lessonId: string, user:
       timestamp: serverTimestamp(),
     });
     // update user's points with lesson points and add 1 t lesson count
-
     await updateDoc(userRef, {
       points: increment(10),
     }); 
