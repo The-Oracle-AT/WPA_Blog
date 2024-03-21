@@ -12,6 +12,17 @@ const concentrationPosts = posts.filter((post:any) => post.data.category === "co
 const studyPosts = posts.filter((post:any) => post.data.category === "study");
 const roleModelPosts = posts.filter((post:any) => post.data.category === "role-models");
 
+let categories = posts.map((post:any) => post.data.category);
+ let uniqueCategories = [...new Set(categories)]; // remove duplicates
+ let categorizedPosts = uniqueCategories.map((category:any) => {
+     return {
+         category: category,
+         posts: posts.filter((post:any) => post.data.category === category),
+         name: category.charAt(0).toUpperCase() + category.slice(1),
+     }
+ });
+
+
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
 const user = await getUserData(sessionCookie);
@@ -28,56 +39,81 @@ if (!user) {
 		<style lang="scss">
 			main {
 				width: 960px;
+				
+			}
+			section {
+				margin-bottom: 2rem;
+				z-index: 1;
+				&:not(:first-child) {
+					margin-top: 2rem;
+				}
 			}
 			ul {
 				display: flex;
-				
 				flex-direction: row;
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
-				padding: 0;
+				padding: .5rem;
 				overflow-x: scroll;
 				overflow-y: hidden;
+				filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+				::-webkit-scrollbar {
+					width: 5px;
+				}
+				::-webkit-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 2rem;
+				}
+				::-webkit-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+
+				}
+
+				/* Styles for Firefox */
+				::-moz-scrollbar {
+					width: 12px;
+				}
+
+				::-moz-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 10px;
+				}
+				::-moz-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+				}
+				/* Styles for IE and Edge */
+				::-ms-scrollbar {
+					width: 5px;
+				}
+				::-ms-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 10px;
+				}
+				::-ms-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+				}
+
 			}
 			ul li {
 				min-width: calc(50% - 1rem);
-				// position: relative;
-				// .date {
-				// 	// place date in top right corner of image
-				// 	position: absolute;
-				// 	top: 0;
-				// 	right: 0;
-				// 	margin: 0;
-				// 	padding: 0.1rem;
-				// 	background-color: rgba(55, 52, 52, 0.8);
-				// 	border-top-right-radius: 0.5rem;
-
-
-				// }
-			}
-			ul li * {
+				* {
 				text-decoration: none;
 				transition: 0.2s ease;
-			}
-			/* ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			} */
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
+				}
+				img {
+					margin-bottom: 0.5rem;
+					border-radius: 12px;
+				}
+				a {
 				display: block;
+				}
 			}
+			ul li 
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
@@ -87,12 +123,21 @@ if (!user) {
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			ul li a{
+				&:hover {
+					.title {
+						color: rgb(var(--accent));
+					}
+					.date {
+					color: rgb(var(--accent));
+					}
+				}
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
+			}
+			.visible {
+				display: block;
 			}
 			@media (max-width: 720px) {
 				ul {
@@ -115,8 +160,13 @@ if (!user) {
 		</style>
 	</head>
 	<DashboardLayout title="Courses - LearnBetter!" description ="Discover new course and revisit old ones, there's always something to learn.">
-			<section>
-				<h2>All Posts</h2>
+		<div id="courses">
+			<div>
+				<p>Welcome back, {user.displayName}!</p>
+				<p>Here are some of the latest posts from the premium blog:</p>
+			</div>
+			<section id="course_section">
+				<h2>All Posts <span class="toggle-icon">+</span></h2>
 				<ul>
 					{
 						posts.map((post:any) => (
@@ -134,13 +184,16 @@ if (!user) {
 					}
 				</ul>
 			</section>
-			<section>
-				<h2>Concentration</h2>
-				{concentrationPosts.length > 0 ?
-				<ul>
-					{
-						concentrationPosts.map((post:any) => (
-							<li>
+
+		{ categorizedPosts.length > 0 ? (
+			<div>
+				{categorizedPosts.map((category:any) => (
+					<section id="course_section">
+						<h3>{category.name} <span class="toggle-icon">+</span></h3>
+						
+						<ul class = {category.name}>
+							{category.posts.map((post:any) => (
+								<li>
 								<a href={`/dashboard/premium_blog/${post.slug}/`}>
 									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h5 class="title">{post.data.title}</h5>
@@ -150,52 +203,20 @@ if (!user) {
 									</p>
 								</a>
 							</li>
-						))
-					}
-				</ul>
-				: <p>No posts found</p>}
-			</section>
-			<section>
-				<h2>Study</h2>
-				{studyPosts.length > 0 ?
-				<ul>
-					{
-						studyPosts.map((post:any) => (
-							<li>
-								<a href={`/dashboard/premium_blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h5 class="title">{post.data.title}</h5>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-										
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-				: <p>No Study posts found</p>}
-			</section>
-			<section>
-				<h2>Role Models</h2>
-				{roleModelPosts.length > 0 ?
-				<ul>
-					{
-						roleModelPosts.map((post:any) => (
-							<li>
-								<a href={`/dashboard/premium_blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-										
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-				: <p>No Role Model posts found</p>}
-			</section>
+							))}
+						</ul>
+					</section>
+					))}
+			</div>
+		
+			) : <p>No categories found</p> }
+		</div>
+		
 	</DashboardLayout>
 </html>
+
+<script>
+	import "../../../scripts/courseExpansion.ts";
+
+</script>
+

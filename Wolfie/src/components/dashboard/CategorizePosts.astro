@@ -1,0 +1,33 @@
+---
+ import FormattedDate from '../../components/FormattedDate.astro';
+ export let posts: [] = [];
+ let categories = posts.map((post:any) => post.data.category);
+ let uniqueCategories = [...new Set(categories)]; // remove duplicates
+ let categorizedPosts = uniqueCategories.map((category:any) => {
+     return {
+         category: category,
+         posts: posts.filter((post:any) => post.data.category === category),
+         name: category.charAt(0).toUpperCase() + category.slice(1),
+     }
+ });
+
+---
+<div>
+    { categorizedPosts.length > 0 ? (
+        <section>
+            {categorizedPosts.map((category:any) => (
+                <h3>{category.name}</h3>
+                <ul>
+                    {category.posts.map((post:any) => (
+                        <li>
+                            <a href={post.url}>{post.data.title}</a>
+                            <p><FormattedDate date={post.data.date} /></p>
+                        </li>
+                    ))}
+                </ul>
+            ))}
+        </section>
+
+    ) : <p>No categories found</p>
+    }
+</div>
