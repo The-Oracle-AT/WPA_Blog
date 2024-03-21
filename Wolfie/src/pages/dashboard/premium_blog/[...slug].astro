@@ -33,7 +33,7 @@ if (loggedIn) {
 		<h2>Related Posts</h2>
 	<ul>
 		{tags && tags.map((tag:string) => (
-			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
+			<li> <a href={`/dashboard/categorical_tags/${tag}`}>{tag}</a></li>
 		))}
 	</ul>
   <LessonTracker 

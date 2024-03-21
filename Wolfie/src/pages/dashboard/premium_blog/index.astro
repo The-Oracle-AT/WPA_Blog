@@ -56,7 +56,6 @@ if (!user) {
 				margin: 0;
 				padding: .5rem;
 				overflow-x: scroll;
-				overflow-y: hidden;
 				filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
 				::-webkit-scrollbar {
@@ -165,36 +164,39 @@ if (!user) {
 				<p>Welcome back, {user.displayName}!</p>
 				<p>Here are some of the latest posts from the premium blog:</p>
 			</div>
-			<section id="course_section">
-				<h2>All Posts <span class="toggle-icon">+</span></h2>
-				<ul>
-					{
-						posts.map((post:any) => (
-							
-							<li>
-								<a href={`/dashboard/premium_blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h5 class="title">{post.data.title}</h5>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+			<div>
+				
+				<section id="course_section">
+					<h2>All Post <span class="toggle-icon">+</span></h2>
+					<ul>
+						{
+							posts.map((post:any) => (
+								
+								<li>
+									<a href={`/dashboard/premium_blog/${post.slug}/`}>
+										<img width={720} height={360} src={post.data.heroImage} alt="" />
+										<h5 class="title">{post.data.title}</h5>
+										<p class="date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			</div>
 
 		{ categorizedPosts.length > 0 ? (
 			<div>
-				{categorizedPosts.map((category:any) => (
-					<section id="course_section">
-						<h3>{category.name} <span class="toggle-icon">+</span></h3>
+				{categorizedPosts.map((category:any, index) => (
+					<section id={`category_${index}_section`}>
+						<h3>{category.name} <a href={`/dashboard/categorical_tags/${category.name}`}><span class="toggle-icon">+</span></a></h3>
 						
 						<ul class = {category.name}>
 							{category.posts.map((post:any) => (
 								<li>
-								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+								<a href={`/dashboard/premium_blog/${post.slug}`}>
 									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h5 class="title">{post.data.title}</h5>
 									<p class="date">
@@ -214,9 +216,5 @@ if (!user) {
 		
 	</DashboardLayout>
 </html>
-
-<script>
-	import "../../../scripts/courseExpansion.ts";
-
-</script>
+s
 
