@@ -3,8 +3,6 @@ import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from '../layouts/Layout.astro';
 
-import BaseHead from "../components/BaseHead.astro";
-
 /* Check if the user is authenticated */
 
 const auth = getAuth(app);
@@ -15,7 +13,7 @@ if (Astro.cookies.has("session")) {
         }
     const sessionCookie = session.value;
     const decodedCookie = await auth.verifySessionCookie(sessionCookie, true);
-    if (decodedCookie) {
+    if (decodedCookie) { 
         return Astro.redirect("/dashboard/main");
     }
 }
@@ -74,6 +72,9 @@ if (Astro.cookies.has("session")) {
 import { getAuth, inMemoryPersistence, signInWithEmailAndPassword } from "firebase/auth";
 import getFriendlyErrorMessage from "../firebase/auth/getFriendlyErrorMessage";
 import { app } from "../firebase/client";
+import { fetchCompletedCategories } from "../services/api/fetchCompletedCategories";
+import { fetchCompletedLessons } from "../services/api/fetchCompletedLessons";
+import { completedCategoriesStore, completedLessonsStore } from "../stores/coursesStores";
 
     const auth = getAuth(app);
     // This will prevent the browser from storing session data
@@ -107,7 +108,7 @@ import { app } from "../firebase/client";
        
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const idToken = await userCredential.user.getIdToken();
+            const idToken = await userCredential.user.getIdToken();//
             sessionStorage.setItem("idToken", idToken);//store the token in the session storage for persistence when redirecting
             const response = await fetch("/api/auth/signin", {
             method: "GET",
@@ -117,6 +118,13 @@ import { app } from "../firebase/client";
             });
     
             if (response.redirected) {
+                
+                //fetch the completed lessons and categories and store them in the store upon successful login
+                //
+                const completedLessons = await fetchCompletedLessons(userCredential.user.uid);
+                const completedCategories = await fetchCompletedCategories(userCredential.user.uid);
+                completedLessonsStore.set(completedLessons);
+                completedCategoriesStore.set(completedCategories);
                 window.location.assign(response.url);
                 }
             

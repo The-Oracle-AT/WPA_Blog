@@ -6,9 +6,10 @@ import type { User } from "./schema";
 export async function fetchUserProgressData(userId: string): Promise<User> {
   const userRef = doc(db, "users", userId);
   const userDoc = await getDoc(userRef);
+  console.log("User doc:", userDoc.data());
 
   if (userDoc.exists()) {
-    console.log("User data:", userDoc.data());
+    //console.log("User data:", userDoc.data());
     return userDoc.data() as User;
   }
 

@@ -13,6 +13,7 @@ export async function getStaticPaths(): Promise<any> {
 		const uniqueTags = [ ...new Set(allPosts.map(post => post.data.tags).flat()) ];
     
 		return uniqueTags.map((tag: any )=> {
+			
 			const filteredPosts = allPosts.filter(post => post.data.tags.includes(tag));
 			return {
 				params : { tag },
@@ -32,6 +33,7 @@ type Props = CollectionEntry<'blog'>;
 export const prerender = true;
 
 const { posts } = Astro.props as { posts: any[] };
+const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // Get the last part of the URL and replace %20 with a space
 
 ---
 <!doctype html>
@@ -111,6 +113,9 @@ const { posts } = Astro.props as { posts: any[] };
 	<body>
 		<Header />
 		<main>
+			<section>
+				Posts tagged with <strong>{category}</strong>
+			</section>
 			<section>
 				<ul>
 					{

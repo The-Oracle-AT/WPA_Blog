@@ -3,14 +3,17 @@
 import UProfile from "../../components/dashboard/UProfile.svelte";
 import getUserData from "../../firebase/auth/getUserData";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
-
-
+import { fetchUserInfo } from "../../services/api/fetchUserInfo";
+import type { User } from "firebase/auth";
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
-
 const user = await getUserData(sessionCookie);
-
 if (!user) {
   return Astro.redirect("/signin");
+}
+const id = user.uid;
+const userData = await fetchUserInfo(id)
+if(!userData) {
+  return Astro.redirect("/404")
 }
 
 
@@ -22,7 +25,9 @@ if (!user) {
         
        
     </h1>
-    <UProfile {user} client:visible/>
+    <section>
+      <UProfile uid={id} user={userData} />
+    </section>
     <section>
       Composition chart
     </section>

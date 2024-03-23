@@ -1,8 +1,10 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { fetchUserProgressData } from "../../firebase/database/fetchUserProgressData";
+    import { fetchCompletedLessons } from "../../services/api/fetchCompletedLessons";
+    import { completedLessonsStore } from "../../stores/coursesStores";
     import Card from "../svelte/Card.svelte";
-    
+        
     interface User {
         id: string;
         email: string;
@@ -23,18 +25,25 @@
         rank: "",
         badges: []
     }; 
-    let CompletedLessons = 0;
-    
+    let completedLessons:any[] = [];
+    let completedCategories:any[] = [];
 
     onMount(async () => {
         progressData = await fetchUserProgressData(uid);
-        console.log(progressData);
+        completedLessons = await fetchCompletedLessons(uid);
+        completedLessonsStore.update((entries) => entries = completedLessons);
     });
+    completedLessonsStore.subscribe((value) => {
+        completedCategories = value;
+    });
+    
 
 </script>
 
 <div class="dashboard">
     <div class="dashboard-content">
+        { completedLessons }
+        { completedCategories }
         <div class="progress">
             <Card title="Progress">
                 <p>Completed lessons indicator</p>

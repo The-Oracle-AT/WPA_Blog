@@ -1,20 +1,30 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
+import GreyFilter from "../../../components/dashboard/GreyFilter.svelte";
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 import getUserData from "../../../firebase/auth/getUserData";
 import DashboardLayout from "../../../layouts/DashboardLayout.astro";
+import { setCompletedLessonsStore, completedCategoriesStore, completedLessonsStore } from '../../../stores/coursesStores';
+import { onMount } from 'svelte';
+import { get } from 'svelte/store';
 
+
+// verify user is signed in
+const sessionCookie = Astro.cookies.get("session")?.value ?? null;
+const user = await getUserData(sessionCookie);
+if (!user) {
+  return Astro.redirect("/signin");
+}
+
+// get posts from the premium blog collection
 const posts = (await getCollection('premium_blog')).sort((a:any, b:any) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()).reverse();
-// create an array with posts that contain category "concentration"
-const concentrationPosts = posts.filter((post:any) => post.data.category === "concentration");
-const studyPosts = posts.filter((post:any) => post.data.category === "study");
-const roleModelPosts = posts.filter((post:any) => post.data.category === "role-models");
 
-let categories = posts.map((post:any) => post.data.category);
- let uniqueCategories = [...new Set(categories)]; // remove duplicates
- let categorizedPosts = uniqueCategories.map((category:any) => {
+const categories = posts.map((post:any) => post.data.category);
+const uniqueCategories = [...new Set(categories)]; // remove duplicates
+const categorizedPosts = uniqueCategories.map((category:any) => {
      return {
          category: category,
          posts: posts.filter((post:any) => post.data.category === category),
@@ -23,13 +33,10 @@ let categories = posts.map((post:any) => post.data.category);
  });
 
 
-const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
-const user = await getUserData(sessionCookie);
 
-if (!user) {
-  return Astro.redirect("/signin");
-}
+
+
 ---
 
 <!doctype html>
@@ -167,14 +174,16 @@ if (!user) {
 			<div>
 				
 				<section id="course_section">
-					<h2>All Post <span class="toggle-icon">+</span></h2>
+					<h2>Latest Posts</h2>
 					<ul>
 						{
 							posts.map((post:any) => (
 								
 								<li>
 									<a href={`/dashboard/premium_blog/${post.slug}/`}>
+										<GreyFilter isCompleted={true} client:only>
 										<img width={720} height={360} src={post.data.heroImage} alt="" />
+										</GreyFilter>
 										<h5 class="title">{post.data.title}</h5>
 										<p class="date">
 											<FormattedDate date={post.data.pubDate} />
@@ -191,13 +200,22 @@ if (!user) {
 			<div>
 				{categorizedPosts.map((category:any, index) => (
 					<section id={`category_${index}_section`}>
-						<h3>{category.name} <a href={`/dashboard/categorical_tags/${category.name}`}><span class="toggle-icon">+</span></a></h3>
+						<h3>{category.name} 
+							<a href={`/dashboard/categorical_tags/${category.name}`}>
+								<span class="folder-wrapper" style="font-size: .75rem;" > 
+								<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" />
+								
+								</span>
+							</a>
+						</h3>
 						
 						<ul class = {category.name}>
 							{category.posts.map((post:any) => (
 								<li>
 								<a href={`/dashboard/premium_blog/${post.slug}`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									<GreyFilter currentLessonTitle={post.data.title} client:only>
+									<img width={720} height={360} src={post.data.heroImage} alt={`${post.data.title} image`} />
+									</GreyFilter>
 									<h5 class="title">{post.data.title}</h5>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
@@ -216,5 +234,10 @@ if (!user) {
 		
 	</DashboardLayout>
 </html>
-s
+<script>
+import { get } from 'svelte/store';
+
+import { completedCategoriesStore } from "../../../stores/coursesStores";
+	console.log(get(completedCategoriesStore));
+</script>
 
