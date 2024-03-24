@@ -1,49 +1,44 @@
 
 <script lang="ts">
-    import { onMount } from "svelte";
-    import type { User } from "../../pages/dashboard/types";
     
+        
     export let uid: string;
-    export let user: User;
-    $: name = user?.name || '';
-    $: username = user?.username || '';
-    $: institution = user?.institution || "Insitution";
+    export let currentUserData:any;
+    let name = currentUserData.name || "";
+    let username = currentUserData.username;
+    let institution = currentUserData.institution;
     $: editable = true;
+    $: edited = name != currentUserData.name || username != currentUserData.username || institution != currentUserData.institution;
+
     
-    let errorMessage = '';
-    let loading = false;
-    let successMessage = '';
-    $: hasChanged = name !== user.name || username !== user.username || institution !== user.institution  ;
-    onMount(()=> {
-      editable = true;
-    })
 
     const save = (e:Event) => {
-      e.preventDefault();
+
       editable = false
 
     }
+    console.log(currentUserData)
 
 
 </script>
 
 <div class="profile">
     <form method="post" action="/api/database/user/${uid}">
-        <label for="name">
-        Name:{ name }
-        <input bind:value={name} placeholder="Name" disabled={!editable} type="text" name="name">
+        <label>
+        Name: { name }
+        <input bind:value={name} placeholder="Name" disabled={!editable} type="text" name="name" autocomplete="name">
         </label>
-        <label for="username">
-        Username:
-        <input bind:value="{username}" placeholder="Username" disabled={!editable} type="text" name="username">
+        <label>
+        Username: { username }
+        <input bind:value={username} placeholder="Username" disabled={!editable} type="text" name="username" autocomplete="additional-name">
         </label>
-        <label for="institution">
-        School/Company:
+        <label>
+        School/Company: { institution }
         <input bind:value={institution} placeholder="Name of your institution" disabled={!editable} type="text" name="institution">
         </label>
-        <button on:click={save}> {editable ? 'Save' : 'Edit'}</button>
+        <button> Save </button>
     </form>
-    <section class="badges">
+    <section class="badges" >
         <h2>Badges</h2>
         <img src="/icons/achievements/achievement-award-medal-svgrepo-com.svg" alt="Badge 1" style="height: 50px; width:50px;">
         <img src="/icons/achievements/achievement-businessman-expertise-svgrepo-com.svg" alt="Badge 2">
@@ -72,12 +67,11 @@
     //   border-radius: 50%;
     // }
     input {
-      width: 100%;
-    }
-    input {
+        width: 100%;
         background-color: transparent;
         border: none;
         border-bottom: 1px solid black;
+        opacity: .8;
     }
     /*
     textarea {

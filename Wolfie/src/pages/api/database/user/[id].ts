@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getFirestore } from "firebase-admin/firestore";
+import updateUserData from "../../../../firebase/auth/updateUserData";
 import { app } from "../../../../firebase/server";
 
 const db = getFirestore(app);
@@ -27,6 +28,16 @@ export const POST: APIRoute = async ({ params, request, redirect}) => {
             username: username,
             institution: institution,
         });
+        try {
+            await updateUserData(uid, {
+                displayName: username.concat(`_${name}_${institution}`)
+            });
+        } catch (error) {
+            console.log(error)
+            return new Response (`"Something went wrong" ${error}`, {
+            status: 500,
+            });
+        }
     } catch (error) {
         console.log(error)
         return new Response (`"Something went wrong" ${error}`, {

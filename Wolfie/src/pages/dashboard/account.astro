@@ -5,10 +5,32 @@ import getUserData from "../../firebase/auth/getUserData";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 import { fetchUserInfo } from "../../services/api/fetchUserInfo";
 import type { User } from "firebase/auth";
+interface currentUserType {
+  name:string;
+  username:string;
+  institution: string;
+
+}
+
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
-const user = await getUserData(sessionCookie);
+const user:User = await getUserData(sessionCookie);
 if (!user) {
   return Astro.redirect("/signin");
+}
+let details:string[] | undefined = user.displayName?.split("_")
+let currentUser: currentUserType;
+currentUser = {
+  name: " name data",
+  username: " username data",
+  institution: "institution data"
+
+}
+if(details) {
+  currentUser = {
+    name: details[0],
+    username: details[1],
+    institution: details[2]
+  }
 }
 const id = user.uid;
 const userData = await fetchUserInfo(id)
@@ -26,7 +48,7 @@ if(!userData) {
        
     </h1>
     <section>
-      <UProfile uid={id} user={userData} />
+      <UProfile uid={id} currentUserData={currentUser} client:only/>
     </section>
     <section>
       Composition chart
