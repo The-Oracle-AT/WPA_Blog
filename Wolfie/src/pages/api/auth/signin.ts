@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { getAuth } from "firebase-admin/auth";
+import getFriendlyErrorMessage from "../../../firebase/auth/getFriendlyErrorMessage";
 import { app } from '../../../firebase/server';
 
 
@@ -20,23 +21,11 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   try {
     await auth.verifyIdToken(idToken);
   } catch (error: any) {
-    switch (error.code) {
-      case "auth/argument-error":
-      case "auth/invalid-id-token":
-      case "auth/id-token-expired":
-      case "auth/user-disable":
-      case "auth/user-not-found":
-        return new Response(
-          "Token expired or invalid",
-          { status: 401 }
-        );
-      default:
-        return new Response(
-          "Internal error, please try again.",
-          { status: 500 }
-        );
+    const err = getFriendlyErrorMessage(error.code);
+    return new Response(err, {
+      status: 400
+    })
 
-    }
   }
 
   /* Create and set session cookie */

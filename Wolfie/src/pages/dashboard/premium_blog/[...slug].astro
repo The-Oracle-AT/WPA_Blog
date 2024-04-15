@@ -2,7 +2,6 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import LessonTracker from '../../../components/LessonTracker.svelte';
 import getUserData from '../../../firebase/auth/getUserData';
-import isLoggedIn from '../../../firebase/auth/isLoggedIn';
 import PremiumBlogPost from '../../../layouts/PremiumBlogPost.astro';
 
 
@@ -18,10 +17,7 @@ const tags = post.data.tags;
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
 const userData = await getUserData(sessionCookie);
-
-const loggedIn = await isLoggedIn(sessionCookie);
-if (loggedIn) {
-  
+if (userData) {
   console.log(userData);
 }
 

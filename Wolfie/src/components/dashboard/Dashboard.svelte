@@ -1,8 +1,11 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { writable } from "svelte/store";
     import { fetchUserProgressData } from "../../firebase/database/fetchUserProgressData";
+    import { fetchCompletedCategories } from "../../services/api/fetchCompletedCategories";
     import { fetchCompletedLessons } from "../../services/api/fetchCompletedLessons";
-    import { completedLessonsStore } from "../../stores/coursesStores";
+    import { synchronizeData } from "../../services/api/fetchDataFromServer";
+    import { completedCategoriesStore, completedLessonsStore, setCompletedCategoriesStore, setCompletedLessonsStore } from "../../stores/coursesStores";
     import Card from "../svelte/Card.svelte";
         
     interface User {
@@ -14,8 +17,6 @@
         badges: string[];
 
   }
-    
-
     export let uid: string;
     let progressData: User = {
         id: "",
@@ -27,22 +28,30 @@
     }; 
     let completedLessons:any[] = [];
     let completedCategories:any[] = [];
+    export const count1 = writable(0)
+    count1.subscribe((n) => 
+    console.log("Store value: ", n + 1))
+
 
     onMount(async () => {
+        synchronizeData(uid)
         progressData = await fetchUserProgressData(uid);
         completedLessons = await fetchCompletedLessons(uid);
-        completedLessonsStore.update((entries) => entries = completedLessons);
+        completedCategories = await fetchCompletedCategories(uid);
+        setCompletedLessonsStore(completedLessons);
+        setCompletedCategoriesStore( completedCategories );
     });
-    completedLessonsStore.subscribe((value) => {
-        completedCategories = value;
-    });
+    
+    completedLessonsStore.subscribe((entries) => completedLessons = entries)
+    completedCategoriesStore.subscribe((entries) => completedCategories = entries)
+
     
 
 </script>
 
 <div class="dashboard">
     <div class="dashboard-content">
-        { completedLessons }
+        { completedLessons } "v"
         { completedCategories }
         <div class="progress">
             <Card title="Progress">

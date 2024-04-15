@@ -7,6 +7,7 @@ import Header from '../../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
 
+
 export async function getStaticPaths(): Promise<any> {
     const allPosts = await getCollection('premium_blog');
 	if (allPosts) {
@@ -122,12 +123,15 @@ const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // 
 						posts.map((post) => (
 							<li>
 								<a href={`/blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
+									
+										<img width={720} height={360} src={post.data.heroImage} alt="" />
+									
 									<h4 class="title">{post.data.title}</h4>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
 								</a>
+								
 							</li>
 						))
 					}

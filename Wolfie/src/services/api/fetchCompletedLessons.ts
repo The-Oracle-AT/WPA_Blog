@@ -1,11 +1,17 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase/client";
+import { fetchCompletedLessonsFromServer } from "./fetchDataFromServer";
 
 export async function fetchCompletedLessons(userId: string): Promise<any> {
-  const querySnapshot = await getDocs(collection(db, "users", userId, "CompletedLessons"));
-  const completedLessons = querySnapshot.docs.map((doc) => doc.id);
-  console.log("Completed lessons:", completedLessons);
+  const cachedData = localStorage.getItem(`CompletedLessons_${userId}`)
 
+  if(cachedData && cachedData.length !== 0){
+    console.log('Accessed Lessons from local', cachedData, cachedData.length)
+    return JSON.parse(cachedData)
+     
+  }
+  const completedLessons = await fetchCompletedLessonsFromServer(userId)
+  // localStorage.setItem(`CompletedLessons_${userId}`, JSON.stringify(completedLessons))
+  
+  localStorage.setItem(`CompletedLessons_${userId}`, JSON.stringify(completedLessons))
   return completedLessons;
 }
 

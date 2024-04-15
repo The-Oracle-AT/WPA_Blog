@@ -7,9 +7,7 @@ import GreyFilter from "../../../components/dashboard/GreyFilter.svelte";
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 import getUserData from "../../../firebase/auth/getUserData";
 import DashboardLayout from "../../../layouts/DashboardLayout.astro";
-import { setCompletedLessonsStore, completedCategoriesStore, completedLessonsStore } from '../../../stores/coursesStores';
-import { onMount } from 'svelte';
-import { get } from 'svelte/store';
+
 
 
 // verify user is signed in
@@ -31,10 +29,6 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
          name: category.charAt(0).toUpperCase() + category.slice(1),
      }
  });
-
-
-
-
 
 
 ---
@@ -181,7 +175,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 								
 								<li>
 									<a href={`/dashboard/premium_blog/${post.slug}/`}>
-										<GreyFilter isCompleted={true} client:only>
+										<GreyFilter uid={user.uid} currentLessonTitle={post.data.title} client:only>
 										<img width={720} height={360} src={post.data.heroImage} alt="" />
 										</GreyFilter>
 										<h5 class="title">{post.data.title}</h5>
@@ -204,7 +198,6 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 							<a href={`/dashboard/categorical_tags/${category.name}`}>
 								<span class="folder-wrapper" style="font-size: .75rem;" > 
 								<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" />
-								
 								</span>
 							</a>
 						</h3>
@@ -213,7 +206,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 							{category.posts.map((post:any) => (
 								<li>
 								<a href={`/dashboard/premium_blog/${post.slug}`}>
-									<GreyFilter currentLessonTitle={post.data.title} client:only>
+									<GreyFilter uid={user.uid} currentLessonTitle={post.data.title}  client:only>
 									<img width={720} height={360} src={post.data.heroImage} alt={`${post.data.title} image`} />
 									</GreyFilter>
 									<h5 class="title">{post.data.title}</h5>
@@ -234,10 +227,5 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		
 	</DashboardLayout>
 </html>
-<script>
-import { get } from 'svelte/store';
 
-import { completedCategoriesStore } from "../../../stores/coursesStores";
-	console.log(get(completedCategoriesStore));
-</script>
 

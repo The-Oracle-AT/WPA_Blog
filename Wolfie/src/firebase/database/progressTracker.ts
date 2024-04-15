@@ -1,4 +1,5 @@
-import { doc, getDoc, serverTimestamp, setDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc, increment, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { appendItemToLocalStorage } from "../../services/api/appendItemToLocalStorage";
 import { db } from "../client";
 import type { Category, Lesson, User } from "./schema";
 
@@ -66,13 +67,8 @@ export async function updateUserProgress(userId: string, lessonId: string, user:
       });
     }
 
-
-    
-
-
-    
-    
-
+    // Append added lesson to local storage
+    appendItemToLocalStorage(`CompletedLessons_${userId}`, lesson.title)
     // update user's points with lesson points and add 1 t lesson count
 
 
