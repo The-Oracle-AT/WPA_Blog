@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { auth } from '../../firebase/client';
     import { fetchCompletedLessons } from '../../services/api/fetchCompletedLessons';
     import { completedLessonsStore, setCompletedLessonsStore } from '../../stores/coursesStores';
     let completedLessons: string[] = [];
@@ -9,6 +10,7 @@
     onMount(async () => {
         const obj = await fetchCompletedLessons(uid);
         setCompletedLessonsStore(obj);
+        console.log("current user," ,auth.currentUser)
         //console.log("obj", obj);
     });
     completedLessonsStore.subscribe((value) => {

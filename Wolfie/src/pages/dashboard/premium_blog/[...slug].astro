@@ -17,9 +17,6 @@ const tags = post.data.tags;
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
 const userData = await getUserData(sessionCookie);
-if (userData) {
-  console.log(userData);
-}
 
 
 ---

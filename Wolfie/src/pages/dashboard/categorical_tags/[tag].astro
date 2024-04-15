@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
@@ -30,8 +30,8 @@ export async function getStaticPaths(): Promise<any> {
 
     
 }
-type Props = CollectionEntry<'blog'>;
-export const prerender = true;
+
+export const prerender = true
 
 const { posts } = Astro.props as { posts: any[] };
 const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // Get the last part of the URL and replace %20 with a space
@@ -115,14 +115,14 @@ const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // 
 		<Header />
 		<main>
 			<section>
-				Posts tagged with <strong>{category}</strong>
+				Posts tagged with <strong>{category}</strong>  
 			</section>
 			<section>
 				<ul>
 					{
-						posts.map((post) => (
+						posts && posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.slug}/`}>
+								<a href={`/dashboard/premium_blog/${post.slug}/`}>
 									
 										<img width={720} height={360} src={post.data.heroImage} alt="" />
 									
@@ -131,7 +131,6 @@ const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // 
 										<FormattedDate date={post.data.pubDate} />
 									</p>
 								</a>
-								
 							</li>
 						))
 					}
