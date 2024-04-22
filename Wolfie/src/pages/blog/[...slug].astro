@@ -1,7 +1,5 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import LessonTracker from '../../components/LessonTracker.svelte';
-import getUserData from '../../firebase/auth/getUserData';
 import BlogPost from '../../layouts/BlogPost.astro';
 
 
@@ -16,17 +14,6 @@ const tags = post.data.tags;
 
 const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
-const userData = await getUserData(sessionCookie);
-
-if (!userData) {
-  
-  console.log(userData);
-}
-
-
-
-
-
 
 ---
 
@@ -39,22 +26,7 @@ if (!userData) {
 			<li> <a href={`/tags/${tag}`}>{tag}</a></li>
 		))}
 	</ul>
-  <LessonTracker 
-  userId={userData.uid}
-  user = {userData}
-  lesson={{
-    title: post.data.title,
-    category: post.data.category,
-    points: 10,
-    id: post.data.title}}
-  category={{
-    name: post.data.category,
-    id: post.data.category,
-    totalCompletedLessons: 10,
-  }}
-  client:only
 
-  />
 
 
 </section>

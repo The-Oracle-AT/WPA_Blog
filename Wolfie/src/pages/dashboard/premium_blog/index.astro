@@ -4,6 +4,8 @@ import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import GreyFilter from "../../../components/dashboard/GreyFilter.svelte";
+
+import Search from '../../../components/Search.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 import getUserData from "../../../firebase/auth/getUserData";
 import DashboardLayout from "../../../layouts/DashboardLayout.astro";
@@ -45,9 +47,11 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			section {
 				margin-bottom: 2rem;
 				z-index: 1;
+
 				&:not(:first-child) {
 					margin-top: 2rem;
 				}
+				
 			}
 			ul {
 				display: flex;
@@ -116,23 +120,13 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			ul li 
 			.title {
 				margin: 0;
-				color: rgb(var(--black));
 				line-height: 1;
 			}
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			ul li a{
-				&:hover {
-					.title {
-						color: rgb(var(--accent));
-					}
-					.date {
-					color: rgb(var(--accent));
-					}
-				}
-			}
+			
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
 			}
@@ -162,8 +156,9 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 	<DashboardLayout title="Courses - LearnBetter!" description ="Discover new course and revisit old ones, there's always something to learn.">
 		<div id="courses">
 			<div>
+				<Search />
 				<p>Welcome back, {user.displayName}!</p>
-				<p>Here are some of the latest posts from the premium blog:</p>
+				
 			</div>
 			<div>
 				
@@ -176,7 +171,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 								<li>
 									<a href={`/dashboard/premium_blog/${post.slug}/`}>
 										<GreyFilter uid={user.uid} currentLessonTitle={post.data.title} client:only>
-										<img width={720} height={360} src={post.data.heroImage} alt="" />
+										<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card"/>
 										</GreyFilter>
 										<h5 class="title">{post.data.title}</h5>
 										<p class="date">
@@ -197,7 +192,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 						<h3>{category.name} 
 							<a href={`/dashboard/categorical_tags/${category.name}`}>
 								<span class="folder-wrapper" style="font-size: .75rem;" > 
-								<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" />
+								<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" loading={"lazy"}/>
 								</span>
 							</a>
 						</h3>
@@ -207,7 +202,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 								<li>
 								<a href={`/dashboard/premium_blog/${post.slug}`}>
 									<GreyFilter uid={user.uid} currentLessonTitle={post.data.title}  client:only>
-									<img width={720} height={360} src={post.data.heroImage} alt={`${post.data.title} image`} />
+									<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
 									</GreyFilter>
 									<h5 class="title">{post.data.title}</h5>
 									<p class="date">

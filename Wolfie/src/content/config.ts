@@ -8,12 +8,11 @@ const blog = defineCollection({
 		description: z.string(),
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
-		heroImage: z.string().optional(),
+		heroImage: z.string(),
+		imageAlt: z.string().optional(), //Fix the error. Disable optional to view error
 		tags: z.array(z.string()),
 		link: z.string(),
 		category: z.string(),
-		
-
 	}),
 	
 });

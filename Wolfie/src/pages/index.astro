@@ -24,10 +24,10 @@ const latest_posts = (await getCollection('blog')).sort(
     <body>
         <Header title={SITE_TITLE} />
         <main>
-			<header>
+			<section>
 				<h1><SiteName /></h1>
 				<p>The only way to get better is to start acting better!</p>
-			</header>
+			</section>
 		
 			<section>
 				<h2>What's New</h2>
@@ -42,9 +42,19 @@ const latest_posts = (await getCollection('blog')).sort(
 							</div></a>
 						)) }
 					</article>
+					<article class="articles-update-cards-m">
+						
+						{latest_posts.map((post) =>(
+							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title-m">{post.data.title}</span>
+								<p class="desc-m">{post.data.description}</p>
+								<p class="date-m"><FormattedDate date={post.data.pubDate} /></p>
+							</div></a>
+						)) }
+					</article>
 					<div class="n-features"><NewFeatures /> </div>                   
 				</ul>
 			</section>
+			
 		
 			<section>
 				<h2>Long Term Goals</h2>
@@ -111,6 +121,9 @@ const latest_posts = (await getCollection('blog')).sort(
 	a {
 			text-decoration: none;
 	}
+	.articles-update-cards-m {
+		display: none;
+	}
 	.articles-update-cards {
 		display: flex;
 		flex-direction: row;
@@ -154,7 +167,7 @@ const latest_posts = (await getCollection('blog')).sort(
 			border-radius: 1.5rem;
 			padding: 1rem;
 			display: flex;
-			background-color: inherit;
+			background-color: azure;
 			position: relative;
 			flex-direction: column;
 			
@@ -202,47 +215,51 @@ const latest_posts = (await getCollection('blog')).sort(
 	}
 	@media  screen and 	(max-width: 680px) {
 		.articles-update-cards{
-			width: 100svw;
+			display: none;
+		}
+		.articles-update-cards-m {
+			display: flex;
+			width: 80svw;
 			flex-direction: column;
-			overflow-y: hidden;
-			height: 20svh;
-
-			a {
-				background-color: azure;
+			color: black;
+			
+			.article-title-m {
 				color: black;
-				min-width: 250px;
-				width: 13rem;
-				height: 10rem;
-				
-				border-radius: 1.5rem;
-				margin-top: 2rem;
-				transition: 0.3s ease;
-				margin-bottom: -10rem;
-				margin-left: 0rem;
-				&:first-child {
-					margin-left: -10rem;
-				}	
+				background-color: azure;
 			}
+			.desc-m {
+				font-size: .9rem;
+				color: #333;
+				
+			}
+			.date-m {
+				font-size: .8rem;
+				color: grey;
+				
+			}
+
+				
+			
 			@for $i from 1 through length($colors) {
 				a:nth-child(#{length($colors)}n + #{$i}) {
-					
+					padding-left: .5rem;
+					background-color: azure;
+					border-radius: 1rem;
+					margin-top:1rem;
+					border-left: 5px solid nth($colors, $i);
+					text-decoration: none;
+					box-shadow: -1rem 0px 2rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 					
 					transition: transform 0.3s ease;
-					&:hover > .card {
-					border-top: 5px solid nth($colors, $i);
-					transform: translateY(-#{$i * 1.5}rem);
-
-					&~a {
-						transform: translateX(10rem) translateY(-#{$i * 1.5}rem);
+					&:hover  {
+						
+						transition: transform 0.5s ease;
+						border-top: 5px solid nth($colors, $i);
+						transform: scale(1.05);
 					}
 					
+
 				}
-			}
-
-		}
-
-			.card {
-				transform: translateX(0rem);
 
 			}
 		}

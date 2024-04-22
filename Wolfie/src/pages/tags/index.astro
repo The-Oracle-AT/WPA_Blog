@@ -6,8 +6,8 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
 
 
 ---
-<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  <section class="container">
+<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} data-pagefind-ignore />
+  <section class="container" data-pagefind-ignore>
     <p>Filter</p>
     <ul>
       

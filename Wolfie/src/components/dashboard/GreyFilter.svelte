@@ -37,7 +37,7 @@
         
     }
     p {
-        transform: translate(0rem, -.64rem);
+        transform: translate(0rem, -.65rem);
         position: fixed;
         filter: grayscale(0%);
         color: white;

@@ -1,4 +1,5 @@
 ---
+import ThemeIcon from "../../components/ThemeIcon.astro";
 import getUserData from "../../firebase/auth/getUserData";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
 
@@ -18,7 +19,7 @@ if (!user) {
         </h1>
 
         <ul>
-            <li>Change theme </li>
+            <li><ThemeIcon/></li>
             <li>Notification settings</li>
             <li>Choose a language</li>
             <li>Help & Support</li>
