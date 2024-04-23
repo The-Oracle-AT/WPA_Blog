@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { ViewTransitions } from "astro:transitions";
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -20,6 +21,7 @@ const latest_posts = (await getCollection('blog')).sort(
 <html lang="en">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<ViewTransitions />
     </head>
     <body>
         <Header title={SITE_TITLE} />
@@ -33,7 +35,7 @@ const latest_posts = (await getCollection('blog')).sort(
 				<h2>What's New</h2>
 				<ul>
 					<h3>Newest Articles</h3>
-					<article class="articles-update-cards">
+					<article class="articles-update-cards" >
 						
 						{latest_posts.map((post) =>(
 							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title">{post.data.title}</span>
