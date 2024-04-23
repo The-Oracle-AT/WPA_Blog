@@ -3,7 +3,6 @@
 import UProfile from "../../components/dashboard/UProfile.svelte";
 import getUserData from "../../firebase/auth/getUserData";
 import DashboardLayout from "../../layouts/DashboardLayout.astro";
-import { fetchUserInfo } from "../../services/api/fetchUserInfo";
 import type { User } from "firebase/auth";
 interface currentUserType {
   name:string;
@@ -33,7 +32,6 @@ if(details) {
   }
 }
 const id = user.uid;
-const userData = await fetchUserInfo(id)
 
 
 ---

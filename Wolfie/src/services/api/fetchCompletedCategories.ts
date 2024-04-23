@@ -2,7 +2,6 @@ import { fetchCompletedCategoriesFromServer } from "./fetchDataFromServer";
 
 export async function fetchCompletedCategories(userId: string): Promise<any> {
     //Try fetching from local storage first
-    let data;
     const cachedData = localStorage.getItem(`CompletedCategories_${userId}`);
     if(cachedData && cachedData.length !== 0 ){
         console.log(`Accessed from categories local storage: ${cachedData}`)

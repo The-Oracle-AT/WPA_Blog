@@ -20,7 +20,7 @@ function updateCompletedLessonsStore(lessonId:string) {
 function setCompletedCategoriesStore(categories:string[]) {
     completedCategoriesStore.set(categories);
 }
-function updateCompletedCategoriesStore(uid:string , categoryId:string) {
+function updateCompletedCategoriesStore(categoryId:string) {
     completedCategoriesStore.update((categories) => {
         categories.push(categoryId);
         return categories;

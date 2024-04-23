@@ -12,7 +12,6 @@ if (!post) return Astro.redirect("/404");
 const { Content } = await post.render();
 const tags = post.data.tags;
 
-const sessionCookie = Astro.cookies.get("session")?.value ?? null;
 
 
 ---

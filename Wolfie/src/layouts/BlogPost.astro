@@ -10,7 +10,7 @@ import Header from '../components/Header.astro';
 type Props = CollectionEntry<'blog'>['data'];
 export const prerender = true;
 
-const { title, description, pubDate, updatedDate, heroImage, imageAlt} = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage} = Astro.props;
 ---
 
 <html lang="en" >

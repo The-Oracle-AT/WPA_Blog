@@ -3,8 +3,6 @@ import { appendItemToLocalStorage } from "../../services/api/appendItemToLocalSt
 import { db } from "../client";
 import type { Category, Lesson, User } from "./schema";
 
-const blogPostId = 'Concentration'; // Replace with the title of your blog post
-
 // Function to update user's progress
 export async function updateUserProgress(userId: string, lessonId: string, user: User, lesson: Lesson, category: Category ): Promise<void> {
     // Check if the user already completed this lesson
@@ -17,11 +15,11 @@ export async function updateUserProgress(userId: string, lessonId: string, user:
     const categoryProgressRef = doc(db, 'users', userId, 'CompletedCategories', lesson.category);
     const categoryProgressDoc = await getDoc(categoryProgressRef);
 
-    const categoryRef = doc(db, 'categories', lesson.category);
-    const categoryDoc = await getDoc(categoryRef);
+    // const categoryRef = doc(db, 'categories', lesson.category);
+    // // const categoryDoc = await getDoc(categoryRef);
 
-    const lessonRef = doc(db, 'lessons', lessonId);
-    const lessonDoc = await getDoc(lessonRef);
+    // const lessonRef = doc(db, 'lessons', lessonId);
+    // const lessonDoc = await getDoc(lessonRef);
 
     if (!userDoc.exists()) {
         // Todo; Check if user is logged in usng isLoggedIn function in astro render page
