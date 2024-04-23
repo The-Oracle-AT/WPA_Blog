@@ -10,8 +10,8 @@ interface ImportMetaEnv {
   readonly FIREBASE_TOKEN_URI: string;
   readonly FIREBASE_AUTH_CERT_URL: string
   readonly FIREBASE_CLIENT_CERT_URL: string;
-  }
+}
   
-  interface ImportMeta {
-    readonly env: ImportMetaEnv;
-  }
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
