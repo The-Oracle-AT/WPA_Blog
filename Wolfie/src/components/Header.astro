@@ -42,11 +42,8 @@ import ThemeIcon from "./ThemeIcon.astro";
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			ul li {
-				margin-right: 0.5rem;
-			}
 			h2 {
-				margin: 0;
+				
 				font-size: 1em;
 			}	
 	}
@@ -89,10 +86,10 @@ import ThemeIcon from "./ThemeIcon.astro";
 		}
 		
 	}
-	@media (max-width: 720px) {
+	@media screen and (max-width: 720px) {
 		.theme-button {
 			background-color: transparent;
-			width: 100%;
+			width: 90%;
 			display: flex;
 			justify-content: center;
 			position: absolute;
@@ -133,9 +130,10 @@ import ThemeIcon from "./ThemeIcon.astro";
 				}
 			}
 		}
-		.topnav{
-			margin-right: -2rem;
+		ul {
+			right: -5.1%;
 		}
+		
 		.topnav.responsive {
 			transition: all .3s ease-in;
 			position: relative;
@@ -153,7 +151,8 @@ import ThemeIcon from "./ThemeIcon.astro";
 		}
 		.topnav.responsive ul {
 			position: absolute;
-			right: 0;
+			display: flex;
+			
 			top:1rem;
 			
 			
@@ -162,9 +161,11 @@ import ThemeIcon from "./ThemeIcon.astro";
 			float: none;
 			display: block;
 			text-align: center;
+			width: 100svw;
 			}
 			li:first-child {
-				display: block;
+				display: f;
+
 				justify-content: flex-end;
 				align-self: flex-end;
 				position: relative;

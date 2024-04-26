@@ -15,47 +15,41 @@ import Layout from '../layouts/BlogPost.astro';
 	>
 <main>
 	<section>
-		<h1><SiteName/></h1>
+		<h1 class="site-name"><SiteName/></h1>
 		<p>We believe in a practical and intentional approach to personal development. Empowering you with realistic tools and knowledge to navigate the journey of self-discovery and growth.</p>
 	</section>
 
 	<section>
-		<h2>Our Focus</h2>
-		<ul>
-			<li><h3>Concentration & Willingness</h3>
+		<h2>Our Focus</h2><hr/>
+			<div><h3>Concentration & Willingness</h3>
 				<p>Learn about harnessing your focus and directing it toward tasks that truly matter to you. Our resources offer actionable strategies, helping you cut through distractions and enhance your concentration for increased productivity in your everyday life.</p>
-			</li>
-			<li>
+			</div>
+			<div>
 				<h3>Self-Improvement</h3>
 				<p>Continuous growth is a journey, not a destination. At Wolf Pack Academia, we offer practical resources and guidance to support your ongoing self-improvement. No fluff or abstract theories—just straightforward advice to help you continually evolve and enhance various aspects of your life.</p>
-			</li>
-			<li>
+			</div>
+			<div>
 				<h3>Control over your emotions & Discipline</h3>
 				<p>Emotions are a powerful force, and learning to control them is a crucial step in your journey to personal growth. It takes discipline and practice with our actionable strategies to help you manage your emotions and use them to your advantage.</p>
-			</li>
-			<li>
+			</div>
+			<div>
 				<h3>Self-Awareness</h3>
 				<p>Self-awareness is a crucial aspect of personal growth, and it's something that can be learned. Our resources offer practical guidance to help you build your self-awareness and develop a positive mindset.</p>
-			</li>
-			<li>
-				<h3>And more ...</h3>
-
-			</li>
-		</ul>
+			</div>
 	</section>
-
+	<br/>
 	<section>
-		<h2>Our Mission</h2>
+		<h2>Our Mission</h2><hr/>
 		<p>Our mission is to provide you with the tools and mindset needed to tap into your potential. We firmly believe that with the right resources and a approach, anyone can work towards achieving the goals they set for themselves. There is no shortcut or sugercoting it—success demands intentional effort and a commitment to yourself.</p>
 	</section>
 
 	<section>
-		<h2>Join LearnBetter Today!</h2>
+		<h2>Join LearnBetter Today!</h2><hr/>
 		<p>Welcome to a community where growth is approached with a realistic mindset. Each of us has a journey of our own but we don't have to take it blindly or completely alone. We're not here to sell you dreams; we're here to provide you with practical tools and strategies. In the Wolf Pack, your success is achieved through intentional effort, commitment to your development and a realistic mindset.</p>
 	</section>
 
 	<section>
-		<h2>Testimonials</h2>
+		<h2>Testimonials</h2><hr/>
 		<blockquote>
 			<p>(No Testimonials yet, project is still in its early launch)</p>
 		</blockquote>
@@ -63,30 +57,22 @@ import Layout from '../layouts/BlogPost.astro';
 	</section>
 
 	<section>
-		<h2>Start Evolving Today!</h2>
+		<h2>Everyday is a chance to improve!</h2><hr/>
 		<p>Ready to direct your efforts towards meaningful change? Explore our <HeaderLink href="/blog">blog</HeaderLink>, and stay tuned for our upcoming interactive platform. The Wolf Pack community is here to support you, offering practical guidance for your journey to personal growth. Welcome to Wolf Pack Academia—where potential meets practicality.</p>
 	</section>
 </main>
 </Layout>
 
 <style>
-	section li {
-		margin: 2rem 0;
-		border: 1px solid rgba(100, 110, 227, 0.5);
-		border-radius: 2rem;
-		list-style: none;
-		padding: 2rem;
-		backdrop-filter: blur(0.5rem);
-		filter:drop-shadow(0 0 1rem rgba(100, 110, 227, 0.5));
-		
-	}
-	section li:nth-child(odd) {
-		transform: translate(-2rem, 0rem);
-	}
-	section li:nth-child(even) {
-		transform: translate(1rem, 0rem);
-	}
-	section h3 {
+	
+	@media screen and (max-width: 500px){
+		.site-name {
 		font-size: 2rem;
 	}
+		section h3 {
+			font-size: 1.5rem;
+		}
+	}
+
+	
 </style>
