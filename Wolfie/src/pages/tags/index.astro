@@ -1,27 +1,34 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/global.scss";
 const allPosts = await Astro.glob('../../content/blog/*.mdx');
-const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())].sort();
 
 
 ---
-<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} data-pagefind-ignore />
-  <section class="container" data-pagefind-ignore>
-    <p>Filter</p>
-    <ul>
-      
+<Layout
+ title="Tags page"
+ data-pagefind-ignore="all"
+ 
+>
+  <section class="container" data-pagefind-ignore="all">
+    <p>Pick a topic:</p>
+    <ul >
       {tags && tags.map((tag) => (
-        <li>
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </li>
+        
+          <a href={`/tags/${tag}`} data-pagefind-ignore="all"><li>{tag}</li></a>
+        
       ))}
     </ul>
   </section>
+  <sectioin>
+    <p>Some blog posts may appear when selecting two different filters. This is because the topics are discussed/used in the post.</p>
+  </sectioin>
+</Layout>
   <style lang="scss">
     .container {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       padding-left: 1rem;
       padding-right: 1rem;
 
@@ -33,46 +40,10 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
     ul {
       display: flex;
       flex-direction: row;
-    
+      flex-wrap: wrap;
       list-style:none;
-      overflow-x: scroll;
       scroll-behavior: smooth;
-      &::-webkit-scrollbar {
-        width: 0.5rem;
     }
-
-    &::-webkit-scrollbar-track {
-        background: #f1f1f1;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 1rem;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-
-    /* For Firefox */
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
-}
-
-/* For IE and Edge */
-@supports (-ms-overflow-style: none) {
-    ul {
-        scrollbar-width: thin;
-        scrollbar-color: #888 #f1f1f1;
-    }
-}
-
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    ul {
-        scrollbar-width: thin;
-        scrollbar-color: #888 #f1f1f1;
-    }
-}
     li {
       margin: 0 0.5rem 0.5rem 0;
       padding: 0rem 0.5rem;
@@ -92,4 +63,41 @@ const tags =[...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
     p {
       margin-right: 1rem;
     }
+//       &::-webkit-scrollbar {
+//         width: 0.5rem;
+//     }
+
+//     &::-webkit-scrollbar-track {
+//         background: #f1f1f1;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//         background: #888;
+//         border-radius: 1rem;
+//     }
+
+//     &::-webkit-scrollbar-thumb:hover {
+//         background: #555;
+//     }
+
+//     /* For Firefox */
+//     scrollbar-width: thin;
+//     scrollbar-color: #888888 #f1f1f1;
+// }
+
+// /* For IE and Edge */
+// @supports (-ms-overflow-style: none) {
+//     ul {
+//         scrollbar-width: thin;
+//         scrollbar-color: #888 #f1f1f1;
+//     }
+// }
+
+// @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+//     ul {
+//         scrollbar-width: thin;
+//         scrollbar-color: #888 #f1f1f1;
+//     }
+// }
+    
   </style>

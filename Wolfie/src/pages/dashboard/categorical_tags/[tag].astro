@@ -10,7 +10,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
 
 export async function getStaticPaths(): Promise<any> {
-    const allPosts = await getCollection('premium_blog');
+    const allPosts = await getCollection('blog');
 	if (allPosts) {
 		const uniqueTags = [ ...new Set(allPosts.map(post => post.data.tags).flat()) ];
     
@@ -116,14 +116,14 @@ const category = (Astro.url.pathname.split('/').pop())?.replace('%20', ' '); // 
 		<Header />
 		<main>
 			<section>
-				Posts tagged with <strong>{category}</strong>  
+				<strong>{category}</strong>  
 			</section>
 			<section>
 				<ul>
 					{
 						posts && posts.map((post) => (
 							<li>
-								<a href={`/dashboard/premium_blog/${post.slug}/`}>
+								<a href={`/blog/${post.slug}/`}>
 									
 										<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card" loading={"lazy"} />
 									

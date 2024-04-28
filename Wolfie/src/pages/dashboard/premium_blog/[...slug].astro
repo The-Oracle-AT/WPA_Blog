@@ -5,8 +5,8 @@ import getUserData from '../../../firebase/auth/getUserData';
 import PremiumBlogPost from '../../../layouts/PremiumBlogPost.astro';
 
 
-const posts = await getCollection('premium_blog');
-type Props = CollectionEntry<'premium_blog'>;
+const posts = await getCollection('blog');
+type Props = CollectionEntry<'blog'>;
 
 const { slug } = Astro.params;
 const post = posts.find((page) => page.slug === slug);

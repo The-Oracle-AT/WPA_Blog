@@ -9,6 +9,7 @@ import HeaderLink from '../components/HeaderLink.astro';
 import SiteName from '../components/SiteName.astro';
 import NewFeatures from '../components/index/NewFeatures.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import "../styles/global.scss";
 
 const latest_posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -35,7 +36,7 @@ const latest_posts = (await getCollection('blog')).sort(
 				<h2>What's New?</h2>
 				<ul>
 					<h3>Newest Articles</h3>
-					<article class="articles-update-cards" >
+					<article class="articles-update-cards" id="articles-update-cards">
 						
 						{latest_posts.map((post) =>(
 							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title">{post.data.title}</span>
@@ -44,7 +45,7 @@ const latest_posts = (await getCollection('blog')).sort(
 							</div></a>
 						)) }
 					</article>
-					<article class="articles-update-cards-m">
+					<article class="articles-update-cards-m" id="articles-update-cards-m">
 						
 						{latest_posts.map((post) =>(
 							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title-m">{post.data.title}</span>
@@ -53,16 +54,20 @@ const latest_posts = (await getCollection('blog')).sort(
 							</div></a>
 						)) }
 					</article>
-					<div class="n-features"><NewFeatures /> </div>                   
+					<div class="n-features">
+						
+						<NewFeatures /> </div>                   
 				</ul>
 			</section>
 			
 		
-			<section>
+			<section class="long-term-goals-summary" id="long-term-goals-summary">
 				<h2>Long Term Goals</h2>
+				
 				<ul>
 					<li>Making the site an interactive Platform(3-8 months plan)</li>
 					<li>Adding Communities to allow interaction between users(6 - 12 months plan) </li>
+					
 				</ul>
 			</section>
 		
@@ -185,6 +190,7 @@ const latest_posts = (await getCollection('blog')).sort(
 
 		}
 		
+		
 
 		@each $color in $colors {
 			a:nth-child(#{length($colors)}n + #{index($colors, $color)}) > .card {
@@ -215,6 +221,11 @@ const latest_posts = (await getCollection('blog')).sort(
 	
 
 	}
+	.dark {
+			.card {
+				box-shadow: 0px 0px 5px rgba(150, 149, 181, 0.5);
+			}
+		}
 	@media  screen and 	(max-width: 680px) {
 		.articles-update-cards{
 			display: none;
@@ -269,7 +280,9 @@ const latest_posts = (await getCollection('blog')).sort(
 			margin-top: 2rem;;
 			transform: translateX(-1rem);
 		}
-		
+		.dark .card {
+			box-shadow: none;
+		}
 	}
 
 </style>

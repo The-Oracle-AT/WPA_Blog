@@ -6,11 +6,21 @@ import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
-import Tags from '../tags/index.astro';
+import "../../styles/global.scss";
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 ).reverse();
+const categories = posts.map((post:any) => post.data.category);
+const uniqueCategories = [...new Set(categories)]; // remove duplicates
+const categorizedPosts = uniqueCategories.map((category:any) => {
+     return {
+         category: category,
+         posts: posts.filter((post:any) => post.data.category === category),
+         name: category.charAt(0).toUpperCase() + category.slice(1),
+     }
+ });
+ 
 ---
 
 <!doctype html>
@@ -20,40 +30,90 @@ const posts = (await getCollection('blog')).sort(
 		<style>
 			main {
 				width: 960px;
+				
+			}
+			section {
+				margin-bottom: 2rem;
+				z-index: 1;
+
+				&:not(:first-child) {
+					margin-top: 2rem;
+				}
+				
 			}
 			ul {
 				display: flex;
-				flex-wrap: wrap;
+				flex-direction: row;
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
-				padding: 0;
+				padding: .5rem;
+				overflow-x: scroll;
+				filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+				&::-webkit-scrollbar {
+					width: 3px;
+					scrollbar-width: thin;
+				}
+				&::-webkit-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 2rem;
+					scrollbar-width: thin;
+				}
+				&::-webkit-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+
+				}
+
+				/* Styles for Firefox */
+				&::-moz-scrollbar {
+					width: 5px;
+					scrollbar-width: thin;
+				}
+
+				&::-moz-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 10px;
+					scrollbar-width: thin;
+				}
+				&::-moz-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+					scrollbar-width: thin;
+				}
+				/* Styles for IE and Edge */
+				&::-ms-scrollbar {
+					width: 5px;
+					scrollbar-width: thin;
+				}
+				&::-ms-scrollbar-track {
+					background: #f1f1f1;
+					border-radius: 10px;
+					scrollbar-width: thin;
+				}
+				&::-ms-scrollbar-thumb {
+					background: #888;
+					border-radius: 10px;
+					scrollbar-width: thin;
+				}
+
 			}
 			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
+				min-width: calc(50% - 1rem);
+				* {
 				text-decoration: none;
 				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
+				}
+				img {
+					margin-bottom: 0.5rem;
+					border-radius: 12px;
+				}
+				a {
 				display: block;
+				}
 			}
+			ul li 
 			.title {
 				margin: 0;
 				line-height: 1;
@@ -62,48 +122,126 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 				color: rgb(var(--gray));
 			}
+			
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
+			}
+			.visible {
+				display: block;
 			}
 			@media (max-width: 720px) {
 				ul {
 					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+					font-size: 1rem;
+					li {
+						width: 100%;
+						text-align: center;
+
+						.title {
+							font-size: 1rem;
+						}
+
+						img {
+							width: 100%;
+						}
+					}
+					&::-webkit-scrollbar {
+						display: none;
+					}
 				}
 			}
+			.filter a {
+				text-decoration: none;
+				color: inherit;
+				display: flex;
+				align-self: end;
+				
+			}
+			.filter a:hover {
+				text-decoration: underline;
+				color: var(--accent);
+			}
+			.dark .filter a:hover {
+				text-decoration: underline;
+				color: var(--dark-mode-link-hover);
+			}
+			
+			.filter {
+				display: flex;
+				flex-direction: column;
+			}
+			
 		</style>
 	</head>
 	<body>
 		<Header />
-		<Tags />
-
+		
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.slug}/`}>
-									<Image width={720} height={360} src={post.data.heroImage} alt={"Lesson card"} />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
+			<div class="filter">
+				<!-- <Search /> -->
+				<a href="/tags/">
+				<svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+					<path d="M7 12L17 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+					<path d="M11 17H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+				</svg>
+					Filter posts<a/>
+			</div><br/>
+			<div id="courses">
+				<div>
+					
+					<section id="course_section">
+						<h2>Latest Posts</h2>
+						<ul>
+							{
+								posts.map((post:any) => (
+									
+									<li>
+										<a href={`/blog/${post.slug}/`}>
+											<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card"/>
+											<h4 class="title">{post.data.title}</h4>
+											<p class="date">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+										</a>
+									</li>
+								))
+							}
+						</ul>
+					</section>
+				</div>
+	
+			{ categorizedPosts.length > 0 ? (
+				<div>
+					{categorizedPosts.map((category:any, index) => (
+						<section id={`category_${index}_section`}>
+							<h3>{category.name} 
+								<a href={`/category/${category.name}`}>
+									<span class="folder-wrapper" style="font-size: .75rem;" > 
+									<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" loading={"lazy"}/>
+									</span>
 								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+							</h3>
+							
+							<ul class = {category.name}>
+								{category.posts.map((post:any) => (
+									<li>
+									<a href={`/blog/${post.slug}`}>
+										<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
+										<h4 class="title">{post.data.title}</h4>
+										<p class="date">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</a>
+								</li>
+								))}
+							</ul>
+						</section>
+						))}
+				</div>
+			
+				) : <p>No categories found</p> }
+			</div>
 		</main>
 		<Footer />
 	</body>
