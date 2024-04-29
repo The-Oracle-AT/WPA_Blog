@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     const controls_sel = '.carousel_controls';
 
     const components = document.querySelectorAll(component_sel);
-    console.log(components.length);
+    
     for(let i = 0; i < components.length; i++){
         const component = components[i];
         const content = component.querySelector(content_sel);
@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
         if(nextButton) {
             nextButton.addEventListener('click', (e)=> {
                 e.preventDefault();
-                x = content.clientWidth*0.95  + content.scrollLeft + 0;//????
+                x = content.clientWidth*1  + content.scrollLeft + 15;//????
                 content.scroll({
                     left: x,
                     behavior: 'smooth',
@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
         if(prevButton){
             prevButton.addEventListener('click', (e)=> {
                 e.preventDefault();
-                x = content.clientWidth*0.95 - content.scrollLeft; // + 0?
+                x = content.clientWidth*1 - content.scrollLeft + 30; // + 0?
                 content.scroll({
                     left: -x,
                     behavior: 'smooth',

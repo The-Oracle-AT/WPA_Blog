@@ -30,182 +30,160 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style lang="scss">
-			main {
-				width: 960px;
-				
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<style lang="scss">
+	main {
+		width: 960px;
+
+	}
+	section {
+		margin-bottom: 2rem;
+		z-index: 1;
+		max-height: fit-content;
+
+		&:not(:first-child) {
+			margin-top: 2rem;
 			}
-			section {
-				margin-bottom: 2rem;
-				z-index: 1;
-				max-height: fit-content;
-
-				&:not(:first-child) {
-					margin-top: 2rem;
-				}
 				
-			}
-			ul {
-				display: flex;
-				flex-direction: row;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: .5rem;
-				overflow-x: scroll;
-				filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-				
+	}
+	ul {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+		list-style-type: none;
+		margin: 0;
+		padding: .5rem;
+		overflow-x: scroll;
+		
+		
 
-				&::-webkit-scrollbar {
-					width: 10px;
-					display: none;
-					
-					
-				}
-				&::-webkit-scrollbar-track {
-					background: #f1f1f1;
-					border-radius: 1rem;
-					scrollbar-width:10px;
-					
-				}
-				&::-webkit-scrollbar-thumb {
-					background: #888;
-					border-radius: 1rem;
-					height: 5px;
+		&::-webkit-scrollbar {
+			width: 10px;
+			display: none;
+			
+			
+		}
+		&::-webkit-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 1rem;
+			scrollbar-width:10px;
 
-					
+		}
+		&::-webkit-scrollbar-thumb {
+			background: #888;
+			border-radius: 1rem;
+			height: 5px;	
+		}				/* Styles for Firefox */
+		&::-moz-scrollbar {
+			width: 5px;
+			scrollbar-width: thin;
+			display: none;
+		}
 
+		&::-moz-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 10px;
+			scrollbar-width: thin;
+			display: none;
 				}
-
-				/* Styles for Firefox */
-				&::-moz-scrollbar {
-					width: 5px;
-					scrollbar-width: thin;
-					display: none;
-				}
-
-				&::-moz-scrollbar-track {
-					background: #f1f1f1;
-					border-radius: 10px;
-					scrollbar-width: thin;
-					display: none;
-				}
-				&::-moz-scrollbar-thumb {
-					background: #888;
-					border-radius: 10px;
-					scrollbar-width: thin;
-					display: none;
+		&::-moz-scrollbar-thumb {
+			background: #888;
+			border-radius: 10px;
+			scrollbar-width: thin;
+			display: none;
 				}
 				/* Styles for IE and Edge */
-				&::-ms-scrollbar {
-					width: 5px;
-					scrollbar-width: thin;
-					display: none;
-				}
-				&::-ms-scrollbar-track {
-					background: #f1f1f1;
-					border-radius: 10px;
-					scrollbar-width: thin;
-				}
-				&::-ms-scrollbar-thumb {
-					background: #888;
-					border-radius: 10px;
-					scrollbar-width: thin;
-				}
+		&::-ms-scrollbar {
+			width: 5px;
+			scrollbar-width: thin;
+			display: none;
+		}
+		&::-ms-scrollbar-track {
+			background: #f1f1f1;
+			border-radius: 10px;
+			scrollbar-width: thin;
+		}
+		&::-ms-scrollbar-thumb {
+			background: #888;
+			border-radius: 10px;
+			scrollbar-width: thin;
+		}
 
+	}
+	ul li {
+		min-width: calc(50% - 1rem);
+		* {
+		text-decoration: none;
+			transition: 0.2s ease;
 			}
-			ul li {
-				min-width: calc(50% - 1rem);
-				* {
-				text-decoration: none;
-				transition: 0.2s ease;
-				}
-				img {
-					margin-bottom: 0.5rem;
-					border-radius: 12px;
-				}
-				a {
-				display: block;
-				}
-				
+		img {
+			margin-bottom: 0.5rem;
+			border-radius: 12px;
 			}
-			ul li 
-			.title {
-				margin: 0;
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
+		a {
+			display: block;
 			}
 			
-			ul a:hover img {
+		}
+	ul li 
+	.title {
+		margin: 0;
+		line-height: 1;
+	}
+	.date {
+		margin: 0;
+		color: rgb(var(--gray));
+		}
+			
+	ul a:hover img {
 				box-shadow: var(--box-shadow);
+	}
+	.visible {
+		display: block;
+	}
+	@media (max-width: 720px) {
+		ul {
+			gap: 0.5em;
+			
+			
+			h4{
+				font-size: 1rem;
 			}
-			.visible {
-				display: block;
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+			li {
+				width: 100%;
+				text-align: center;
+				.title {
 					font-size: 1rem;
-					h4{
-						font-size: 1rem;
-					}
-					h3 {
-						font-size: larger;
-					}
+				}
+				.date {
+					font-size: small;
+				}
 
-					li {
-						width: 100%;
-						text-align: center;
-
-						.title {
-							font-size: 1rem;
-						}
-
-						img {
-							width: 100%;
-						}
-					}
-					
+				img {
+					width: 100%;
 				}
 			}
-			.filter a {
-				text-decoration: none;
-				color: inherit;
-				display: flex;
-				align-self: end;
-				
-			}
-			.filter a:hover {
-				text-decoration: underline;
-				color: var(--accent);
-			}
-			.dark .filter a:hover {
-				text-decoration: underline;
-				color: var(--dark-mode-link-hover);
-			}
+		}
+	}
+	.filter a {
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		align-self: end;	
+	}
+	.filter a:hover {
+		text-decoration: underline;
+		color: var(--accent);
+	}
+	.dark .filter a:hover {
+		text-decoration: underline;
+		color: var(--dark-mode-link-hover);
+	}
 			
-			.filter {
-				display: flex;
-				flex-direction: column;
-			}
-			.item-1 {
-				height: 8rem;
-				width: 8rem;
-				display: flex;
-				flex-direction: row;
-				a {
-
-				}
-			}
-			
-			
-			
-			
-			
+	.filter {
+		display: flex;
+		flex-direction: column;
+	}	
 		</style>
 	</head>
 	<body>
@@ -342,6 +320,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		}
 	}
 	.prev{
+
 		&.disabled {
 		opacity: .5;
 		}
@@ -369,6 +348,11 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		&.has-controls {
 			.carousel_controls {
 				display: flex;
+				button {
+					&:hover {
+						cursor:pointer;
+					}
+				}
 			}
 		}
 
