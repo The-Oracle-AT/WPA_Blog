@@ -188,7 +188,7 @@ nav {
 .topnav.responsive {
 	
 	li:not(:first-child) {
-		background-color: #f4f4f4;
+		background: #f4f4f4;
 		}
 		
 }
@@ -202,19 +202,24 @@ ul li a{
 	&:hover { 
 		.title {
 			color: rgb(var(--accent));
+			
 		}
 		.date {
-		color: rgb(var(--accent));
+			color: rgb(var(--accent));
+			
 		}
 	}
 }
 
+
 html.dark {
-	background-color: var(--dark-mode-bg);
+	background: var(--dark-mode-bg);
 	color: var(--light-nav);
+	
   }
 
 .dark {
+	transition: all 2s;
 	.html_body{
 		color: var(--dark-mode-text)
 	}
@@ -223,11 +228,12 @@ html.dark {
 		background: linear-gradient(var(--dark-mode-bg)) no-repeat;
 
 		nav {
-			background-color: var(--dark-mode-bg);
+			background: var(--dark-mode-bg);
 			color: var(--dark-mode-text);
 		}
 		main {
-			background-color: var(--dark-mode-bg);
+			background: var(--dark-mode-bg);
+			
 		}
 
 	}
@@ -307,5 +313,6 @@ html.dark {
 			}
 		}
 	}
+	
 
 }

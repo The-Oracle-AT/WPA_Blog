@@ -5,11 +5,9 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import CarouselRender from '../../components/svelte/CarouselRender.svelte';
+
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
-
-import Hamburger from '../../components/Hamburger.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -254,18 +252,27 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 				<div>
 					{categorizedPosts.map((category:any, index) => (
 						<section id={`category_${index}_section`} class="carousel_wrapper">
-							<h3>{category.name} 
-								<a href={`/category/${category.name}`}>
-									<span class="folder-wrapper" style="font-size: .75rem;" > 
-									<Image src="/icons/utils/folder-more.svg" alt="View category" width="24" height="24" loading={"lazy"}/>
-									</span>
+							<h3> 
+								<a href={`/page/${category.name}/1`} class="category-name">
+									{category.name}
+									{/* <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> */}
+									<svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+										<title>goto</title>
+										<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+											<g id="icon" fill="#000000" transform="translate(64.000000, 106.666667)">
+												<polygon id="Shape" transform="translate(181.333333, 160.000000) scale(1, -1) rotate(-90.000000) translate(-181.333333, -160.000000) " points="341.333333 213.333333 213.333333 341.333333 183.04 311.04 259.626667 234.666667 21.3333333 234.666667 21.3333333 -21.3333333 64 -21.3333333 64 192 259.626667 192 183.04 115.626667 213.333333 85.3333333">
+												</polygon>
+											</g>
+										</g>
+									</svg>
+									
 								</a>
 							</h3>
 							
 							
 							<ul id= {category.name} class="carousel_content">
 								
-								{category.posts.map((post:any) => (
+								{category.posts.slice(0,7).map((post:any) => (
 									<li class="post">
 									<a href={`/blog/${post.slug}`} >
 										<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
@@ -357,11 +364,37 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		}
 
 	}
-	.dark {
-		svg path {
-			fill: white;
+	.category-name {
+		color: inherit; 
+		text-decoration: none;
+		&:hover {
+			color: var(--accent);
 		}
 	}
+	.dark {
+	svg {
+		path, polygon, g {
+			fill: white;
+		}
+		
+	}
+		.category-name {
+
+			
+			&:hover{
+				color: var(--dark-mode-link-hover);
+			}
+			svg {
+				
+				transform: translateX(-.6rem);
+			}
+
+
+		}
+		
+		
+	}
+
 </style>
 
 
