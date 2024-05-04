@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout 
+	title="Oops! Looks like you took a wrong turn."
+	description="Page not found"
+	pubDate={new Date('August 08 2021')}
+	heroImage=""
+	tags={['']}
+	link = ''
+	category=''
+	>
+<main>
+    <p>Error 404: Page not found</p>
+</main>
+</Layout>
+
+<style>
+    main {
+        background: url('/location-not-found-svgrepo-com.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      
+        position: relative;
+        
+    }
+    h1{
+        font-size: larger;
+    }
+	p {
+        color: inherit;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: 8rem;
+        
+        
+        
+    }
+	@media screen and (max-width: 720px){
+		.site-name {
+		font-size: 2rem;
+	}
+		section h3 {
+			font-size: 1.5rem;
+		}
+        section h1 {
+            font-size: 2rem;
+        }
+        p {
+            top: 6rem;
+        }
+       
+
+	}
+    
+	
+</style>

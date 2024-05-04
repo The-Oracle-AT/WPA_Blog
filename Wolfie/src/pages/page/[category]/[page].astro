@@ -14,10 +14,10 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 export const getStaticPaths = (async ({paginate}) => {
   const allPosts = await getCollection('blog');
   const uniqueCategories = [ ...new Set(allPosts.map(post => post.data.category).flat()) ];
-  return uniqueCategories.flatMap((tag) => {
-	const filteredPosts = allPosts.filter(post => post.data.category.includes(tag));
+  return uniqueCategories.flatMap((category) => {
+	const filteredPosts = allPosts.filter(post => post.data.category.includes(category));
 	return paginate( filteredPosts, { 
-		params: { tag }, 
+		params: { category }, 
 		pageSize: 2});
   })
 	
@@ -27,7 +27,7 @@ export const prerender = true
 
 const { page } = Astro.props;
 const params = Astro.params;
-console.log(params)
+console.log(page.data[0].slug)
 // const category = (Astro.url.pathname.split('/').pop())?.replace(/%20/g , ' '); // Get the last part of the URL and replace %20 with a space
 
 ---
@@ -97,15 +97,15 @@ console.log(params)
 		<Header />
 		<main style="display: flex; flex-direction: column;">
 			<section>
-				<h3 >{params.tag} </h3> 
+				<h3 >{params.category} </h3> 
 				<hr/>
 			</section>
 			<section>
 				<ul>
 					{
-						page && page.data.map((post) => (
+						page && page.data.map((post, index) => (
 							<li>
-								<a href={`/blog/${params}/${post.slug}/`}>
+								<a href={`/page/category/${post.slug}`}>
 									
 										<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card" loading={"lazy"} />
 									

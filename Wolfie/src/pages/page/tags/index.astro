@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import "../../styles/global.scss";
+import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/global.scss";
 const allPosts = await getCollection('blog')
 const tags =[...new Set(allPosts.map((post) => post.data.tags).flat())].sort();
 
@@ -20,7 +20,7 @@ const tags =[...new Set(allPosts.map((post) => post.data.tags).flat())].sort();
     <ul >
       {tags && tags.map((tag) => (
         
-          <a href={`/tags/${tag}`} data-pagefind-ignore="all"><li>{tag}</li></a>
+          <a href={`/page/tags/${tag}`} data-pagefind-ignore="all"><li>{tag}</li></a>
         
       ))}
     </ul>

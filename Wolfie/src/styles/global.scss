@@ -280,6 +280,7 @@ html.dark {
 		color: var(--dark-mode-text);
 		
 	}
+	//Header.astro
 	.topnav.responsive .nav-bar li:not(.hamburger-icon){
 		background-color: var(--dark-nav);
 		&:hover {
@@ -301,11 +302,9 @@ html.dark {
 	ul li a:hover .date {
 		color: var(--dark-mode-link-hover);
 	}
+	// Search.astro
 	.filter {
-		color: var(--dark-mode-text);
-		
-		
-		
+		color: var(--dark-mode-text);		
 		.filter-p {
 			stroke: var(--dark-mode-text);
 			&:hover {
@@ -313,6 +312,11 @@ html.dark {
 			}
 		}
 	}
+	//Pagination.svelte
+	.pagination_wrapper {
+		color: white;
+	}
+	
 	
 
 }

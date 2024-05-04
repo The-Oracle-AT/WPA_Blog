@@ -1,0 +1,117 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Pagination from '../../../components/Pagination.svelte';
+import BlogPost from '../../../layouts/BlogPost.astro';
+
+
+const posts = await getCollection('blog');
+type Props = CollectionEntry<'blog'>;
+if(!posts) {
+  return new Response("Something went wrong on the server. Try relaoding the previous page", {
+    status: 500,
+    statusText: 'Internal server Error'
+  })
+}
+
+const { slug } = Astro.params;
+
+let prevSlug = null
+let nextSlug = null
+const index = posts.findIndex((page) => page.slug === slug);
+console.log('read')
+const numPosts = posts.length
+if(index === 0) {
+  prevSlug = null
+  nextSlug = posts[index + 1].slug
+  
+} else if ( index === numPosts -1) {
+  nextSlug = null
+  prevSlug = posts[index - 1].slug
+} else {
+    prevSlug = posts[index - 1].slug
+    nextSlug = posts[index + 1].slug
+}
+console.log(index, numPosts)
+console.log("prev:",prevSlug,"\nnext:", nextSlug)
+const prevPostURL = prevSlug ? `/page/category/${prevSlug}` : null
+const nextPostURL = nextSlug ? `/page/category/${nextSlug}` : null
+const prevPostTitle = prevSlug ? posts[index - 1].data.title : null
+const nextPostTitle= nextSlug ? posts[index + 1].data.title : null
+const post = posts.find((page) => page.slug === slug);
+if (!post) return Astro.redirect("/404");
+const { Content } = await post.render();
+const tags = post.data.tags;
+
+
+
+
+
+
+---
+
+<BlogPost {...post.data}>
+	<Content />
+	<section class="container">
+		<h2>Related Posts</h2>
+	<ul>
+		{tags && tags.map((tag:string) => (
+			<li> <a href={`/page/tags/${tag}`}>{tag}</a></li>
+		))}
+	</ul>
+  <Pagination 
+    prevousPageURL= {prevPostURL}
+    nextPageURL={nextPostURL} 
+    client:only
+    > 
+    <span slot="prev_link_content">{prevPostTitle}</span>
+    <span slot="next_link_content">{nextPostTitle}</span>
+  </Pagination>
+   
+</section>
+</BlogPost>
+
+<style lang="scss">
+	
+    .container {
+      display: flex;
+      flex-direction: column;
+      padding-top: 2rem;
+	  margin-top: 2rem;
+      /* Custom scrollbar for Chrome, Safari and Opera */
+     
+
+
+    }
+    ul {
+      display: flex;
+      flex-flow: row wrap;
+	  justify-content: flex-start;
+      list-style:none;
+      scroll-behavior: smooth;
+	}
+    li {
+      margin: 0 0.5rem 0.5rem 0;
+      padding: 0rem 0.5rem;
+      border-radius: 0.5rem;
+      min-width: max-content;
+      background-color: rgba(78, 175, 255, 0.3);
+      display: inline-block;
+
+      &:hover {
+        background-color: rgba(78, 175, 255, 0.5);
+      }
+      a {
+        text-decoration: none;
+        color: var(--color-text);
+      }
+    }
+    
+    p {
+      margin-right: 1rem;
+    }
+    span {
+      font-size: medium;
+      text-wrap:wrap;
+      color: inherit
+      }
+</style>

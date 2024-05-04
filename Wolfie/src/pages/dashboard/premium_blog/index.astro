@@ -169,7 +169,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 							posts.map((post:any) => (
 								
 								<li>
-									<a href={`/dashboard/premium_blog/${post.slug}/`}>
+									<a href={`/dashboard/blog/${post.slug}/`}>
 										<GreyFilter uid={user.uid} currentLessonTitle={post.data.title} client:only>
 										<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card"/>
 										</GreyFilter>
@@ -200,7 +200,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 						<ul class = {category.name}>
 							{category.posts.map((post:any) => (
 								<li>
-								<a href={`/dashboard/premium_blog/${post.slug}`}>
+								<a href={`/dashboard/blog/${post.slug}`}>
 									<GreyFilter uid={user.uid} currentLessonTitle={post.data.title}  client:only>
 									<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
 									</GreyFilter>

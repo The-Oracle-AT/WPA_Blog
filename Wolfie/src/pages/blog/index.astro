@@ -210,7 +210,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 								posts.map((post:any) => (
 									
 									<li class="post">
-										<a href={`/blog/${post.slug}/`}>
+										<a href={`/page/category/${post.slug}/`}>
 											<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card"/>
 											<h4 class="title">{post.data.title}</h4>
 											<p class="date">
@@ -265,7 +265,6 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 											</g>
 										</g>
 									</svg>
-									
 								</a>
 							</h3>
 							
@@ -274,7 +273,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 								
 								{category.posts.slice(0,7).map((post:any) => (
 									<li class="post">
-									<a href={`/blog/${post.slug}`} >
+									<a href={`/page/category/${post.slug}`} >
 										<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
 										<h4 class="title">{post.data.title}</h4>
 										<p class="date">
