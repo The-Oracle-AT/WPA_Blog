@@ -320,6 +320,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
     import '../../scripts/horizontal_post_scroll';
 </script>
 <style lang="scss">
+
 	.next{
 		&.disabled {
 		opacity: .5;
@@ -371,27 +372,19 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		}
 	}
 	.dark {
-	svg {
-		path, polygon, g {
-			fill: white;
+		svg {
+			path, polygon, g {
+				fill: white;
+			}
 		}
-		
-	}
 		.category-name {
-
-			
 			&:hover{
 				color: var(--dark-mode-link-hover);
 			}
 			svg {
-				
 				transform: translateX(-.6rem);
 			}
-
-
 		}
-		
-		
 	}
 
 </style>

@@ -40,7 +40,7 @@ const nextPostURL = nextSlug ? `/page/category/${nextSlug}` : null
 const prevPostTitle = prevSlug ? posts[index - 1].data.title : null
 const nextPostTitle= nextSlug ? posts[index + 1].data.title : null
 const post = posts.find((page) => page.slug === slug);
-if (!post) return Astro.redirect("/404");
+if (!post) return Astro.redirect("ErrorPage");
 const { Content } = await post.render();
 const tags = post.data.tags;
 const category = post.data.category
@@ -71,7 +71,7 @@ const categorySlug = category.replace(/ /g, '%20') //for return link
     categoryURL={`/page/${categorySlug}/1`}
     client:only
     > 
-    <span slot="category_link_content">{category} </span>
+    <!-- <span slot="category_link_content">{category} </span> -->
     <span slot="prev_link_content">{prevPostTitle}</span>
     <span slot="next_link_content">{nextPostTitle}</span>
   </Pagination>

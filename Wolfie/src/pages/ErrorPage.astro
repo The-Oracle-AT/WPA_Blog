@@ -11,7 +11,7 @@ import Layout from '../layouts/BlogPost.astro';
 	link = ''
 	category=''
 	>
-<main>
+<main class="error-page">
     <p>Error 404: Page not found</p>
 </main>
 </Layout>
@@ -26,23 +26,20 @@ import Layout from '../layouts/BlogPost.astro';
         position: relative;
         
     }
+    
     h1{
         font-size: larger;
     }
 	p {
-        color: inherit;
+        
         display: flex;
         justify-content: center;
         position: relative;
-        top: 8rem;
-        
-        
-        
+        top: 8rem; 
     }
+    
 	@media screen and (max-width: 720px){
-		.site-name {
-		font-size: 2rem;
-	}
+		.site-name { font-size: 2rem; }
 		section h3 {
 			font-size: 1.5rem;
 		}
@@ -52,9 +49,6 @@ import Layout from '../layouts/BlogPost.astro';
         p {
             top: 6rem;
         }
-       
-
 	}
-    
 	
 </style>
