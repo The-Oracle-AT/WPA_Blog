@@ -8,6 +8,7 @@ import Header from '../../components/Header.astro';
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
+import Search from '../../components/Search.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -190,7 +191,8 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		<main>
 			<div class="filter">
 				<!-- <Search /> -->
-				<a href="/tags/">
+				
+				<a href="/page/tags/">
 				<svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
 					<path d="M7 12L17 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
