@@ -1,0 +1,32 @@
+---
+---
+<html>
+    <div>
+        <slot />
+        
+    </div>
+    
+</html>
+
+<style lang="scss">
+    div {
+        list-style-type: none;
+        display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+        
+        
+    }
+    @media screen and (max-width: 992px) and (min-width: 600px) {
+        div {
+            grid-template-columns: 1fr 1fr;
+        }
+		
+    }
+    @media screen and (max-width: 600px) {
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+</style>

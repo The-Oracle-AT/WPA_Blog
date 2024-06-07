@@ -37,8 +37,8 @@
 
 <div class={`pagination_wrapper ${dark}`}>
     <a href={categoryURL} class={`category ${showCategoryURL}`} ><span>See full category<slot name="category_link_content"></slot></span></a>
-    <a href={prevousPageURL} class={`prev ${showPrevURL} `} ><span>Prevous</span><br/><slot name="prev_link_content"><span>Prevous</span></slot> </a>
-    <a href={nextPageURL} class={`next ${showNextURL} `}><span>Next</span><br/><slot name="next_link_content"><span>Next</span></slot> </a>
+    <a href={prevousPageURL} class={`prev ${showPrevURL} `} ><span>Prevous</span><br/><slot name="prev_link_content"><span class="link-text">Prevous</span></slot> </a>
+    <a href={nextPageURL} class={`next ${showNextURL} `}><span>Next</span><br/><slot name="next_link_content"><span class="link-text">Next</span></slot> </a>
 </div>
 
 <style lang="scss">
@@ -159,6 +159,7 @@
         }
   
     }
+
     .next{
         position: absolute;
         right: 1rem;
@@ -187,14 +188,13 @@
         }
     }
     .category {
-        width: fit-content;
-        
-        
+        width: 100%;
         display: flex;
         justify-content : center;
         align-self: center;
         span {
-            width: fit-content;
+            width: 100%;
+            height: 100%;
             background-color: inherit;
             padding: .5rem;
             border-radius: .5rem;

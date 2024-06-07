@@ -8,7 +8,8 @@ import Header from '../../components/Header.astro';
 
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
-import Search from '../../components/Search.astro';
+
+import PlaylistItem from '../../components/index/PlaylistItem.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -22,7 +23,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
          name: category.charAt(0).toUpperCase() + category.slice(1),
      }
  });
- console.log(posts[0])
+
  
 ---
 
@@ -45,7 +46,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			}
 				
 	}
-	ul {
+	ul:has(.post) {
 		display: flex;
 		flex-direction: row;
 		gap: 2rem;
@@ -115,7 +116,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		text-decoration: none;
 			transition: 0.2s ease;
 			}
-		img {
+		img:has(.latest-post) {
 			margin-bottom: 0.5rem;
 			border-radius: 12px;
 			}
@@ -141,7 +142,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		display: block;
 	}
 	@media (max-width: 720px) {
-		ul {
+		ul:has(.post) {
 			gap: 0.5em;
 			
 			
@@ -211,9 +212,10 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 							{
 								posts.map((post:any) => (
 									
+									
 									<li class="post">
 										<a href={`/page/category/${post.slug}/`}>
-											<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card"/>
+											<Image width={4800} height={360} src={post.data.heroImage} alt="Lesson card" class={'"latest-post'}/>
 											<h4 class="title">{post.data.title}</h4>
 											<p class="date">
 												<FormattedDate date={post.data.pubDate} />
@@ -251,14 +253,15 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 					</section>
 				</div>
 			{ categorizedPosts.length > 0 ? (
-				<div>
+				<div class="categories">
 					{categorizedPosts.map((category:any, index) => (
 						<section id={`category_${index}_section`} class="carousel_wrapper">
 							<h3> 
 								<a href={`/page/${category.name}/1`} class="category-name">
-									{category.name}
+									
+									<Image src={`/${category.name}-category-img.png`} width={720} height={360} alt={`${category.name}`} class={'category-img'}/>
 									{/* <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> */}
-									<svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+									{/* <svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 										<title>goto</title>
 										<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 											<g id="icon" fill="#000000" transform="translate(64.000000, 106.666667)">
@@ -266,29 +269,25 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 												</polygon>
 											</g>
 										</g>
-									</svg>
+									</svg> */}
 								</a>
 							</h3>
 							
 							
-							<ul id= {category.name} class="carousel_content">
+							<div id="playlist" class="carousel_content" style="margin-top: -1rem;  position: relative; left: .5rem; font-size: 1rem;">
+								<p>Title: <strong>{category.name}</strong> </p>
+								<p style="transform: translateY(-.9rem);">Description: </p>
+								<p style="transform: translateY(.9rem);">Number of lessons: {category.posts.length} </p>
+								<p>Last updated: </p>
 								
-								{category.posts.slice(0,7).map((post:any) => (
-									<li class="post">
-									<a href={`/page/category/${post.slug}`} >
-										<Image width={720} height={360} src={post.data.heroImage} alt={`${post.data.title}`} />
-										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
-									</a>
-								</li>
-								))}
+								<p style="transform: translateY(-.9rem);"> Authors: @E.L Maela ( add to frontmatter of each post)</p>
+
+
 								
-							</ul>
-							<div class="carousel_controls">
+							</div>
+							{/* <div class="carousel_controls">
 								<button id="prev" class="prev">
-									{/* <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> */}
+									
 									<svg width="800px" height="800px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<g id="previous">
 									<g id="previous_2">
@@ -298,7 +297,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 									</svg>
 								</button>
 								<button id="next" class="next">
-									{/* <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> */}
+									 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 									<svg width="800px" height="800px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<g id="next">
 										<g id="next_2">
@@ -307,7 +306,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 										</g>
 									</svg>
 								</button>
-							</div>
+							</div> */}
 						</section>
 						))}
 				</div>
@@ -322,7 +321,48 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
     import '../../scripts/horizontal_post_scroll';
 </script>
 <style lang="scss">
+	.categories {
+		display: grid;
+		width: 100%;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
 
+
+		
+		
+		.carousel_wrapper {
+			display: flex;
+			flex-direction: column;
+			border-radius: 1rem;
+			background: inherit;
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+			transition: all .3s;
+			&:hover {
+				box-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+				transform: scale(1.05);
+			}
+			.category-img {
+				border-bottom-left-radius: 0%;
+				border-bottom-right-radius: 0%;
+			}
+			
+
+			#playlist {
+				
+				display: block;
+				
+				
+				li {
+					padding: 0;
+					margin: -1rem;
+
+					
+				}
+			}
+			
+		}
+	}
+	
 	.next{
 		&.disabled {
 		opacity: .5;
@@ -348,7 +388,12 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			max-width: 30px;
 		}
 	}
+	.carousel_controls:not(:first-child){
+		display: none;
+	}
 	.carousel_wrapper {
+		
+		
 		
 		.carousel_controls {
 			display: none;
@@ -364,7 +409,6 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 				}
 			}
 		}
-
 	}
 	.category-name {
 		color: inherit; 
@@ -373,6 +417,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			color: var(--accent);
 		}
 	}
+
 	.dark {
 		svg {
 			path, polygon, g {
@@ -386,6 +431,12 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 			svg {
 				transform: translateX(-.6rem);
 			}
+		}
+	}
+	@media screen and (max-width: 720px) {
+		.categories {
+			grid-template-columns: 1fr;
+
 		}
 	}
 

@@ -36,6 +36,7 @@ const latest_posts = (await getCollection('blog')).sort(
 				<h2>What's New?</h2>
 				<ul>
 					<h3>Newest Articles</h3>
+					<!-- Computer update layout -->
 					<article class="articles-update-cards" id="articles-update-cards">
 						
 						{latest_posts.map((post) =>(
@@ -45,6 +46,7 @@ const latest_posts = (await getCollection('blog')).sort(
 							</div></a>
 						)) }
 					</article>
+					<!-- Mobile phoone update cards -->
 					<article class="articles-update-cards-m" id="articles-update-cards-m">
 						
 						{latest_posts.map((post) =>(
@@ -196,7 +198,7 @@ const latest_posts = (await getCollection('blog')).sort(
 			a:nth-child(#{length($colors)}n + #{index($colors, $color)}) > .card {
 				border-left: 5px solid $color;
 				&:hover {
-					border-top: 5px solid $color;
+					border-top: 3px solid $color;
 				}
 			}
 		}
@@ -224,6 +226,8 @@ const latest_posts = (await getCollection('blog')).sort(
 	.dark {
 			.card {
 				box-shadow: 0px 0px 5px rgba(150, 149, 181, 0.5);
+				color: white;
+				background-color: #333;
 			}
 		}
 	@media  screen and 	(max-width: 680px) {

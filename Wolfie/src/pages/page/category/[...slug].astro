@@ -102,9 +102,9 @@ const categoryURL = `/page/${categorySlug}/1`
       margin: 0 0.5rem 0.5rem 0;
       padding: 0rem 0.5rem;
       border-radius: 0.5rem;
-      min-width: max-content;
+
       background-color: rgba(78, 175, 255, 0.3);
-      display: inline-block;
+   
       &:hover {
         background-color: rgba(78, 175, 255, 0.5);
       }
@@ -119,9 +119,19 @@ const categoryURL = `/page/${categorySlug}/1`
   }
   span {
     font-size: medium;
-    text-wrap:wrap;
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     }
+  
       	// Back to category link
  
- 
+ span:nth-child(1)
+    {
+      display: block;
+      height: 100%;
+      
+    }
 </style>

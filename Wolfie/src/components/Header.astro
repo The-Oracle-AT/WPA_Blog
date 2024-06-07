@@ -36,7 +36,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 	header {
 		margin: 0;
 		height: 4rem;
-		padding: 0 1rem;
+		padding: 0 0rem;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 		z-index: 100;
 		position: sticky; 
@@ -46,13 +46,16 @@ import ThemeIcon from "./ThemeIcon.astro";
 			align-items: center;
 			justify-content: space-between;
 			height: 4rem;
+			
+			padding: 0rem 0rem 0rem 0rem;
 			h2 {
-				
 				font-size: 1em;
 			}	
-	}
-
 		}
+	}
+	.site-name {
+		padding-left: 1rem;
+	}
 	.sign-in {
 			display: none;
 		}
@@ -94,7 +97,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 	@media screen and (max-width: 720px) {
 		.theme-button {
 			background-color: transparent;
-			width: 90%;
+			width: 100%;
 			display: flex;
 			justify-content: center;
 			position: absolute;
@@ -109,9 +112,11 @@ import ThemeIcon from "./ThemeIcon.astro";
 		.sign-in {
 			display: block;
 		}
+		
 		.nav-bar {
 			flex-direction: column;
 			position: relative;
+			padding-top: 1rem;
 			li {
 				&:first-child {
 					display: block;
@@ -119,6 +124,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 					align-self: flex-end;
 					z-index: 2;
 					padding-right: 2rem;
+					
 					
 					
 					
@@ -135,14 +141,13 @@ import ThemeIcon from "./ThemeIcon.astro";
 				}
 			}
 		}
-		ul {
-			right: -5.1%;
-		}
+		
 		
 		.topnav.responsive {
 			transition: all .3s ease-in;
 			position: relative;
 			z-index: 1000;
+			
 			h2 {
 				left: 0.5rem;
 				width: 100%;
@@ -157,23 +162,26 @@ import ThemeIcon from "./ThemeIcon.astro";
 		.topnav.responsive ul {
 			position: absolute;
 			display: flex;
+			margin-right: -1rem;
 			
 			top:1rem;
 			
 			
-			box-shadow: 0 2px 8px rgba(var(--black), 5%);
+			
+			box-shadow: 0 10px 10px rgba(var(--black), 80%);
 			li:not(:first-child) {
-			float: none;
-			display: block;
-			text-align: center;
-			width: 100svw;
+				float: none;
+				display: block;
+				text-align: center;
+				width: 100svw;
 			}
 			li:first-child {
-				display: f;
-
+				display: flex;
+				transform: translateY(-.2rem);
 				justify-content: flex-end;
 				align-self: flex-end;
 				position: relative;
+				left: -1rem;
 				transition: all .3s ease-in;
 				width: fit-content;
 				

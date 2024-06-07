@@ -4,9 +4,10 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
-import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/Header.astro';
 import Pagination from '../../../components/Pagination.svelte';
+import Playlist from "../../../components/index/Playlist.astro";
+import PlaylistItem from "../../../components/index/PlaylistItem.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
 
@@ -18,7 +19,7 @@ export const getStaticPaths = (async ({paginate}) => {
 	const filteredPosts = allPosts.filter(post => post.data.category.includes(category));
 	return paginate( filteredPosts, { 
 		params: { category }, 
-		pageSize: 4});
+		pageSize: 8});
   })
 	
 }) satisfies GetStaticPaths;
@@ -27,7 +28,7 @@ export const prerender = true
 
 const { page } = Astro.props;
 const params = Astro.params;
-console.log(page.data[0].slug)
+
 // const category = (Astro.url.pathname.split('/').pop())?.replace(/%20/g , ' '); // Get the last part of the URL and replace %20 with a space
 
 ---
@@ -41,18 +42,20 @@ console.log(page.data[0].slug)
 			}
 			ul {
 				display: flex;
-				flex-wrap: wrap;
+				flex-direction: column;
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
 			ul li {
-				width: calc(50% - 1rem);
+				width: 100%;
+				border-bottom: 5px yellow;
 			}
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
+				
 			}
 
 			ul li img {
@@ -96,28 +99,33 @@ console.log(page.data[0].slug)
 	<body>
 		<Header />
 		<main style="display: flex; flex-direction: column;">
-			<section>
-				<h3 >{params.category} </h3> 
-				<hr/>
+			<section style="margin-bottom: 1rem;">
+				<Image src={`/${params.category}-category-img.png`} width={720} height={360} alt={`${params.category}`} class={'category-img'}/>
 			</section>
 			<section>
-				<ul>
+				<Playlist>
 					{
 						page && page.data.map((post, index) => (
-							<li>
-								<a href={`/page/category/${post.slug}`}>
-									
-										<Image width={720} height={360} src={post.data.heroImage} alt="Lesson card" loading={"lazy"} />
-									
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
+							<div class="item-of-playlist">
+								
+
+								
+									<PlaylistItem
+									title = {post.data.title}
+									urlParam = {`/page/category/${post.slug}/`}
+									postDate={ post.data.pubDate}
+									description={post.data.description}
+									cardHeight={"15rem"}
+									postTags={post.data.tags}
+									/>
+								
+
+								
+								
+							</div>
 						))
 					}
-				</ul>
+				</Playlist>
 				<Pagination
 					categoryURL={""}
 					prevousPageURL={page.url.prev ? page.url.prev : null}
@@ -131,27 +139,26 @@ console.log(page.data[0].slug)
 </html>
 <style lang="scss">
 	section {
-		
-		&:first-child {
-			
-			position: -webkit-sticky; /* Safari */
-			position:sticky;
-			top: 4rem;
-			width: 100%;
-			background: white;
-			
-			h3 {
-				font-size: larger;
-				padding-top: .5rem;
-				margin-bottom: -.9rem;
+		&:has(.category-img){
+			display: flex;
+			justify-content: center;
+			.category-img {
+				width: 100%;
 			}
 		}
+	}
+	.item-of-playlist {
+		background: #f1f1f1;
+		border-radius: 2rem;
+		height: fit-content;
+		
 	}
 	.dark {
-		section {
-			&:first-child {
-				background: inherit;
-			}
+		.item-of-playlist {
+			background: rgba(black, 1);
+			
 		}
 	}
+
+
 </style>
