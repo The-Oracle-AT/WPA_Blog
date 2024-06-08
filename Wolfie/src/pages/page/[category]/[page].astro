@@ -36,92 +36,30 @@ const params = Astro.params;
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style lang="scss">
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-direction: column;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: 100%;
-				border-bottom: 5px yellow;
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-				
-			}
-
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-			
-				line-height: 1;
-			}
-			
-			
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-					li {
-						width: 100%;
-						text-align: center;
-
-
-						&:first-child {
-							margin-bottom: 0;
-							.title {
-								font-size: 1.563em;
-							}
-						}
-						h3 {
-							font-size: large;
-						}
-					}
-				}
-			}
- 	
-			
-		</style>
 	</head>
+
 	<body>
 		<Header />
 		<main style="display: flex; flex-direction: column;">
 			<section style="margin-bottom: 1rem;">
-				<Image src={`/${params.category}-category-img.png`} width={720} height={360} alt={`${params.category}`} class={'category-img'}/>
+				<Image src={`/${params.category}-category-img.png`} 
+				width={1020} height={510} 
+				alt={`${params.category}`} 
+				class={'category-img'}
+				transition:name={`/${params.category}-category-img.png`}/>
 			</section>
 			<section>
 				<Playlist>
 					{
 						page && page.data.map((post, index) => (
 							<div class="item-of-playlist">
-								
-
-								
 									<PlaylistItem
 									title = {post.data.title}
 									urlParam = {`/page/category/${post.slug}/`}
 									postDate={ post.data.pubDate}
 									description={post.data.description}
 									cardHeight={"15rem"}
-									postTags={post.data.tags}
-									/>
-								
-
-								
-								
+									postTags={post.data.tags} />	
 							</div>
 						))
 					}
@@ -130,7 +68,7 @@ const params = Astro.params;
 					categoryURL={""}
 					prevousPageURL={page.url.prev ? page.url.prev : null}
 					nextPageURL={page.url.next ? page.url.next : null}
-				client:only/>
+				/>
 				
 			</section>
 		</main>

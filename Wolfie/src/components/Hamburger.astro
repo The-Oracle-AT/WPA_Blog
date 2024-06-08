@@ -39,6 +39,14 @@
     }
 
 </style>
-<script>
-    import "../scripts/menu";
+<script is:inline>
+    document.addEventListener('astro:page-load', () => {
+        document.getElementById('hamburger-icon').addEventListener('click', () => {
+        console.log('Hamburger icon run on page load and view transition: Solved!')
+        document.getElementById('topnav').classList.toggle('responsive');
+        document.getElementById('hamburger').classList.toggle('open');
+    });
+
+    })
+
 </script>

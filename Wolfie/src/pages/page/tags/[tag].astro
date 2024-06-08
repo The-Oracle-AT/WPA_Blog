@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
-import FormattedDate from '../../../components/FormattedDate.astro';
 import Header from '../../../components/Header.astro';
+import Playlist from '../../../components/index/Playlist.astro';
+import PlaylistItem from '../../../components/index/PlaylistItem.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
 
 
@@ -109,23 +110,39 @@ const { posts } = Astro.props as { posts: any[] };
 		<Header />
 		<main data-pagefind-body>
 			<section>
-				<ul>
+				<Playlist>
 					{
 						posts.map((post) => (
-							<li>
-								<a href={`/page/category/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
+							<div class="item-of-playlist">
+								<PlaylistItem
+									title = {post.data.title}
+									urlParam = {`/page/category/${post.slug}/`}
+									postDate={ post.data.pubDate}
+									description={post.data.description}
+									cardHeight={"15rem"}
+									postTags={post.data.tags}
+								/>	
+							</div>
 						))
 					}
-				</ul>
+					</Playlist>
 			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style lang="scss">
+	.item-of-playlist {
+		background: #f1f1f1;
+		border-radius: 2rem;
+		height: fit-content;
+		
+	}
+	.dark {
+		.item-of-playlist {
+			background: rgba(black, 1);
+			
+		}
+	}
+</style>

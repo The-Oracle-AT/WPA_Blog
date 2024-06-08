@@ -1,28 +1,49 @@
 <script>
-    export let title = "Title";
-    export let content = "Content";
-    export let border = "1px solid #000";
-    export let backgroundColor = "#fff";
-    
-    $: console.log(title);
-    $: console.log(content);
-</script>
+    import FormattedDate from './FormattedDate.svelte';
+    export let post;
+  </script>
 
-<div class="card" style="--borderSettings: {border}; --backgroundSettings: {backgroundColor} ">
-    <p>{title}</p>
-    <slot></slot>
-</div>
+    <div class="post-block">
+        <div class="post-block-wrapper">
+        <a href={`/page/category/${post.slug}/`} class="post-block-link">
+          <img  src={post.data.heroImage} alt="Lesson card" class="post-block-img"/>
+          <h4 class="post-block-title">{post.data.title}</h4>
+        </a>
+          <div>
+            
+            <p class="post-block-date">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+          </div>
+        
+    </div>
+      </div>
 
-<style>
-    .card {
-        border: var(--borderSettings);
-        background: var(--backgroundSettings);
+
+ 
+<style lang="scss">
+    .post-block {
         padding: 1rem;
-        margin: 1rem;
-        border-radius: 1rem;
+        min-width:18rem;
+        height: 20rem;
     }
-    p {
-        font-size: 1.5rem;
-        font-weight: bold;
+    .post-block-link {
+        text-decoration: none;
+        transition: all .3s;
+        &:hover {
+           
+            transform: scale(105%);
+            img {
+                
+                box-shadow: var(--box-shadow);
+                transform: scale(1.05);
+            }
+        }
     }
+    .post-block-title {
+        font-size: larger;
+    }
+
+
 </style>
+  

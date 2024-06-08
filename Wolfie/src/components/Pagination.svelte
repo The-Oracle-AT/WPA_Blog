@@ -188,7 +188,9 @@
         }
     }
     .category {
-        width: 100%;
+        width: fit-content;
+        
+        
         display: flex;
         justify-content : center;
         align-self: center;

@@ -1,5 +1,5 @@
 ---
- import FormattedDate from '../../components/FormattedDate.astro';
+ import FormattedDate from '../../components/svelte/FormattedDate.svelte';
  export let posts: [] = [];
  let categories = posts.map((post:any) => post.data.category);
  let uniqueCategories = [...new Set(categories)]; // remove duplicates

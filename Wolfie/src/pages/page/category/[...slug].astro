@@ -71,10 +71,10 @@ const categoryURL = `/page/${categorySlug}/1`
     prevousPageURL={prevPostURL}
     nextPageURL={nextPostURL} 
     
-    client:only
+    client:visible
     > 
     <span slot="category_link_content"> </span>
-    <span slot="prev_link_content">{prevPostTitle}</span>
+    <span slot="prev_link_content" >{prevPostTitle}</span>
     <span slot="next_link_content">{nextPostTitle}</span>
   </Pagination>
    

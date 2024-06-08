@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import "../styles/global.scss";
 import Hamburger from './Hamburger.astro';
 import HeaderLink from './HeaderLink.astro';
@@ -7,6 +8,9 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 
 ---
+<head>
+	<ViewTransitions />
+</head>
 
 <header>
 	<nav class="topnav" id="topnav">
@@ -15,7 +19,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 		</a></h2>
 		
 		<ul class="nav-bar">
-			<li class="hamburger-icon" id="hamburger-icon"><Hamburger/></li>
+			<li class="hamburger-icon" id="hamburger-icon"><Hamburger /></li>
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			
@@ -25,7 +29,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 	
 		</ul>
 		<div class="theme-button">
-			 <div><ThemeIcon/></div>
+			 <div><ThemeIcon  /></div>
 		</div>
 	</nav>
 
