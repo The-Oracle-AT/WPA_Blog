@@ -5,12 +5,11 @@
 
     <div class="post-block">
         <div class="post-block-wrapper">
-        <a href={`/page/category/${post.slug}/`} class="post-block-link">
+        <a href={`/page/category/${post.slug}/`} class="post-block-link" title={`${post.data.title}`}>
           <img  src={post.data.heroImage} alt="Lesson card" class="post-block-img"/>
           <h4 class="post-block-title">{post.data.title}</h4>
         </a>
           <div>
-            
             <p class="post-block-date">
               <FormattedDate date={post.data.pubDate} />
             </p>
@@ -29,7 +28,7 @@
     }
     .post-block-link {
         text-decoration: none;
-        transition: all .3s;
+        transition: all .3s ease;
         &:hover {
            
             transform: scale(105%);
@@ -41,7 +40,19 @@
         }
     }
     .post-block-title {
-        font-size: larger;
+        font-size: large;
+    }
+    @media screen and (max-width: 991px) {
+      .post-block {
+        padding: 0 1rem 0 .5rem;
+        min-width: calc(50% - 1rem);
+      }
+      a {
+        max-height: 80%;
+      }
+      .post-block-title {
+        font-size: medium;
+      }
     }
 
 

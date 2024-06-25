@@ -8,6 +8,8 @@ import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
 
+import Album from '../../components/index/Album.svelte';
+import AlbumContainer from '../../components/index/AlbumContainer.svelte';
 import Card from '../../components/svelte/Card.svelte';
 import Carousel from '../../components/svelte/Carousel.svelte';
 
@@ -32,10 +34,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 	<head>
 	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<style lang="scss">
-	main {
-		width: 960px;
 
-	}
 	section {
 		margin-bottom: 2rem;
 		z-index: 1;
@@ -51,11 +50,7 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 	}
 	.filter a:hover {
 		text-decoration: underline;
-		color: var(--accent);
-	}
-	.dark .filter a:hover {
-		text-decoration: underline;
-		color: var(--dark-mode-link-hover);
+		color: var(--link-hover);
 	}
 			
 	.filter {
@@ -96,38 +91,23 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 					</section>
 				</div>
 			{ categorizedPosts.length > 0 ? (
-				<div class="categories">
+				<AlbumContainer>
 					{categorizedPosts.map((category:any, index) => (
-						<section id={`category_${index}_section`} class="carousel_wrapper">
-							<h3> 
-								<a href={`/page/${category.name}/1`} class="category-name">
-									
-									<Image 
-									src={`/${category.name}-category-img.png`} 
-									width={720} height={360} 
-									alt={`${category.name}`} 
-									class={'category-img'}
-									loading={"lazy"}
-									transition:name={`/${category.name}-category-img.png`}/>
-
-								</a>
-							</h3>
-							
-							
-							<div id="playlist" class="carousel_content" style="margin-top: -1rem;  position: relative; left: .5rem; font-size: 1rem;">
-								<p>Title: <strong>{category.name}</strong> </p>
-								<p style="transform: translateY(-.9rem);">Description: </p>
-								<p style="transform: translateY(.9rem);">Number of lessons: {category.posts.length} </p>
-								<p>Last updated: </p>
-								
-								<p style="transform: translateY(-.9rem);"> Authors: @E.L Maela ( add to frontmatter of each post)</p>
-
-
-								
-							</div>
-						</section>
+						<Album
+						albumName={category.name}
+						linkToPlaylist={`/page/${category.name}/1`}
+						numPosts={category.posts.length}>		
+							<Image 
+								src={`/${category.name}-category-img.png`} 
+								width={720} height={360} 
+								alt={`${category.name}`} 
+								class={'category-img'}
+								loading={"lazy"}
+								transition:name={`/${category.name}-category-img.png`}/>
+						</Album>	
 						))}
-				</div>
+
+				</AlbumContainer>
 			
 				) : <p>No categories found</p> }
 			</div>
@@ -144,51 +124,35 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
 
-
-		
 		
 		.carousel_wrapper {
 			display: flex;
 			flex-direction: column;
 			border-radius: 1rem;
 			background: inherit;
-			box-shadow: 0px 0px 4px rgba(0, 0, 0, .5);
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+			background: rgba(#f1f1f1, 1);
 			transition: all .3s;
 			&:hover {
-				box-shadow: 0px 0px 8px rgba(0, 0, 0, 1);
+				box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
 				transform: scale(1.05);
 			}
-			.category-img {
-				border-bottom-left-radius: 0%;
-				border-bottom-right-radius: 0%;
-			}
-			
-
-			#playlist {
-				
-				display: block;
-				
-				
-				li {
-					padding: 0;
-					margin: -1rem;
-
-					
-				}
-			}
-			
+						
 		}
 	}
-	
-
 	.category-name {
 		color: inherit; 
 		text-decoration: none;
 		&:hover {
-			color: var(--accent);
+			color: var(--link-hover);
 		}
 	}
-
+	@media screen and (max-width: 600px) {
+		.categories {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 	
 </style>
 

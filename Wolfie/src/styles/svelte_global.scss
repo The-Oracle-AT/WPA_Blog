@@ -1,0 +1,11 @@
+
+.album-container {
+    &:hover {
+
+        img {
+            border-bottom-left-radius: 0rem;
+            border-bottom-right-radius: 0%;
+        }
+    
+    }
+}

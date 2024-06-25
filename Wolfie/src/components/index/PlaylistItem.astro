@@ -1,18 +1,40 @@
 ---
-import "../../styles/global.scss"
-import FormattedDate from "../FormattedDate.astro"
-const { title, postDate, urlParam, description, cardHeight, cardWidth, bgColor, postTags} = Astro.props
+import "../../styles/global.scss";
+import FormattedDate from "../svelte/FormattedDate.svelte";
+const { post, cardHeight, cardWidth, bgColor} = Astro.props
+const colorOpacity = 0.3;
+
+const colors:any = {
+    'Personal development': `rgba(53, 55, 75, ${colorOpacity})`,   // yellow
+    'Alter ego': `rgba(255, 0, 0, ${colorOpacity})`,               // red
+    'Role model': `rgba(0, 0, 255, ${colorOpacity})`,              // blue
+    'Guidance': `rgba(80, 114, 123, ${colorOpacity})`,                // green
+    'Mentorship': `rgba(255, 165, 0, ${colorOpacity})`,            // orange
+    'Critical thinking': `rgba(138, 43, 226, ${colorOpacity})`,    // violet
+    'Self awareness': `rgba(128, 0, 128, ${colorOpacity})`,        // purple
+    'concentration': `rgba(173, 216, 230, ${colorOpacity})`,       // lightblue
+    'Discipline': `rgba(128, 128, 128, ${colorOpacity})`,          // grey
+    'Learning': `rgba(255, 192, 203, ${colorOpacity})`,            // pink
+    'Study': `rgba(255, 0, 255, ${colorOpacity})`,                 // magenta
+    'Exam and test': `rgba(120, 160, 131, ${colorOpacity})`           // brown
+};
+
+
+
 ---
 <html>
     <div class="playlist-item">
         <div class="playlist-header" id="playlist-header">
-            <a href={urlParam} ><p class="playlist-title"><strong>{title}</strong></p></a>
-            
-            
+            <p class="playlist-title"><strong><a href={`/page/category/${post.slug}/`} title={`${post.data.title}`}>{post.data.title}</a></strong></p> 
         </div>
-        {description && (<p class="playlist-item-descr">{description}</p>)}
-        <div class="tags-n-date">
-            <p class="postDate">{postDate != null ? (<FormattedDate date={postDate}/>) : null}</p>
+        <div class="post-tags" style="display:flex; flex-direction: row;">
+            {post.data.tags.map((tag: string) => (
+                <p><a class="tag" style={`background: ${colors[tag]}; `} href={`/page/tags/${tag}`}>{tag}</a></p>
+            ))}
+        </div>
+        {post.data.description && (<p class="playlist-item-descr">{post.data.description}</p>)}
+        <div class="others-n-date">
+            <p class="postDate">{post.data.pubDate != null ? (<FormattedDate date={post.data.pubDate}/>) : null}</p>
          </div>
     </div>
 
@@ -22,90 +44,123 @@ const { title, postDate, urlParam, description, cardHeight, cardWidth, bgColor, 
 
 <style lang="scss" define:vars={{cardHeight, cardWidth, bgColor}}>
     .playlist-item {
+
         height: auto;
         height: var(--cardHeight);
         border-radius: .5rem;
-        background: inherit;
         padding: 0 .5rem 0 .5rem;
         position: relative;
-        
-        
+        background: #f1f1f1;
+		border-radius: .5rem;
         .playlist-header {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: -.5rem;
-        }  
+            height: fit-content;
+            
+            
+        } 
+        a {
+            text-decoration: none; 
+            color: inherit;
+            width: fit-content;
+       
+        } 
     }
     .playlist-title {
-                
-                font-size: medium;
-                padding-bottom: 1%;
-                background: linear-gradient(#000 0 0);
-                display: inline-block;
-                background-position: 0 100%; /*OR bottom left*/
-                background-size: 0% 2px;
-                background-repeat: no-repeat;
-                transition: background-size 0.3s, background-position 0s 0.3s;
+        
+        font-size: medium;
+        padding-bottom: 1%;
+        background: linear-gradient(#000 0 0);
+        display: inline-block;
+        max-width: 20rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-size: 0% 2px;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-position 0s 0.3s, background-size 0.3s;
  
-                &:hover {
-                    background-position: 100% 100%; /*OR bottom right*/
-                    background-size: 100% 2px;
-                }
-            }
-    a {
-       text-decoration: none; 
-       color: inherit;
-       width: fit-content;
-       
+        &:hover {
+            background-size: 100% 2px;
+            background-position: 100% 100%; 
+            
+        }
     }
-    .tags-n-date {
+
+    .others-n-date {
         display: relative;
         font-size: small;
-        position: absolute;
         bottom: -3%;
         right: 1%;
+        width: 100%;
         
         .postDate {
             border-radius: .3rem;
+            position: absolute;
+            width:fit-content;
             border: 1px solid rgba(orange, 0.5);
-            padding: 0 .1rem 0 .1rem
+            padding: 0 .1rem 0 .1rem;
+            justify-self: flex-end;
+            bottom: -3%;
+            right: 1%;
         }
     }
     
     .playlist-item-descr {
         font-size: medium;
+        transform: translateY(-3rem);
+        line-clamp: 4;
     
     }
+    .post-tags {
+        transform: translateY(-2.3rem);
+    }
+    .tag {
+        max-height: fit-content;
+        font-size: small;
+        border-radius: .2rem;
+        border: 2px solid #000;
+        padding-left: .1rem;
+        padding-right: .1rem;
+        margin-left: .1rem;
+        display: inline-block;
+        max-width: 8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;  
+        background: rgba(var(--tag-color));   
+    }
     @media screen and (max-width: 600px){
-        a {
-            font-size: 1.563rem;
-            
-        }
         .playlist-title {
-            font-size: 1rem;
+            font-size: medium;
         }
         .playlist-item-descr {
-            font-size: small;
+            font-size: medium;
         }
     }
     .dark {
         .playlist-title {
-                
-                font-size: medium;
-                
-                padding-bottom: 1%;
-                background: linear-gradient(#ffffff 0 0);
-                display: inline-block;
-                background-position: 0 100%; /*OR bottom left*/
-                background-size: 0% 2px;
-                background-repeat: no-repeat;
-                transition: background-size 0.3s, background-position 0s 0.3s;
+            
+            display: inline-block;
+            background: linear-gradient(#f3f3f3 0 0);;
+            background-position: 0 100%; /*OR bottom left*/
+            background-size: 0% 2px;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s, background-position 0s 0.3s;
  
                 &:hover {
                     background-position: 100% 100%; /*OR bottom right*/
                     background-size: 100% 2px;
                 }
             }
+            .playlist-item {
+			    background: rgba(#040D12, 1);
+			
+		}
+        .tag {
+            border: 2px solid #333;
+        }
         
     }
+    
+ 
 </style>

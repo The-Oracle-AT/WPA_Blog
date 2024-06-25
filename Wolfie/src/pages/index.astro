@@ -1,19 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { ViewTransitions } from "astro:transitions";
 import BaseHead from '../components/BaseHead.astro';
+import CTAButton from '../components/CTAButton.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import HeaderLink from '../components/HeaderLink.astro';
 import SiteName from '../components/SiteName.astro';
-import NewFeatures from '../components/index/NewFeatures.astro';
-import FormattedDate from '../components/svelte/FormattedDate.svelte';
+import AlbumContainer from '../components/index/AlbumContainer.svelte';
+import ShortCard from '../components/index/ShortCard.svelte';
+import StackedCardList from '../components/index/StackedCardList.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import "../styles/global.scss";
 
 const latest_posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-).reverse().slice(0, 4);
+).reverse().slice(0, 7);
 
 
 ---
@@ -22,75 +24,136 @@ const latest_posts = (await getCollection('blog')).sort(
 <html lang="en">
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<ViewTransitions />
+		
     </head>
+	
     <body>
         <Header title={SITE_TITLE} />
-        <main>
-			<section>
+		<section class="hero" style="color:white">
+			<div class="container">
 				<h1><SiteName /></h1>
-				<p>The only way to get better is to start acting better!</p>
+				<p><b>Transform, Thrive, Succeed!</b></p>
+				<p style="font-size: medium;">Your Guide to Self-Mastery and Achieving Greatness ihn a way that you can be proud of.</p>
+				<div class="cta-buttons">
+					<a href="/blog/">Get Started</a>
+					<a href="#start">Learn More</a>
+				</div>
+			</div>
+			
+		</section>
+        <main>
+			
+			<span id="start"></span>
+			<section class="the-why">
+				<div class="main-content container">
+					<h2>Discover the Power of Self-Mastery</h2>
+					<p>At LearnBetter!, we believe that personal growth is a key step to achieving any goal you set for yourself. Our platform is dedicated to providing you with the tools and resources you need to cultivate the power of your mental facilities, control over ones' self, and self-awareness. Whether you're looking to refine your professional skills or embark on a journey of self-discovery, LearnBetter! is here to guide you every step of the way.</p>
+					<div class="main-content-header" style="width: 100%; text-align: center; padding: 4rem 0 0rem 0;">
+						<p style="color: grey; ">What we offer</p>
+						<hr style="transform: translateY(-1rem)"/>
+					</div>
+					<p style="margin-top: 0rem;">Our comprehensive blog offers insightful articles on a wide range of topics, including:</p>
+					<div class="content-child">
+						<div>
+							<div><strong>Critical Thinking and Adaptability</strong><p>Learn how to analyze situations and adjust your strategies to thrive in any environment.</p></div>
+							<Image src='/landing-img4.jpeg'
+								width={240}
+								height={240}
+								alt={'Critical Thinking and Adaptability'} />
+
+						</div>
+						<div>
+						<div><strong style="color: rgb(#0000ff, 40%);">The Alter Ego</strong><p>Create and embrace a powerful version of yourself that embodies your highest aspirations and strengths.</p></div>
+							<Image src='/landing-img3.jpeg'
+							width={240}
+							height={240}
+							alt={'The alter ego'} />
+						</div>
+						<div>
+						<div><strong>Self-Awareness</strong> <p>Understand the foundation of personal growth and how to harness it to exceed your expectations.</p></div>
+							<Image src='/landing-img2.jpeg'
+							width={240}
+							height={240}
+							alt={'Self-awareness'} />
+						</div>
+					</div>
+				</div>
+				</div>
 			</section>
-		
-			<section>
-				<h2>What's New?</h2>
-				<ul>
-					<h3>Newest Articles</h3>
-					<!-- Computer update layout -->
-					<article class="articles-update-cards" id="articles-update-cards">
+			<section class="features" id="features" style="margin-top: 4rem;">
+				<div class="container">
+					<div class="features-header" style="width: 100%; text-align: center">
+						<p style="color:grey;">Get access to</p>
+						<hr style="transform: translateY(-1rem);"/>
+					</div>
+					<div class="feature">
 						
-						{latest_posts.map((post) =>(
-							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title">{post.data.title}</span>
-								<p class="desc">{post.data.description}</p>
-								<p class="date"><FormattedDate date={post.data.pubDate} /></p>
-							</div></a>
-						)) }
-					</article>
-					<!-- Mobile phoone update cards -->
-					<article class="articles-update-cards-m" id="articles-update-cards-m">
+						<h2>High-quality Content</h2>
+						<AlbumContainer>
+							
+							<ShortCard>
+								<li><b>Tested Principles</b></li>
+								<p> 
+									We ensure the principles and knowledge we impart are practically applicable to achieve the promised results.
+								</p>
+							</ShortCard>
+							<ShortCard>
+								<li><b>Thorough Verification</b></li>
+								<p>We conduct extensive research on the topics we cover to verify our findings before publishing.</p>
+							</ShortCard>
+							<ShortCard>
+								<li><b>Expert Insights</b></li>
+								<p>High-quality articles and guides derived from expert documents and our experiences.</p>
+							</ShortCard>
+						</AlbumContainer>
 						
-						{latest_posts.map((post) =>(
-							<a href={`/blog/${post.slug}`}><div class="card"><span class="article-title-m">{post.data.title}</span>
-								<p class="desc-m">{post.data.description}</p>
-								<p class="date-m"><FormattedDate date={post.data.pubDate} /></p>
-							</div></a>
-						)) }
-					</article>
-					<div class="n-features">
+					</div>
+					<div class="feature">
 						
-						<NewFeatures /> </div>                   
-				</ul>
+						<h2>Interactive Courses</h2>
+						<p>Engaging courses designed to boost your skills and keep you focused on what you are learning. Many of the lessons have an actionable instruction that you can apply right away. From mental exercises to physical ones- not the intense kind 😉, all of which are designed to help you gain control over your mental and physical faculties.</p>
+					</div>
+					<div class="feature">
+						<h2>Community Support</h2>
+						<p>Join a community of learners and share knowledge.</p>
+					</div>
+				</div>
 			</section>
 			
-		
-			<section class="long-term-goals-summary" id="long-term-goals-summary">
-				<h2>Long Term Goals</h2>
-				
-				<ul>
-					<li>Making the site an interactive Platform(3-8 months plan)</li>
-					<li>Adding Communities to allow interaction between users(6 - 12 months plan) </li>
-					
-				</ul>
+			<section class="latest-posts">
+				<div class="features-header" style="width: 100%; text-align: center">
+					<p style="color:grey;">Explore</p>
+					<hr style="transform: translateY(-1rem);"/>
+				</div>
+				<h2>Our latest posts</h2>
+				<StackedCardList allCards={latest_posts} />
 			</section>
+			<section class="cta">
+				<div class="container">
+					<h2>Ready to Start Learning?</h2>
+					<p>Explore our <span><HeaderLink href="/blog">blog</HeaderLink></span>, and stay tuned for our upcoming content. We're here to support you, offering practical guidance for your journey to personal growth. Be part of LearnBetter!—where potential meets practicality.</p>
+					<p>Join our platform today and get access to top-notch content.</p>
+					<div style="text-align: center; margin-top: 4rem;">
+						
+						<CTAButton text="Join Now" link="/register"/>
+					</div>
+					
+				</div>
+			</section>
+			
 		
 			<section>
 				<h2>Testimonials</h2>
 				<blockquote>
 					<p>(No Testimonials yet, project is still in its early launch)</p>
 				</blockquote>
-				
-			</section>
-		
-			<section>
-				<h2>Get better Today!</h2>
-				<p>Ready to direct your efforts towards meaningful change? Explore our <span><HeaderLink href="/blog">blog</HeaderLink></span>, and stay tuned for our upcoming content. We here to support you, offering practical guidance for your journey to personal growth. Be part a of LearnBetter!—where potential meets practicality.</p>
 			</section>
 			
 			<section >
 				<h2>Get in Touch</h2>
-				<p>Have a question or comment? We’d love to hear from you. Send us a message and we’ll respond as soon as possible.</p>
-				<p>Please <b>review</b> our content using this form: <a href="https://forms.gle/GTsujUFxCj6Dkd9HA">LearnBetter review form</a></p>
-				<p>For general inquiries, please email <a href="mailto:lapanemaela140403@gmail.com">learnbetter!inquiries@gmail.com</a></p>
+				<p>Have a question or comment? We’d love to hear from you. Send us a message and we’ll respond as soon as possible.<br/>
+				<br/>Please <b>review</b> our content using this form: <a href="https://forms.gle/GTsujUFxCj6Dkd9HA">LearnBetter review form</a>
+				<br/>For general inquiries, send an email to <a href="mailto:lapanemaela140403@gmail.com">LearnBetter! gmail</a></p>
 			</section>
         </main>
 		
@@ -99,194 +162,145 @@ const latest_posts = (await getCollection('blog')).sort(
 </html>
 
 <style lang="scss">
-	main {
-	}
-	$colors: red, blue, green, yellow, purple, pink, orange, brown;
-	span:not(.article-title) {
-		background-color: rgba(78, 175, 255, 0.3);
-		border-radius: 0.5em;
-		padding: 0rem 0.5rem;
-		a {
-			text-decoration: none;
-			color: #333;
-			
-		}
-		&:hover {
-			background-color: rgba(78, 175, 255, 0.8);
-		}
-
-	}	
-	section:nth-last-child(1) a {
-		
-		color: black;
-		background-color: rgba(78, 175, 255, 0.3);
-		border-radius: 0.5em;
-		padding: 0.3rem 0.5rem;
-
-		&:hover {
-			background-color: rgba(78, 175, 255, 0.8);
-		}
+	$colors: ( #3151A1, #b35918, #7a46a0, #2871a1, #b33b2d, #239a57, #b3960c);
+	@function borderColor($index) {
+		@return nth($colors, $index + 1);
 	}
 	a {
 			text-decoration: none;
-	}
-	.articles-update-cards-m {
-		display: none;
-	}
-	.articles-update-cards {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		flex-wrap: nowrap;
-		overflow-x: hidden;
-		padding: 3rem;
-
-		padding-bottom: 5rem;
-		transition: .3s ease;
-		transform: translateX(-3rem);
-	
-
-		
-		a {
-			background-color: azure;
-			color: black;
-			min-width: 250px;
-			width: 13rem;
-			height: 10rem;
-			transition: 0.3s ease;
-			
-			border-radius: 1.5rem;
-			margin-top: 2rem;
+			color: inherit;
+			background-color: rgba(78, 175, 255, 0.3);
+			border-radius: 0.5em;
+			padding: 0.3rem 0.5rem;
 
 			&:hover {
-				transform: translateY(-1rem);
-
-				&~a {
-					transform: translateX(10rem);
-				}
-			}
-			&:not(:first-child) {
-				margin-left: -10rem;
+				background-color: var(--link-hover);
 			}
 		}
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 
-		.card {
+		section {
+			margin-bottom: 8rem;
+		}
+		
+	}
+	.feature {
+		margin-bottom: 4rem;
+	}
+		
+
+	section {
+		width: 100%;
+		display: flex;
+		flex-direction: column;	
+		.cta, .cta-buttons {
+				display: flex;
+				flex-direction: column;
+				width: fit-content;
+				align-items: center;
+				gap:.2rem;
+				a {
+					width: 150%;
+					text-align: center;
+					border-radius: 2rem;
+
+				}
+				
+				
+			}
+	}
+	.hero {
+			display: flex;
+			flex-direction: column;
+			
+			height: 94svh;
+			background-image: url('/hero-img-3.jpeg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+			background-position-x: center;
+			background-position-y: center;
+			
+			background-color: white;
+			.container {
+				height: 110%;
+				margin-bottom: -.1rem;
+				backdrop-filter: blur(01rem);
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+			}
+	}
+	.feature:first-child .grid{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		
+	}
+
+	h2 {
+			font-size: xx-large;
+		}
+	.main-content {
+		font-size: large;
+	}
+	.content-child {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		gap: 2rem;
+		
+		
+		div {
 			width: 100%;
-			height: 100%;
-			border-radius: 1.5rem;
-			padding: 1rem;
+			font-size: medium;
+			margin-top: 2rem;
 			display: flex;
-			background-color: azure;
-			position: relative;
-			flex-direction: column;
+			flex-direction: row;
+			justify-content: space-evenly;
+			@for $i from 0 through length($colors) - 1 {
+			&:nth-child(#{$i + 1}) div strong {
+				color: borderColor($i);
+				
+				}
+			}
+			div {
+				max-width: 30rem;
+				padding: 2rem;
+				display: flex;
+				flex-direction: column;
+			}
 			
-			box-shadow: -1rem 0px 2rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-
-			.date {
-				font-size: 0.8rem;
-				position: absolute;
-				bottom: 0.5rem;
-				right: 0.5rem;
-				color: grey;
+			
+			
+		}
+		div:nth-child(even) {
+				flex-direction: row-reverse;
+				
 			}
 
-		}
 		
-		
-
-		@each $color in $colors {
-			a:nth-child(#{length($colors)}n + #{index($colors, $color)}) > .card {
-				border-left: 5px solid $color;
-				&:hover {
-					border-top: 3px solid $color;
+	}
+	@media screen and (max-width: 600px) {
+		.content-child {
+			div {
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				&:nth-child(even) {
+					flex-direction: column;
 				}
 			}
 		}
-		.desc {
-			font-size: 0.8rem;
-		}
-		&::-webkit-scrollbar-track {
-			background-color: #7070ea;
-		}
-		&::-webkit-scrollbar {
-			height: 0.5rem;
-			background-color: #7070ea;
-		}
-		&::-webkit-scrollbar-thumb {
-			background-color: #7070ea;
-			border-radius: 1rem;
-			box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-		}
-		&::-webkit-scrollbar-thumb:hover {
-			background-color: #5f5fef;
-		}
-	
-
 	}
-	.dark {
-			.card {
-				box-shadow: 0px 0px 5px rgba(150, 149, 181, 0.5);
-				color: white;
-				background-color: #333;
-			}
-		}
-	@media  screen and 	(max-width: 680px) {
-		.articles-update-cards{
-			display: none;
-		}
-		.articles-update-cards-m {
-			display: flex;
-			width: 80svw;
-			flex-direction: column;
-			color: black;
-			
-			.article-title-m {
-				color: black;
-				background-color: azure;
-			}
-			.desc-m {
-				font-size: .9rem;
-				color: #333;
-				
-			}
-			.date-m {
-				font-size: .8rem;
-				color: grey;
-				
-			}
 
-				
-			
-			@for $i from 1 through length($colors) {
-				a:nth-child(#{length($colors)}n + #{$i}) {
-					padding-left: .5rem;
-					background-color: azure;
-					border-radius: 1rem;
-					margin-top:1rem;
-					border-left: 5px solid nth($colors, $i);
-					text-decoration: none;
-					box-shadow: -1rem 0px 2rem rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-					
-					transition: transform 0.3s ease;
-					&:hover  {
-						
-						transition: transform 0.5s ease;
-						border-top: 5px solid nth($colors, $i);
-						transform: scale(1.05);
-					}
-					
 
-				}
 
-			}
-		}
-		.n-features {
-			margin-top: 2rem;;
-			transform: translateX(-1rem);
-		}
-		.dark .card {
-			box-shadow: none;
-		}
-	}
 
 </style>

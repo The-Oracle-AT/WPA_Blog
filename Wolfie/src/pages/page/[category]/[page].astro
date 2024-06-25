@@ -33,34 +33,33 @@ const params = Astro.params;
 
 ---
 <!doctype html>
-<html lang="en">
+
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 
 	<body>
 		<Header />
-		<main style="display: flex; flex-direction: column;">
+		<main style="display: flex; flex-direction: column; align-items: center;">
 			<section style="margin-bottom: 1rem;">
 				<Image src={`/${params.category}-category-img.png`} 
-				width={1020} height={510} 
+				width={510} height={510} 
+				
 				alt={`${params.category}`} 
 				class={'category-img'}
-				transition:name={`/${params.category}-category-img.png`}/>
+				transition:name={`/${params.category}-category-img.png`}
+				decoding="async"
+  				loading="lazy"/>
 			</section>
 			<section>
 				<Playlist>
 					{
 						page && page.data.map((post, index) => (
-							<div class="item-of-playlist">
 									<PlaylistItem
-									title = {post.data.title}
-									urlParam = {`/page/category/${post.slug}/`}
-									postDate={ post.data.pubDate}
-									description={post.data.description}
-									cardHeight={"15rem"}
-									postTags={post.data.tags} />	
-							</div>
+									post={post}
+									cardHeight={"18rem"}
+									 />
+
 						))
 					}
 				</Playlist>
@@ -74,7 +73,7 @@ const params = Astro.params;
 		</main>
 		<Footer />
 	</body>
-</html>
+
 <style lang="scss">
 	section {
 		&:has(.category-img){
@@ -82,21 +81,19 @@ const params = Astro.params;
 			justify-content: center;
 			.category-img {
 				width: 100%;
+				max-width: calc(100% - 2rem);
 			}
 		}
 	}
-	.item-of-playlist {
-		background: #f1f1f1;
-		border-radius: 2rem;
-		height: fit-content;
-		
-	}
-	.dark {
-		.item-of-playlist {
-			background: rgba(black, 1);
+	@media screen and (min-width: 900px) {
+		section:first-child {
+			max-width: 900px;
+			display: flex;
 			
 		}
 	}
+
+
 
 
 </style>

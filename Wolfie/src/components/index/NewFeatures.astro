@@ -30,42 +30,34 @@ const updates = {
 }
 ---
 <div class="new-features">
-<h3>New Features</h3>
-<p>We are working tirelessly to improve your experience. Due to this we often roll-out updates to make the site easier to use, morec secure and more stable. All changes to the website will be listed in this section.</p>
+	<h3>New Features</h3>
+	<p>We are working tirelessly to improve your experience. Due to this we often roll-out updates to make the site easier to use, morec secure and more stable. All changes to the website will be listed in this section.</p>
 	<div class="items">
 		{
 			updates.info.map((item: any) => {
 				return (
-					<a href={item.linkToChange} class="item">
+					<div class="item">
 						<h4>{item.title}</h4>
 						<p class="desc">{item.desc}</p>
-						<p class="date">{item.date}</p>
-					</a>
+						
+					</div>
 				)
 			})
 		}
-
-		
 	</div>
 </div>
 
 <style lang="scss">
 	.new-features {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+
 
 		.items {
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-			justify-content: center;
+			
 		}
 		.item {
-
-			max-width: 15rem;
-			max-height:min-content;
-
 			display: flex;
 			flex-direction: column;
 			border-radius: 1rem;
@@ -73,57 +65,22 @@ const updates = {
 			margin: 1rem;
 			text-decoration: none;
 			color: inherit;
-
-			box-shadow: 0 0 0.5rem rgba(0,0,0,0.5);
-			backdrop-filter: blur(15px);
-
-		}
-		$colors: red, blue, green, yellow, purple, pink, orange, brown;
-		@keyframes turnOnBorderColors {
-			25% {
-				
-			}
-			
-		}
-
-		@each $color in $colors {
-		$n: index($colors, $color); // Get the index of the current color
-
-		.item:nth-child(#{length($colors)}n + #{$n}) {
-			border-top: 2px solid rgba($color, 0.8);
-			
-			@keyframes turnOnBorderColors {
-			40% {
-				border-right: 2px solid rgba(nth($colors, $n), 0.8);	
-			}
-			70% {
-				border-bottom: 2px solid rgba(nth($colors, $n), 0.8);
-			}
-			100% {
-				border: 2px solid rgba(nth($colors, $n), 0.8);
-			}
-			}
-
-			&:hover {
-			animation: turnOnBorderColors 3s ease-out ;
+			h4 {
+				background: linear-gradient(90deg, rgba(#040D12, 1), transparent) bottom;
+				background-size: 100% 2px;
+				background-repeat: no-repeat;
 			
 			}
 		}
-		}
 
-		.date {
-			font-size: 0.8rem;
-			color: grey;
-			align-self: flex-end;
-			
-		}
+
 		.desc {
 			font-size: 0.9rem;
 			
 			margin: 0.5rem 0;
 		}
 	}
-	@media screen and (max-width:680px) {
+	@media screen and (max-width:600px) {
 		.items {
 			justify-content: flex-start;
 		}

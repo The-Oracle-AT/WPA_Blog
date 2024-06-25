@@ -1,0 +1,72 @@
+---
+const { text, link} = Astro.props
+---
+
+<div class="cta">
+            <a href={`${link}`} class="join-now-button">{text}</a>
+</div>
+
+<style>
+ 
+    .join-now-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: 2px solid var(--link-hover);
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+    background: linear-gradient(45deg, #2337ff, #ff4500);
+   
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    
+}
+
+.join-now-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #2337ff, #ff4500);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.join-now-button:hover::before {
+    left: 0;
+}
+
+.join-now-button:hover {
+    border: 2px solid #ff4500;
+    color: white;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+}
+
+@keyframes textGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.join-now-button {
+    animation: textGradient 3s ease infinite;
+    background-size: 200% 200%;
+}
+
+</style>

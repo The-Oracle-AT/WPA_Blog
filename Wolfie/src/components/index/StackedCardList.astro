@@ -1,0 +1,81 @@
+---
+import FormattedDate from "../svelte/FormattedDate.svelte"
+
+const { allCards} = Astro.props
+---
+<html>
+    {allCards && 
+        <div>
+           
+            {allCards.slice(0, 7).map((card: any) => (
+               <article> <a href={`/page/category/${card.slug}`}>
+                    <h6>{card.data.title}</h6>
+                    <p class="desc">{card.data.description}</p>
+                    <p class="date"><FormattedDate date={card.data.pubDate}/></p>
+                </a></article>
+            ))}
+        </div>
+        }
+
+</html>
+
+<style lang="scss">
+$colors: ( #1abc9c, #9b59b6, #e67e22, #3498db,  #e74c3c, #2ecc71, #f1c40f);
+@function borderColor($index) {
+  @return nth($colors, $index + 1);
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+div {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    padding: 2rem;
+    
+}
+article {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 250px;
+    width: 400px;
+    height: 250px;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: -.5rem .1rem .5rem rgba(black, .5);
+    transition: all .3s ease;
+    background-color: var(--card-color);
+
+    @for $i from 0 through length($colors) - 1 {
+      &:nth-child(#{$i + 1}) {
+        border-left: 2px solid borderColor($i);
+      }
+    }
+    
+
+    &:hover {
+        transform: translateY(-1rem);
+        box-shadow: -1rem 1rem 1rem rgba(black, .5);
+
+        ~article {
+            transform: translateX( 5rem);
+        }
+    }
+}
+article:not(:first-child) {
+    margin-left: -5rem;
+}
+p {
+    font-size: medium;
+}
+.dark {
+    article {
+        box-shadow: -1rem 0 1rem black;
+        &:hover {
+            box-shadow: -1rem 1rem 1rem black;
+        }
+    }
+}
+</style>

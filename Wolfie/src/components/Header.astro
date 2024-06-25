@@ -41,7 +41,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 		margin: 0;
 		height: 4rem;
 		padding: 0 0rem;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		box-shadow: 0 2px 8px rgba(var(--text-color), 5%);
 		z-index: 100;
 		position: sticky; 
 		top:0%;
@@ -65,13 +65,13 @@ import ThemeIcon from "./ThemeIcon.astro";
 		}
 	nav a {
 		padding: .5em 0.5em;
-		color: var(--black);
+		color: var(--text-color);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
 	}
 	nav a.active {
 		text-decoration: none;
-		border-bottom-color: var(--accent);
+		border-bottom-color: var(--link-hover);
 	}
 	.social-links,
 	.social-links a {
@@ -86,8 +86,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 		
 
 		li {
-			margin: 0;
-			padding: 0;
+			
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -120,18 +119,15 @@ import ThemeIcon from "./ThemeIcon.astro";
 		.nav-bar {
 			flex-direction: column;
 			position: relative;
-			padding-top: 1rem;
+			padding-top: 0;
+			
 			li {
 				&:first-child {
 					display: block;
 					justify-content: flex-end;
 					align-self: flex-end;
 					z-index: 2;
-					padding-right: 2rem;
-					
-					
-					
-					
+					padding-right: 2rem;	
 				}
 				&:not(:first-child) {
 					display: none;
@@ -166,13 +162,10 @@ import ThemeIcon from "./ThemeIcon.astro";
 		.topnav.responsive ul {
 			position: absolute;
 			display: flex;
-			margin-right: -1rem;
-			
-			top:1rem;
-			
-			
-			
-			box-shadow: 0 10px 10px rgba(var(--black), 80%);
+			margin-right: -1rem;	
+			top:0rem;
+			box-shadow: 0 10px 10px rgba(var(--text-color), 50%);
+			padding-top: 1rem;
 			li:not(:first-child) {
 				float: none;
 				display: block;
@@ -181,11 +174,11 @@ import ThemeIcon from "./ThemeIcon.astro";
 			}
 			li:first-child {
 				display: flex;
-				transform: translateY(-.2rem);
+				transform: translateY(0);
 				justify-content: flex-end;
 				align-self: flex-end;
 				position: relative;
-				left: -1rem;
+				
 				transition: all .3s ease-in;
 				width: fit-content;
 				

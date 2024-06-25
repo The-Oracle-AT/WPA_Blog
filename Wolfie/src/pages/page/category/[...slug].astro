@@ -3,9 +3,6 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Pagination from '../../../components/Pagination.svelte';
 import BlogPost from '../../../layouts/BlogPost.astro';
 
-
-
-
 const posts = await getCollection('blog');
 type Props = CollectionEntry<'blog'>;
 if(!posts) {
@@ -19,19 +16,27 @@ const { slug } = Astro.params;
 
 let prevSlug = null
 let nextSlug = null
+let nextCategory = null
+let prevCategory = null
 const index = posts.findIndex((page) => page.slug === slug);
 console.log('read')
 const numPosts = posts.length
 if(index === 0) {
   prevSlug = null
+  prevCategory = null
   nextSlug = posts[index + 1].slug
+  nextCategory = posts[index + 1].data.category
   
 } else if ( index === numPosts -1) {
   nextSlug = null
+  nextCategory = null;
   prevSlug = posts[index - 1].slug
+  prevCategory = posts[index - 1].data.category
 } else {
     prevSlug = posts[index - 1].slug
     nextSlug = posts[index + 1].slug
+    prevCategory = posts[index - 1].data.category
+    nextCategory = posts[index + 1].data.category
 }
 console.log(index, numPosts)
 console.log("prev:",prevSlug,"\nnext:", nextSlug)

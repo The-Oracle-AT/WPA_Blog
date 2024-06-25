@@ -18,7 +18,7 @@
       if (nextButton) {
         nextButton.addEventListener('click', (e) => {
           e.preventDefault();
-          x = content.clientWidth + content.scrollLeft + 15;
+          x = content.clientWidth + content.scrollLeft -15;
           content.scroll({
             left: x,
             behavior: 'smooth',
@@ -29,7 +29,7 @@
       if (prevButton) {
         prevButton.addEventListener('click', (e) => {
           e.preventDefault();
-          x = content.clientWidth - content.scrollLeft + 30;
+          x = content.clientWidth - content.scrollLeft - 15 ;
           content.scroll({
             left: -x,
             behavior: 'smooth',
@@ -110,13 +110,21 @@
     .carousel_wrapper {
       position: relative;
       width: 100%;
+      overflow-y: visible;
+      display: flex;
+      justify-content: center;
+      justify-self: center;
+     
       
     }
     .carousel_content {
       display: flex;
       overflow: hidden;
-      padding:0 1rem 0 1rem;
+      max-width: 60rem;
+      padding: 2rem .5rem 0 .5rem;
+      transform: translateY(-1rem);
       cursor: grab;
+      
     }
     .carousel_content.dragging {
       cursor: grabbing;
@@ -134,7 +142,7 @@
       pointer-events: all;
       background-color: red;
       width: 5rem;
-      min-height: 20rem;
+      min-height: 16rem;
       border: none;
       color: white;
       padding: 10px;
@@ -148,13 +156,13 @@
         }
       }
       &:first-child {
-        background: linear-gradient(90deg, transparent 10%, rgba(255, 255, 255, 0.2) 80%, transparent 10% );
+        background: rgba(0, 0, 0, 0);
         svg {
           transform: translate(-1rem, -.5rem);
         } 
       }
       &:nth-child(2) {
-        background: linear-gradient(270deg,  transparent 10%, rgba(255, 255, 255, 0.2) 80%,  transparent 10%);
+        background: rgba(0, 0, 0, 0);
         svg {
           transform: translate(1rem, -.5rem);
         }
@@ -176,14 +184,14 @@
       .carousel_controls button {
         
       &:first-child {
-        background: linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.2) 80%, transparent 10% );
+        background: rgba(0, 0, 0, 0);
         svg {
           transform: translate(-1rem, -.5rem);
         }
         
       }
       &:nth-child(2) {
-        background: linear-gradient(270deg,  transparent 10%, rgba(0, 0, 0, 0.2) 80%,  transparent 10%);
+        background: lrgba(0, 0, 0, 0);
         svg {
           transform: translate(1rem, -.5rem);
         }
@@ -197,12 +205,7 @@
 			}
 		}
 		}
-	@media screen and (max-width: 720px) {
-		.categories {
-			grid-template-columns: 1fr;
 
-		}
-	}
 
   </style>
   
