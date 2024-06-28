@@ -6,7 +6,7 @@
     import { fetchCompletedLessons } from "../../services/api/fetchCompletedLessons";
     import { synchronizeData } from "../../services/api/fetchDataFromServer";
     import { completedCategoriesStore, completedLessonsStore, setCompletedCategoriesStore, setCompletedLessonsStore } from "../../stores/coursesStores";
-    import Card from "../svelte/Card.svelte";
+   
         
     interface User {
         id: string;
@@ -54,20 +54,20 @@
         { completedLessons } "v"
         { completedCategories }
         <div class="progress">
-            <Card title="Progress">
+            
                 <p>Completed lessons indicator</p>
                 <p>In progess lessons</p>
-            </Card>
+            
         </div>
         <div class="points">
-            <Card title="points">
+            
                 <span>{progressData.points }</span>
-            </Card>
+            
         </div>
         <div class="tasks">
-            <Card title="Points">
+            
                 <p>Weekly points graph</p>
-            </Card>
+            
         </div>
         <!-- <div class="calendar">
             <Card title="Calendar">

@@ -1,17 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Footer from '../../components/Footer.astro';
-import Header from '../../components/Header.astro';
 
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
 
-import Album from '../../components/index/Album.svelte';
-import AlbumContainer from '../../components/index/AlbumContainer.svelte';
-import Card from '../../components/svelte/Card.svelte';
-import Carousel from '../../components/svelte/Carousel.svelte';
+import Album from '../../components/blog/Album.svelte';
+import AlbumContainer from '../../components/blog/AlbumContainer.svelte';
+import Card from '../../components/blog/Card.svelte';
+import Carousel from '../../components/blog/Carousel.svelte';
+import Layout from '../../layouts/Layout.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -25,16 +22,99 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
          name: category.charAt(0).toUpperCase() + category.slice(1),
      }
  });
-
  
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	<style lang="scss">
+<Layout>
+			<div class="filter">
+				<!-- <Search /> -->
+				
+				<a href="/page/tags/">
+				<svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+					<path d="M7 12L17 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+					<path d="M11 17H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
+				</svg>
+					Filter posts<a/>
+			</div><br/>
+			
+			<div id="courses">
+				<div>
+					<section id="course_section" class="carousel_wrapper">
+						
+						<div class="main-content-header" style="width: 100%; text-align: center; ">
+							<p style="color: grey; "><b>Latest Feed</b></p>
+							<hr style="transform: translateY(-1rem)"/>
+						</div>
+						
+						<Carousel client:load>
+							{
+								posts.map((post:any) => (
+									<Card post={post} transition:name={`${post.data.title}`}/>
+								))
+							}
 
+						</Carousel>
+					</section>
+				</div>
+			{ categorizedPosts.length > 0 ? (
+				<div class="main-content-header" style="width: 100%; text-align: center; margin-bottom: 1rem;">
+							<p style="color: grey; "><b>Chapters</b></p>
+							<hr style="transform: translateY(-1rem)"/>
+						</div>
+				<AlbumContainer>
+
+					{categorizedPosts.map((category:any, index) => (
+						<Album
+						albumName={category.name}
+						linkToPlaylist={`/page/${category.name}/1`}
+						numPosts={category.posts.length}>		
+							<Image 
+								src={`/${category.name}-category-img.png`} 
+								width={720} height={360} 
+								alt={`${category.name}`} 
+								class={'category-img'}
+								loading={"lazy"}
+								transition:name={`/${category.name}-category-img.png`}/>
+						</Album>	
+						))}
+
+				</AlbumContainer>
+			
+				) : <p>No categories found</p> }
+			</div>
+</Layout>
+
+<style lang="scss">
+	.categories {
+		display: grid;
+		width: 100%;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+
+		
+		.carousel_wrapper {
+			display: flex;
+			flex-direction: column;
+			border-radius: 1rem;
+			background: inherit;
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
+			background: rgba(#f1f1f1, 1);
+			transition: all .3s ease;
+			&:hover {
+				box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+				transform: scale(1.05);
+			}
+						
+		}
+	}
+	.category-name {
+		color: inherit; 
+		text-decoration: none;
+		&:hover {
+			color: var(--link-hover);
+		}
+	}
 	section {
 		margin-bottom: 2rem;
 		z-index: 1;
@@ -56,97 +136,8 @@ const categorizedPosts = uniqueCategories.map((category:any) => {
 	.filter {
 		display: flex;
 		flex-direction: column;
-	}	
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			
-			<div class="filter">
-				<!-- <Search /> -->
-				
-				<a href="/page/tags/">
-				<svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
-					<path d="M7 12L17 12" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
-					<path d="M11 17H13" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="filter-p"/>
-				</svg>
-					Filter posts<a/>
-			</div><br/>
-			
-			<div id="courses">
-				<div>
-					<section id="course_section" class="carousel_wrapper">
-						<h2>Latest Posts</h2>
-						
-						<Carousel client:load>
-							{
-								posts.map((post:any) => (
-									<Card post={post} transition:name={`${post.data.title}`}/>
-								))
-							}
-
-						</Carousel>
-					</section>
-				</div>
-			{ categorizedPosts.length > 0 ? (
-				<AlbumContainer>
-					{categorizedPosts.map((category:any, index) => (
-						<Album
-						albumName={category.name}
-						linkToPlaylist={`/page/${category.name}/1`}
-						numPosts={category.posts.length}>		
-							<Image 
-								src={`/${category.name}-category-img.png`} 
-								width={720} height={360} 
-								alt={`${category.name}`} 
-								class={'category-img'}
-								loading={"lazy"}
-								transition:name={`/${category.name}-category-img.png`}/>
-						</Album>	
-						))}
-
-				</AlbumContainer>
-			
-				) : <p>No categories found</p> }
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
-
-
-<style lang="scss">
-	.categories {
-		display: grid;
-		width: 100%;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
-
-		
-		.carousel_wrapper {
-			display: flex;
-			flex-direction: column;
-			border-radius: 1rem;
-			background: inherit;
-			box-shadow: 0px 0px 4px rgba(0, 0, 0, 1);
-			background: rgba(#f1f1f1, 1);
-			transition: all .3s;
-			&:hover {
-				box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-				transform: scale(1.05);
-			}
-						
-		}
 	}
-	.category-name {
-		color: inherit; 
-		text-decoration: none;
-		&:hover {
-			color: var(--link-hover);
-		}
-	}
+	
 	@media screen and (max-width: 600px) {
 		.categories {
 			display: flex;

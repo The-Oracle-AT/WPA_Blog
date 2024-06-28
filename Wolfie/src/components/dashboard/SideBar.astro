@@ -1,21 +1,13 @@
 ---
 import HeaderLink from "../HeaderLink.astro"
 import Arrow from "./Arrow.astro"
-import SiteName from "../SiteName.astro"
+
 
 
 ---
-
-<script>
-
-import "../../scripts/side_menu.js";
-</script>
-<header class="sidenav" id="sidenav">
-  <nav class="sidebar">
-   
-      <ul>
-        <li> <h2><a href="/"><SiteName /></a></h2></li>
-        <li id="arrow-icon"><Arrow/></li>
+  <nav >
+    <div id="arrow-icon" class="arrow-icon"><Arrow/></div>
+      <div class="sidenav" id="sidenav">
         <li><HeaderLink href="/dashboard/main">Dashboard</HeaderLink></li>
         <li><HeaderLink href="/dashboard/premium_blog/">Courses</HeaderLink></li>
         <li><HeaderLink href="/dashboard/account">Account</HeaderLink></li>
@@ -23,115 +15,88 @@ import "../../scripts/side_menu.js";
         <li><HeaderLink href="/dashboard/faq">FAQ</HeaderLink></li>
         <li><HeaderLink href="/dashboard/help">Help</HeaderLink></li>  
         <li><form action="/api/auth/signout"><button type="submit">signout</button></form></HeaderLink></li>
-      </ul>
-  </nav>
-</header>
-<style lang="scss">
-  header {
-		padding: 0 1em;
-		box-shadow: 0 2px 8px rgba(var(--text-color), 5%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 12rem;
-    transition: all 0.3s ease;
-    z-index: 1000;
-    
-		nav {
-      display: flex;
-      flex-direction: column;
+      </div>
       
-			
-      ul {
-        position: absolute;
-        width: 100%;
-        li {
-				margin-right: 0rem;
+  </nav>
 
-			  }
+<style lang="scss">
+  nav {
+		width: 300px;
+    height: 100svh;
+		box-shadow: .5rem 10px 10px rgba(black, 50%);
+    border-top: 1px solid var(--text-color);
+    position: fixed;
+    top: 4rem;
+    left: 0;
+    transition: all 0.3s ease;
+    z-index: 800;
+    background: var(--nav-color);
+    font-size: medium;
+
+    a {
+      border-bottom: 4px solid transparent;
       }
-			h2 {
-				margin: 0;
-				font-size: 1em;
 
-				a.active {
-					text-decoration: none;
-				}
+    a.active {
+			text-decoration: none;
+      border-bottom-color: var(--link-hover);
 			}	
 	}
-
-		}
+  div.sidenav {
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: space-between;
+    position: absolute;
+    width:100%;
+    
+      }
+  li {
+    list-style: none;
+    transform: translateX(3rem);
+  }
 	nav a {
-		padding: 1em 0.5em;
+		padding: 1em 0rem;
 		color: var(--text-color);
-		border-bottom: 4px solid transparent;
 		text-decoration: none;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--link-hover);
-	}
-	ul {
 
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		
-
-		li {
-			margin: 0;
-			padding: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-      
-
-		}
-		
-	}
-  #arrow-icon {
+  .arrow-icon {
     display: none;
     transition: all 0.3s ease;
+    
   }
-  @media (max-width: 1190px) {
-    #arrow-icon {
+  @media (max-width: 1480px) {
+    .arrow-icon {
       display: block;
+      position: relative;
+      transform: translateX(1rem);
+      z-index: 900;
+      
     }
-    header.sidenav {
-      width: 0;
-      overflow-x: visible;
-      position: fixed;
-      box-shadow: none;
-
-
-      ul li {
-        &:not(:nth-child(2)){
-          position: relative;
-          left: -300%;
-        }
-      }
+    nav {
+      width: 0px;
     }
-
-    .sidenav.responsive {
-      transition: all 0.3s ease;
-      width: 200px;
+    div.sidenav {
       overflow: hidden;
-      // background-color: #f4f4f4;
+      width: 0px;
+      transform: translateY(-50px);
 
-      ul li {
-          margin-right: 0rem;
-          &:not(:nth-child(2)){
-            position: relative;
-            display: block;
-            margin-left: 1rem;
-            left: 0rem;
-          }
-          &:nth-child(2) {
-            position: relative;
-            
-          }
-        }
     }
+
+    nav:has(.responsive) {
+      width: 12rem;
+      transition: all 0.3s ease;
+      .sidenav {
+        transition: all 0.3s ease;
+        width: 200px;
+        overflow: hidden;
+      }
+        .arrow-icon {
+        transform: translateX(10rem);
+      }
+      
+    }
+
   }
 </style>

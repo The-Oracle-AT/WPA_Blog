@@ -17,9 +17,9 @@ import ThemeIcon from "./ThemeIcon.astro";
 		<h2 class="site-name"><a href="/">
 			<SiteName />
 		</a></h2>
-		
-		<ul class="nav-bar">
-			<li class="hamburger-icon" id="hamburger-icon"><Hamburger /></li>
+		<li class="hamburger-icon" id="hamburger-icon"><span class="hanburger-wrapper"><Hamburger /></span></li>
+		<div class="nav-bar">
+			
 			<li><HeaderLink href='/'>Home</HeaderLink></li>
 			<li><HeaderLink href='/blog'>Explore</HeaderLink></li>
 			
@@ -27,7 +27,7 @@ import ThemeIcon from "./ThemeIcon.astro";
 			<li><HeaderLink href='/about'>About</HeaderLink></li>
 
 	
-		</ul>
+		</div>
 		<div class="theme-button">
 			 <div><ThemeIcon  /></div>
 		</div>
@@ -38,31 +38,31 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 <style lang="scss">
 	header {
-		margin: 0;
 		height: 4rem;
-		padding: 0 0rem;
-		box-shadow: 0 2px 8px rgba(var(--text-color), 5%);
-		z-index: 100;
-		position: sticky; 
+		width: 100%;
+		position: fixed;
+		background-color: var(--nav-color);
 		top:0%;
+		box-shadow: 0 2px 8px rgba(var(--text-color), 100%);
+		z-index: 100;
+		margin: 0;
+		
 		nav {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			height: 4rem;
+			height: 100%;
+			background-color: var(--nav-color);
 			
-			padding: 0rem 0rem 0rem 0rem;
-			h2 {
-				font-size: 1em;
-			}	
+			
+				
 		}
 	}
 	.site-name {
-		padding-left: 1rem;
+		padding-left: 2rem;
+		font-size: 1.3rem;
 	}
-	.sign-in {
-			display: none;
-		}
+
 	nav a {
 		padding: .5em 0.5em;
 		color: var(--text-color);
@@ -73,31 +73,27 @@ import ThemeIcon from "./ThemeIcon.astro";
 		text-decoration: none;
 		border-bottom-color: var(--link-hover);
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	ul {
-		display: flex;
+	li {
 		list-style: none;
-		margin: 0;
-		padding: 0;
+	}
 
-		
+	.nav-bar {
+		display: flex;	
+		background-color: var(--nav-color);
 
 		li {
 			
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-			&:first-child {
-				display: none;
-			}
+			background-color: var(--nav-color);
 		}
 		
 	}
-	@media screen and (max-width: 720px) {
+	.theme-button {
+		padding-right: 3rem;
+	}
+	.hamburger-icon {
+		display: none;
+	}
+	@media screen and (max-width: 600px) {
 		.theme-button {
 			background-color: transparent;
 			width: 100%;
@@ -105,8 +101,13 @@ import ThemeIcon from "./ThemeIcon.astro";
 			justify-content: center;
 			position: absolute;
 			z-index: 1;
-			
-			
+		}
+		.hamburger-icon {
+			display: block;
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			z-index: 2;
 		}
 		.site-name {
 			z-index: 2;
@@ -118,19 +119,16 @@ import ThemeIcon from "./ThemeIcon.astro";
 		
 		.nav-bar {
 			flex-direction: column;
-			position: relative;
-			padding-top: 0;
+			position: absolute;
+			width: 100svw;
+			top: 4rem;
+			height: 0rem;
+			overflow-y: hidden;
+			box-shadow: 0 10px 10px rgba(black, 50%);
+			transition:  height .5s ease;
 			
 			li {
-				&:first-child {
-					display: block;
-					justify-content: flex-end;
-					align-self: flex-end;
-					z-index: 2;
-					padding-right: 2rem;	
-				}
-				&:not(:first-child) {
-					display: none;
+					
 					width: 100svw;
 					align-self: flex-start;
 					text-align: center;
@@ -138,7 +136,6 @@ import ThemeIcon from "./ThemeIcon.astro";
 					&:hover {
 						background: aqua;	
 					}
-				}
 			}
 		}
 		
@@ -159,31 +156,21 @@ import ThemeIcon from "./ThemeIcon.astro";
 
 			
 		}
-		.topnav.responsive ul {
+		.topnav.responsive .nav-bar {
 			position: absolute;
 			display: flex;
+			height: 14rem;
 			margin-right: -1rem;	
-			top:0rem;
-			box-shadow: 0 10px 10px rgba(var(--text-color), 50%);
-			padding-top: 1rem;
-			li:not(:first-child) {
+			top:4rem;
+			box-shadow: 0 10px 10px rgba(black, 50%);
+			padding-top: 0rem;
+			li {
 				float: none;
 				display: block;
 				text-align: center;
 				width: 100svw;
 			}
-			li:first-child {
-				display: flex;
-				transform: translateY(0);
-				justify-content: flex-end;
-				align-self: flex-end;
-				position: relative;
-				
-				transition: all .3s ease-in;
-				width: fit-content;
-				
-				
-			}
+		
 		}
 	}
 

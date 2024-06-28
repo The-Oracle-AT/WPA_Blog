@@ -6,10 +6,12 @@
 // 121212, 180a0a
 :root {
 	--bg-color: rgba(var(--gray-light), 50%), #fff;
-	--text-color: 15, 18, 25;
+	--text-color: #0f1219;
 	--link-hover: #2337ff;
 	--link-hover-dark: #000d8a;
 	--link-bg: rgba(78, 175, 255, 30%);
+	--nav-color: #f4f4f4;
+	--card-color: #f3f3f3;
 	
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
@@ -18,8 +20,7 @@
 	--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
 		0 16px 32px rgba(var(--gray), 33%);
 	
-	--nav-color: #f4f4f4;
-	--card-color: #f3f3f3;
+	
 	
 }
 :root.dark {
@@ -44,6 +45,7 @@
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
+	
 }
 body {
 	font-family: 'Atkinson', sans-serif;
@@ -184,22 +186,8 @@ hr {
 	white-space: nowrap;
 }
 
-nav {
-	background-color: #f4f4f4;
-	
-	a.active {
-		text-decoration: none;
-		border-bottom-color: var(--link-hover);
-	}
-	
-}
-.topnav.responsive {
-	
-	li:not(:first-child) {
-		background: #f4f4f4;
-		}
-		
-}
+
+
 footer {
 	padding: 2em 1em 6em 1em;
 	background: linear-gradient(var(--bg-color)) no-repeat;
@@ -222,7 +210,7 @@ ul li a{
 
 html.dark {
 	background: var(--bg-color);
-	color: var(--nav-color);
+	color: var(--text-color);
 	
   }
 
@@ -238,36 +226,9 @@ html.dark {
 		color: var(--text-color);
 		background: linear-gradient(var(--bg-color)) no-repeat;
 
-		nav {
-			background: var(--bg-color);
-			color: var(--text-color);
-		}
-
 
 	}
-	header {
-		background-color: var(--nav-color);
-		nav {
-			background-color: var(--nav-color)
-		}
-	}
-	.sidenav {
-		color: var(--nav-color);
-		background-color: var(--nav-color);
 
-		a {
-			color: var(--text-color);
-
-			&:active {
-				border-bottom: #FFAC41 2px solid;
-			}
-		}
-	}
-
-	.sidenav.responsive {
-		background-color: var(--nav-color);
-		color: var(--text-color)
-	}
 	footer {
 		padding: 2em 1em 6em 1em;
 		background: linear-gradient(var(--bg-color), rgba(0, 0, 0, 70%)) no-repeat;

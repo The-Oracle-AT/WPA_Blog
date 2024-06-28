@@ -1,5 +1,17 @@
 ---
 ---
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const arrow_icon = document.getElementById('arrow-icon') as HTMLElement;
+        const sidenav = document.getElementById('sidenav') as HTMLElement;
+        const arrow = document.getElementById('arrow') as HTMLElement;
+        arrow_icon.addEventListener('click', () => {
+        
+            sidenav.classList.toggle('responsive');
+            arrow.classList.toggle('open');
+        });
+            });
+</script>
 
 <div class="arrow" id="arrow">
     <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

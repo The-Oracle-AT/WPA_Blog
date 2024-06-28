@@ -1,5 +1,5 @@
 <script>
-    import FormattedDate from './FormattedDate.svelte';
+    import FormattedDate from '../svelte/FormattedDate.svelte';
     export let post;
   </script>
 
@@ -27,13 +27,12 @@
         height: 20rem;
     }
     .post-block-link {
+      color: var(--text-color);
         text-decoration: none;
-        transition: all .3s ease;
+        
         &:hover {
-           
-            transform: scale(105%);
-            img {
-                
+             > img {
+                transition: all .3s ease;
                 box-shadow: var(--box-shadow);
                 transform: scale(1.05);
             }

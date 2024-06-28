@@ -4,6 +4,22 @@ import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/global.scss";
 const allPosts = await getCollection('blog')
 const tags =[...new Set(allPosts.map((post) => post.data.tags).flat())].sort();
+const colorOpacity = 0.3;
+
+const colors:any = {
+    'Personal development': `rgba(53, 55, 75, ${colorOpacity})`,   // yellow
+    'Alter ego': `rgba(255, 0, 0, ${colorOpacity})`,               // red
+    'Role model': `rgba(0, 0, 255, ${colorOpacity})`,              // blue
+    'Guidance': `rgba(80, 114, 123, ${colorOpacity})`,                // green
+    'Mentorship': `rgba(255, 165, 0, ${colorOpacity})`,            // orange
+    'Critical thinking': `rgba(138, 43, 226, ${colorOpacity})`,    // violet
+    'Self awareness': `rgba(128, 0, 128, ${colorOpacity})`,        // purple
+    'concentration': `rgba(173, 216, 230, ${colorOpacity})`,       // lightblue
+    'Discipline': `rgba(128, 128, 128, ${colorOpacity})`,          // grey
+    'Learning': `rgba(255, 192, 203, ${colorOpacity})`,            // pink
+    'Study': `rgba(255, 0, 255, ${colorOpacity})`,                 // magenta
+    'Exam and test': `rgba(120, 160, 131, ${colorOpacity})`           // brown
+};
 
 
 ---

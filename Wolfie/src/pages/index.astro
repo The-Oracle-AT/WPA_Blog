@@ -7,7 +7,7 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import HeaderLink from '../components/HeaderLink.astro';
 import SiteName from '../components/SiteName.astro';
-import AlbumContainer from '../components/index/AlbumContainer.svelte';
+import AlbumContainer from '../components/blog/AlbumContainer.svelte';
 import ShortCard from '../components/index/ShortCard.svelte';
 import StackedCardList from '../components/index/StackedCardList.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
@@ -33,22 +33,22 @@ const latest_posts = (await getCollection('blog')).sort(
 			<div class="container">
 				<h1><SiteName /></h1>
 				<p><b>Transform, Thrive, Succeed!</b></p>
-				<p style="font-size: medium;">Your Guide to Self-Mastery and Achieving Greatness ihn a way that you can be proud of.</p>
+				<p style="font-size: medium; text-align: center;">Your Guide to Self-Mastery and Achieving Greatness in a way that you can be proud of.</p>
 				<div class="cta-buttons">
 					<a href="/blog/">Get Started</a>
-					<a href="#start">Learn More</a>
+					<a href="#the-why">Learn More</a>
 				</div>
 			</div>
 			
 		</section>
         <main>
 			
-			<span id="start"></span>
-			<section class="the-why">
-				<div class="main-content container">
+			
+			<section class="the-why" id="the-why">
+				<div class="main-content container" style="padding: 4rem 0 0rem 0;">
 					<h2>Discover the Power of Self-Mastery</h2>
 					<p>At LearnBetter!, we believe that personal growth is a key step to achieving any goal you set for yourself. Our platform is dedicated to providing you with the tools and resources you need to cultivate the power of your mental facilities, control over ones' self, and self-awareness. Whether you're looking to refine your professional skills or embark on a journey of self-discovery, LearnBetter! is here to guide you every step of the way.</p>
-					<div class="main-content-header" style="width: 100%; text-align: center; padding: 4rem 0 0rem 0;">
+					<div class="main-content-header" style="width: 100%; text-align: center; ">
 						<p style="color: grey; ">What we offer</p>
 						<hr style="transform: translateY(-1rem)"/>
 					</div>
@@ -182,9 +182,7 @@ const latest_posts = (await getCollection('blog')).sort(
 		flex-direction: column;
 		gap: 1rem;
 
-		section {
-			margin-bottom: 8rem;
-		}
+		
 		
 	}
 	.feature {
@@ -226,7 +224,7 @@ const latest_posts = (await getCollection('blog')).sort(
 			
 			background-color: white;
 			.container {
-				height: 110%;
+				height: 100%;
 				margin-bottom: -.1rem;
 				backdrop-filter: blur(01rem);
 				width: 100%;

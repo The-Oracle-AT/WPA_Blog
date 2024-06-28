@@ -2,13 +2,10 @@
 import type { GetStaticPaths } from "astro";
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro';
-import Footer from '../../../components/Footer.astro';
-import Header from '../../../components/Header.astro';
 import Pagination from '../../../components/Pagination.svelte';
-import Playlist from "../../../components/index/Playlist.astro";
-import PlaylistItem from "../../../components/index/PlaylistItem.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+import Playlist from "../../../components/page/Playlist.astro";
+import PlaylistItem from "../../../components/page/PlaylistItem.astro";
+import Layout from "../../../layouts/Layout.astro";
 
 
 
@@ -32,15 +29,7 @@ const params = Astro.params;
 // const category = (Astro.url.pathname.split('/').pop())?.replace(/%20/g , ' '); // Get the last part of the URL and replace %20 with a space
 
 ---
-<!doctype html>
-
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-
-	<body>
-		<Header />
-		<main style="display: flex; flex-direction: column; align-items: center;">
+<Layout>
 			<section style="margin-bottom: 1rem;">
 				<Image src={`/${params.category}-category-img.png`} 
 				width={510} height={510} 
@@ -70,10 +59,7 @@ const params = Astro.params;
 				/>
 				
 			</section>
-		</main>
-		<Footer />
-	</body>
-
+</Layout>
 <style lang="scss">
 	section {
 		&:has(.category-img){

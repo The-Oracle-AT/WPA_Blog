@@ -9,9 +9,9 @@ import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import "../../styles/global.scss";
 
-import PlaylistItem from '../../components/index/PlaylistItem.astro';
-import Carousel from "../../components/svelte/Carousel.svelte"
-import Card from "../../components/svelte/Card.svelte"
+import PlaylistItem from '../../components/page/PlaylistItem.astro';
+import Carousel from "../../components/blog/Carousel.svelte"
+import Card from "../../components/blog/Card.svelte"
 import StackedCardList from '../../components/index/StackedCardList.astro';
 
 const posts = (await getCollection('blog')).sort(

@@ -1,5 +1,5 @@
 <script>
-    import '../../styles/svelte_global.scss';
+    
     export let linkToPlaylist;
     export let albumName;
     export let numPosts;
@@ -24,16 +24,14 @@
 <style lang="scss">
     .album-container {
         
-        transition: all .2s ease;
+        transition: all .3s ease;
         &:hover {
             transform: scale(1.03);
             
             box-shadow: var(--box-shadow);
-            border-radius: 1rem;
+            border-radius: .5rem;
             transform: translateY(-.5rem);
-            img {
-                border-top-right-radius: 10rem;
-            }
+            
             
         
         }
